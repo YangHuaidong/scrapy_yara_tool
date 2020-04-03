@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../XSLT/pluginHTML.xsl"?>
+<plugin id="20121" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../XSD/pluginDetails.xsd">
+
+	<name>E_Qwerty</name>
+    <projectpath>plugin/Utility</projectpath>
+    <pluginname>E_QwertyIM</pluginname>
+	<description>Keystroke Logger Plugin.</description>
+	<version>
+		<majorType>1</majorType>
+		<minorType>0</minorType>
+	</version>
+	<commands>
+	</commands>
+	<!-->
+	<errors>
+		<error>
+			<code>00001000</code>
+			<message>Invalid File Size</message>
+		</error>
+		<error>
+			<code>00001001</code>
+			<message>Cannot Read File</message>
+		</error>
+		<error>
+			<code>00001002</code>
+			<message>File Size Mismatch</message>
+		</error>
+		<error>
+			<code>00001003</code>
+			<message>No Comms. with Driver</message>
+		</error>
+		<error>
+			<code>00001004</code>
+			<message>ws</message>
+		</error>
+		<error>
+			<code>00001006</code>
+			<message>Failed to set File Time</message>
+		</error>
+		<error>
+			<code>00001007</code>
+			<message>Failed to get File Time</message>
+		</error>
+	</errors>
+	<-->
+	<poc>erebus</poc>
+	<shortDescription>Keystroke Logger Plugin.</shortDescription>
+	<comments>
+		<team>None</team>
+		<platforms>Windows (User/Win32)</platforms>
+		<rightsRequired>None</rightsRequired>
+		<files>None</files>
+		<dllDepend>None</dllDepend>
+		<pluginsDepend>None</pluginsDepend>
+		<librariesDepend>DriverInstallationUtilities, U_CompressionLib, U_StealthLib, U_ConsoleLib, CovertStoreLib, CNEWin32, WzowskiLib</librariesDepend>
+		<associatedImplantId>20120</associatedImplantId>
+	</comments>
+</plugin>

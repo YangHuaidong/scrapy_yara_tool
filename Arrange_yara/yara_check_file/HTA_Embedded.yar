@@ -1,20 +1,14 @@
 rule HTA_Embedded {
-  meta:
-    author = Spider
-    comment = None
-    date = 2017-06-21
-    description = Detects an embedded HTA file
-    family = None
-    hacker = None
-    hash1 = ca7b653cf41e980c44311b2cd701ed666f8c1dbc
-    judge = unknown
-    license = https://creativecommons.org/licenses/by-nc/4.0/
-    reference = https://twitter.com/msftmmpc/status/877396932758560768
-    score = 50
-    threatname = HTA[Embedded
-    threattype = Embedded.yar
-  strings:
-    $s1 = "<hta:application windowstate=\"minimize\"/>"
-  condition:
-    $s1 and not $s1 in (0..50000)
+   meta:
+      description = "Detects an embedded HTA file"
+      license = "https://creativecommons.org/licenses/by-nc/4.0/"
+      author = "Florian Roth"
+      reference = "https://twitter.com/msftmmpc/status/877396932758560768"
+      date = "2017-06-21"
+      score = 50
+      hash1 = "ca7b653cf41e980c44311b2cd701ed666f8c1dbc"
+   strings:
+      $s1 = "<hta:application windowstate=\"minimize\"/>"
+   condition:
+      $s1 and not $s1 in (0..50000)
 }

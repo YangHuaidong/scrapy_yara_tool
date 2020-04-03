@@ -1,0 +1,8 @@
+[Version]
+Signature="$Windows NT$"
+
+[DefaultInstall]
+RegisterDlls=OurDll
+
+[OurDll]
+01,,hccutils.dll,2

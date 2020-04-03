@@ -1,0 +1,94 @@
+<%
+	option explicit
+%>
+<!--#include file="config.asp"-->
+
+<!-- PageServer Below -->
+<%
+	pageServer()
+
+	sub pageServer()
+		dim i,obj,theAct,theStr
+'		isIn(1)
+		theAct=request("theAct")
+		showTitle("服务器相关数据")
+		
+		dim t1,t2,lsabc,theTime
+		
+		if theAct="showService" then
+			theTime="系统服务列表打开时不执行速度测试"
+			theStr="<a href=""?pageName=server"">关闭系统服务列表</a>"
+		 else
+			t1=timer()
+			for i=1 to 500000
+				lsabc=1+1
+			next
+			t2=timer()
+			theTime=cstr(int(((t2-t1)*10000)+0.5)/10)&" 毫秒(50万次1+1运算所需时间)"
+			theStr="<a href=""?pageName=server&theAct=showService"">打开系统服务列表</a>"
+		end if
+%>
+<table width=560 border=0 align="center" cellpadding=0 cellspacing=0>
+  <tr align="center" class="td" onmouseover="this.className='';" onMouseOut="this.className='td'" height=18> 
+    <td height="22" colspan="2" class="td">服务器相关数据</td>
+  </tr>
+  <tr align="center" class="td" onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td height="0" colspan="2" class="trHead">&nbsp;</td>
+  </tr>
+  <tr class="td" height=18 onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td height="22" align=left>&nbsp;服务器名</td>
+    <td height="22">&nbsp;<%=request.serverVariables("SERVER_NAME")%></td>
+  </tr>
+  <tr class="td" height=18 onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td height="22" align=left>&nbsp;服务器IP</td>
+    <td height="22">&nbsp;<%=request.serverVariables("LOCAL_ADDR")%></td>
+  </tr>
+  <tr class="td" height=18 onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td height="22" align=left>&nbsp;服务器时间</td>
+    <td height="22">&nbsp;<%=now%></td>
+  </tr>
+  <tr class="td" height=18 onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td height="22" align=left>&nbsp;本文件绝对路径</td>
+    <td height="22">&nbsp;<%=server.mappath(request.serverVariables("SCRIPT_NAME"))%></td>
+  </tr>
+  <tr class="td" height=18 onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td height="22" align=left>&nbsp;服务器操作系统</td>
+    <td height="22">&nbsp;<%=request.serverVariables("OS")%></td>
+  </tr>
+  <tr class="td" height=18 onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td height="22" align=left>&nbsp;服务器运算速度测试</td>
+    <td height="22" class="warningColor">&nbsp;<%=theTime%></td>
+  </tr>
+  <tr class="td" height=18 onmouseover="this.className='';" onMouseOut="this.className='td'">
+    <td height="22" align=left>&nbsp;服务器系统服务列表</td>
+    <td height="22">&nbsp;<%=theStr%></td>
+  </tr>
+<%
+	if  theAct="showService" then
+		on error resume next
+		for each obj in getObject("WinNT://.")
+			err.clear
+			echo "<tr class=""td"">"
+			echo "<td  height=""22"">&nbsp;"
+			echo obj.Name
+			echo "</td><td class=""td"">&nbsp;"
+			echo obj.DisplayName
+			if err then
+				echo "系统用户(组)"
+			end if
+			echo "</td></tr>"
+			echo "<tr class=""td""><td height=""22""></td><td>&nbsp;<font color=#FF0000>"&obj.path&"</font></td></tr>"
+		next 
+	end if
+%>
+  <tr class="td" onmouseover="this.className='';" onMouseOut="this.className='td'"> 
+    <td colspan="2" align=left class="trHead">&nbsp;</td>
+  </tr>
+  <tr align="right" class="td" height=18> 
+    <td height="22" colspan="2">Powered By Allen &amp; LCX 2004.11&nbsp;</td>
+  </tr>
+</table>
+<%
+		showExecuteTime()
+	end sub
+%>

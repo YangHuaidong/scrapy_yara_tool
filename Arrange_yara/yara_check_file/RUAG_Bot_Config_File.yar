@@ -1,16 +1,9 @@
 rule RUAG_Bot_Config_File {
   meta:
-    author = Spider
-    comment = None
-    date = None
-    description = Detects a specific config file used by malware in RUAG APT case
-    family = File
-    hacker = None
-    judge = unknown
-    reference = https://goo.gl/N5MEj0
+    description = "Detects a specific config file used by malware in RUAG APT case"
+    author = "Florian Roth"
+    reference = "https://goo.gl/N5MEj0"
     score = 60
-    threatname = RUAG[Bot]/Config.File
-    threattype = Bot
   strings:
     $s1 = "[CONFIG]" ascii
     $s2 = "name = " ascii

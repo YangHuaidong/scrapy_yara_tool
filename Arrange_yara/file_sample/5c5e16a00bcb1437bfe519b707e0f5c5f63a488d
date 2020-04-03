@@ -1,0 +1,156 @@
+<% Response.Buffer = True %>
+<% Server.ScriptTimeout = 500 
+Dim frmFolderPath, frmFilePath
+
+frmFolderPath = Request.Form("frmFolderPath")
+frmFilePath = Request.Form("frmDllPath")
+frmMethod = Request.Form("frmMethod")
+btnREG = Request.Form("btnREG")
+%>
+
+<HTML>
+<HEAD>
+<TITLE>Regsvr32.asp</TITLE>
+<STYLE TYPE="TEXT/CSS">
+.Legend {FONT-FAMILY: veranda; FONT-SIZE: 14px; FONT-WEIGHT: bold; COLOR: blue}
+.FS {FONT-FAMILY: veranda; FONT-SIZE: 12px; BORDER-WIDTH: 4px; BORDER-COLOR: green;
+MARGIN-LEFT:2px; MARGIN-RIGHT:2px}
+TD {MARGIN-LEFT:6px; MARGIN-RIGHT:6px; PADDING-LEFT:12px; PADDING-RIGHT:12px}
+</STYLE>
+</HEAD>
+
+<BODY>
+<FORM NAME="regForm" METHOD="POST">
+<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=6 MARGINWIDTH=6>
+<TR>
+<TD VALIGN=TOP>
+<FIELDSET ID=FS1 NAME=FS1 CLASS=FS>
+<LEGEND CLASS=Legend>Regsvr Functions</LEGEND>
+Insert Path to DLL Directory<BR>
+<INPUT TYPE=TEXT NAME="frmFolderPath" VALUE="<%=frmFolderPath%>"><BR>
+<INPUT TYPE=SUBMIT NAME=btnFileList VALUE="Build File List"><BR>
+<% 
+IF Request.Form("btnFileList") <> "" OR btnREG <> "" Then
+Set RegisterFiles = New clsRegister
+RegisterFiles.EchoB("<B>Select File</B>")
+Call RegisterFiles.init(frmFolderPath)
+RegisterFiles.EchoB("<BR><INPUT TYPE=SUBMIT NAME=btnREG VALUE=" & Chr(34) _
+& "REG/UNREG" & Chr(34) & ">")
+IF Request.Form("btnREG") <> "" Then
+Call RegisterFiles.Register(frmFilePath, frmMethod)
+End IF
+Set RegisterFiles = Nothing
+End IF
+%>
+</FIELDSET>
+</TD>
+</TR>
+</TABLE>
+</FORM>
+</BODY>
+</HTML>
+<%
+Class clsRegister
+
+Private m_oFS 
+
+Public Property Let oFS(objOFS)
+m_oFS = objOFS
+End Property
+
+Public Property Get oFS()
+Set oFS = Server.CreateObject("Scripting.FileSystemObject")
+End Property
+
+
+Sub init(strRoot) 'Root to Search (c:, d:, e:)
+Dim oDrive, oRootDir
+IF oFS.FolderExists(strRoot) Then
+IF Len(strRoot) < 3 Then 'Must Be a Drive
+Set oDrive = oFS.GetDrive(strRoot)
+Set oRootDir = oDrive.RootFolder
+Else
+Set oRootDir = oFS.GetFolder(strRoot)
+End IF
+Else
+EchoB("<B>Folder ( " & strRoot & " ) Not Found.")
+Exit Sub
+End IF
+setRoot = oRootDir
+
+Echo("<SELECT NAME=" & Chr(34) & "frmDllPath" & Chr(34) & ">")
+Call getAllDlls(oRootDir)
+EchoB("</SELECT>")
+BuildOptions
+End Sub
+
+Sub getAllDlls(oParentFolder)
+Dim oSubFolders, oFile, oFiles
+Set oSubFolders = oParentFolder.SubFolders
+Set opFiles = oParentFolder.Files
+
+For Each oFile in opFiles
+IF Right(lCase(oFile.Name), 4) = ".dll" OR Right(lCase(oFile.Name), 4) = ".ocx" Then
+Echo("<OPTION VALUE=" & Chr(34) & oFile.Path & Chr(34) & ">" _
+& oFile.Name & "</Option>")
+End IF
+Next
+
+On Error Resume Next
+For Each oFolder In oSubFolders 'Iterate All Folders in Drive
+Set oFiles = oFolder.Files
+For Each oFile in oFiles
+IF Right(lCase(oFile.Name), 4) = ".dll" OR Right(lCase(oFile.Name), 4) = ".ocx" Then
+Echo("<OPTION VALUE=" & Chr(34) & oFile.Path & Chr(34) & ">" _
+& oFile.Name & "</Option>")
+End IF
+Next
+Call getAllDlls(oFolder)
+Next
+On Error GoTo 0
+End Sub
+
+Sub Register(strFilePath, regMethod)
+Dim theFile, strFile, oShell, exitcode
+Set theFile = oFS.GetFile(strFilePath)
+strFile = theFile.Path
+
+Set oShell = CreateObject ("WScript.Shell")
+
+IF regMethod = "REG" Then 'Register
+oShell.Run "c:\WINNT\system32\regsvr32.exe /s " & strFile, 0, False
+exitcode = oShell.Run("c:\WINNT\system32\regsvr32.exe /s " & strFile, 0, False)
+EchoB("regsvr32.exe exitcode = " & exitcode)
+Else 'unRegister
+oShell.Run "c:\WINNT\system32\regsvr32.exe /u/s " & strFile, 0, False
+exitcode = oShell.Run("c:\WINNT\system32\regsvr32.exe /u/s " & strFile, 0, False)
+EchoB("regsvr32.exe exitcode = " & exitcode)
+End IF
+
+Cleanup oShell
+End Sub
+
+Sub BuildOptions
+EchoB("Register: <INPUT TYPE=RADIO NAME=frmMethod VALUE=REG CHECKED>")
+EchoB("unRegister: <INPUT TYPE=RADIO NAME=frmMethod VALUE=UNREG>")
+End Sub
+
+Function Echo(str)
+Echo = Response.Write(str & vbCrLf)
+End Function
+
+Function EchoB(str)
+EchoB = Response.Write(str & "<BR>" & vbCrLf)
+End Function
+
+Sub Cleanup(obj)
+If isObject(obj) Then
+Set obj = Nothing
+End IF
+End Sub
+
+Sub Class_Terminate()
+Cleanup oFS
+End Sub
+End Class
+%>

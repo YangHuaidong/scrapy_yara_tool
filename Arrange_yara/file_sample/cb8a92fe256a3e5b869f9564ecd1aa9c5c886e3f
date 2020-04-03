@@ -1,0 +1,2 @@
+copy PacketX.dll C:\windows\system32\PacketX.dll
+regsvr32.exe C:\windows\system32\PacketX.dll

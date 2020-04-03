@@ -1,12 +1,3 @@
-/*
-   Yara Rule Set
-   Author: Florian Roth
-   Date: 2018-03-10
-   Identifier: APT15 Report
-   Reference: https://goo.gl/HZ5XMN
-*/
-
-/* Rule Set ----------------------------------------------------------------- */
 
 import "pe"
 

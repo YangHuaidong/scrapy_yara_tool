@@ -1,20 +1,13 @@
 rule webshell_redirect {
-  meta:
-    author = Spider
-    comment = None
-    date = 2014/01/28
-    description = Web Shell - file redirect.asp
-    family = None
-    hacker = None
-    hash = 97da83c6e3efbba98df270cc70beb8f8
-    judge = unknown
-    license = https://creativecommons.org/licenses/by-nc/4.0/
-    reference = None
-    score = 70
-    threatname = webshell[redirect
-    threattype = redirect.yar
-  strings:
-    $s7 = "var flag = \"?txt=\" + (document.getElementById(\"dl\").checked ? \"2\":\"1\" "
-  condition:
-    all of them
+	meta:
+		description = "Web Shell - file redirect.asp"
+		license = "https://creativecommons.org/licenses/by-nc/4.0/"
+		author = "Florian Roth"
+		date = "2014/01/28"
+		score = 70
+		hash = "97da83c6e3efbba98df270cc70beb8f8"
+	strings:
+		$s7 = "var flag = \"?txt=\" + (document.getElementById(\"dl\").checked ? \"2\":\"1\" "
+	condition:
+		all of them
 }

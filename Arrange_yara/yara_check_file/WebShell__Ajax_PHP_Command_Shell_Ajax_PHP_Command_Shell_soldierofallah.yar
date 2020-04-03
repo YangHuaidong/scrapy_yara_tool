@@ -1,28 +1,20 @@
 rule WebShell__Ajax_PHP_Command_Shell_Ajax_PHP_Command_Shell_soldierofallah {
-  meta:
-    author = Spider
-    comment = None
-    date = None
-    description = PHP Webshells Github Archive - from files Ajax_PHP Command Shell.php, Ajax_PHP_Command_Shell.php, soldierofallah.php
-    family = PHP
-    hacker = None
-    hash0 = fa11deaee821ca3de7ad1caafa2a585ee1bc8d82
-    hash1 = c0a4ba3e834fb63e0a220a43caaf55c654f97429
-    hash2 = 16fa789b20409c1f2ffec74484a30d0491904064
-    judge = unknown
-    license = https://creativecommons.org/licenses/by-nc/4.0/
-    reference = None
-    super_rule = 1
-    threatname = WebShell[]/Ajax.PHP.Command.Shell.Ajax.PHP.Command.Shell.soldierofallah
-    threattype = 
-  strings:
-    $s1 = "'Read /etc/passwd' => \"runcommand('etcpasswdfile','GET')\"," fullword
-    $s2 = "'Running processes' => \"runcommand('ps -aux','GET')\"," fullword
-    $s3 = "$dt = $_POST['filecontent'];" fullword
-    $s4 = "'Open ports' => \"runcommand('netstat -an | grep -i listen','GET')\"," fullword
-    $s6 = "print \"Sorry, none of the command functions works.\";" fullword
-    $s11 = "document.cmdform.command.value='';" fullword
-    $s12 = "elseif(isset($_GET['savefile']) && !empty($_POST['filetosave']) && !empty($_POST"
-  condition:
-    3 of them
+	meta:
+		description = "PHP Webshells Github Archive - from files Ajax_PHP Command Shell.php, Ajax_PHP_Command_Shell.php, soldierofallah.php"
+		license = "https://creativecommons.org/licenses/by-nc/4.0/"
+		author = "Florian Roth"
+		super_rule = 1
+		hash0 = "fa11deaee821ca3de7ad1caafa2a585ee1bc8d82"
+		hash1 = "c0a4ba3e834fb63e0a220a43caaf55c654f97429"
+		hash2 = "16fa789b20409c1f2ffec74484a30d0491904064"
+	strings:
+		$s1 = "'Read /etc/passwd' => \"runcommand('etcpasswdfile','GET')\"," fullword
+		$s2 = "'Running processes' => \"runcommand('ps -aux','GET')\"," fullword
+		$s3 = "$dt = $_POST['filecontent'];" fullword
+		$s4 = "'Open ports' => \"runcommand('netstat -an | grep -i listen','GET')\"," fullword
+		$s6 = "print \"Sorry, none of the command functions works.\";" fullword
+		$s11 = "document.cmdform.command.value='';" fullword
+		$s12 = "elseif(isset($_GET['savefile']) && !empty($_POST['filetosave']) && !empty($_POST"
+	condition:
+		3 of them
 }

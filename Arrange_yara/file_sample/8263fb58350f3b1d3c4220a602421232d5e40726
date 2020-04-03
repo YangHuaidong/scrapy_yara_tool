@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\xsd\pluginConfig.xsd" id="20121">
+	<platform type="1">
+		<lpConfig>
+			<configFileName>20121_cmdDef.xml</configFileName>
+			<pluginConfig>
+				<name>20121.dll</name>
+				<codebase>"Reserved for future use."</codebase>
+			</pluginConfig>
+		</lpConfig>
+	</platform>
+</plugin>

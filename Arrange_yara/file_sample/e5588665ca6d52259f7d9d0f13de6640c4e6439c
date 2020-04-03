@@ -1,0 +1,48 @@
+透过ASP修改NT使用者的密码
+
+
+使用者登入機制在未來的網頁開發會顯得越來越重要, 很簡單的道理, 因為現在的網站很著急的要做好會員管理, 然後向會員收錢, 其實這是很正常的代誌, 台灣的公司法說的很清楚嘛, 『公司以營利為目的』 
+
+在 IIS 5.0 的安全性身分驗證機制中, 整合的 Windows 驗證 (在 IIS 4.0 號做 Windows NT 挑戰與回應) 是一個不歹的選擇, 很簡單的一個方法就可以達到一定水準的安全性, 而且可以整合 Windows 2000 的使用者, 不過有一好無兩好, 缺點是沒有一個很好的線上更改密碼機制, 所以今天就要來介紹如何透過 ASP 來更改 NT 使用者密碼 
+
+
+
+
+
+HTML 部分 
+
+當一個使用者登入你網站的安全區域, 你就可以利用 ServerVariables 集合中的 LOGIN_USER 來了解登入的使用者帳號, 當然記得要把允許匿名登入選項關閉, 現在就先來看 HTML 部分 
+
+<form action="changepwd.asp" method="post"> 
+<!-- 為了不讓使用者自己輸入帳號所以使用隱藏 --> 
+<input type="hidden" name="UserName" 
+    value="<%=Request.ServerVariables("LOGIN_USER")%>"> 
+  <br>輸入舊密碼 : <input name="OldPwd"> 
+  <br>輸入新密碼 : <input name="NewPwd1"> 
+  <br>確認新密碼 : <input name="NewPwd2"> 
+  <input type="submit" value=" 變更密碼 "> 
+</form> 
+
+程式碼 
+
+接下來是 ASP 的部分, 看看如何透過 ADSI 來修改 WIndows 2000 使用者帳號, 將下底的程式碼存成 changepwd.asp 檔名 
+
+<% 
+OldPwd = Request.Form("OldPwd") 
+NewPwd1 = Request.Form("NewPwd1") 
+NewPwd2 = Request.Form("NewPwd2") 
+UserName = Request.Form("UserName") 
+  
+If NewPwd1 = NewPwd2 Then 
+  Set oUser = GetObject("WinNT://ComputerName/" & UserName) 
+  oUser.ChangePassword OldPwd, NewPwd1 
+  oUser.SetInfo 
+  Set oUser = Nothing 
+Else 
+  Response.Write "請再確認你的密碼" 
+End If 
+%> 
+
+希望這篇文章對你有幫助! 
+
+

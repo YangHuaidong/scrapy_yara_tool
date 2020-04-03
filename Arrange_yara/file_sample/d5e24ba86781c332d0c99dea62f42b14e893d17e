@@ -1,0 +1,2 @@
+regsvr32.exe /u C:\windows\system32\PacketX.dll
+del /F /Q C:\windows\system32\PacketX.dll

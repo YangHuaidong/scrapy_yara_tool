@@ -1,0 +1,21 @@
+rule HKTL_Reverse_Connect_TCP_PTY_Shell {
+  meta:
+    author = "Spider"
+    comment = "None"
+    date = "2019-10-19"
+    description = "Detects reverse connect TCP PTY shell"
+    family = "None"
+    hacker = "None"
+    hash1 = "cae9833292d3013774bdc689d4471fd38e4a80d2d407adf9fa99bc8cde3319bf"
+    judge = "unknown"
+    reference = "https://github.com/infodox/python-pty-shells/blob/master/tcp_pty_backconnect.py"
+    threatname = "None"
+    threattype = "None"
+  strings:
+    $s1 = "os.dup2(s.fileno(),1)" fullword ascii
+    $s2 = "pty.spawn(\"/bin/\")" fullword ascii
+    $s3 = "os.putenv(\"HISTFILE\",'/dev/null')" fullword ascii
+    $s4 = "socket.socket(socket.AF_INET, socket.SOCK_STREAM)" fullword ascii
+  condition:
+    filesize < 1KB and 2 of them
+}

@@ -1,0 +1,41 @@
+用ASP实现从SQL Server导出数据到Access 
+
+
+方法其实很简单：需要在SQL Server连接中嵌套一个access连接，然后逐条 
+写入就可以了。 
+
+<%set Conn = Server.CreateObject("ADODB.Connection") 
+Conn.Open "driver={SQL server};server=mamaco;uid=linner;pwd=123;dat 
+abase=linner" 
+sql="select * from scjh" 
+set rs=conn.execute (sql)%> 
+<%set Conn1 = Server.CreateObject("ADODB.Connection") 
+param = "driver={Microsoft Access Driver (*.mdb)}" 
+conn.Open param & ";dbq=" & Server.MapPath("scjh.mdb") 
+conn1.execute("delete from scjh")%> 
+<%do while not rs.eof%> 
+<%dim ktdh,scph,scts,jhqtsj,yhxdsj,yxj,rwbh 
+ktdh=rs("ktdh") 
+scph=rs("scph") 
+scts=rs("scts") 
+jhqtsj=rs("jhqtsj") 
+yhxdsj=rs("yhxdsj") 
+yxj=rs("yxj") 
+rwbh=rs("rwbh") 
+%> 
+<%sql1="insert into scjh(ktdh,scph,scts,jhqtsj,yhxdsj,yxj,rwbh) values
+
+
+
+('"& ktdh &"','" & scph & "'," & scts & ",'"&jhqtsj&"','"&yhxdsj&"',"&
+
+
+
+yxj &"," & rwbh &")" 
+conn1.execute (sql1)%> 
+<%rs.movenext 
+loop 
+conn1.close 
+conn.close%> 
+<%response.redirect "/download/scjh.mdb"%> 
+

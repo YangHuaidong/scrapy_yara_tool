@@ -1,0 +1,100 @@
+<%
+
+if left(trim(request("sqllanguage")),6)="select" then
+%>
+<script language=javascript>
+window.open("entice2.asp?sql=<%=request("sqllanguage")%>","","height=450,width=600,resizable=yes,
+
+scrollbars=yes,status=no,toolbar=no,menubar=no,location=no")
+</script>
+<%
+end if
+%>
+<!--#include file=sqlconn.asp-->
+<HTML>
+<Title></Title>
+<style type="text/css">
+<!--
+body { font-size: 12px}
+table { font-size: 12px}
+-->
+</style>
+<Body Bgcolor=#009999>
+<%
+sqllanguage=Request("sqllanguage")
+%>
+<Form Name="FormPst" Method="Post" Action="entice.asp">
+<div align="center"><FieldSet> <Legend>请输入SQL语句</Legend> 指令： 
+<Input type="text" name="sqllanguage" Size=60>
+<Input type="Submit" Value="送出">
+</FieldSet> </div>
+</form>
+<Hr>
+SQL 语句执行情况：
+
+<%
+if sqllanguage<>Empty then
+On Error Resume Next 
+conndb.Execute(sqllanguage)
+if err.number="0" then
+message1="执行成功"
+response.write message1
+else
+message1=err.description
+response.write message1
+err.clear
+end if
+end if
+%>
+
+
+
+<%
+set rstable=conndb.openSchema(20)
+rstable.movefirst
+%>
+<table width="95%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="#000000">
+<%
+do while not rstable.eof
+if rstable("table_type")="TABLE" then
+%>
+<tr bgcolor="#006400"> 
+<td width="18%" nowrap><font color="#FFFFFF">数据库中的表名</font></td>
+<td width="82%" nowrap> <font color="#FFFFFF"> 
+<%
+
+response.write rstable("table_name")
+%>
+</font></td>
+</tr>
+<tr bgcolor="#CCCCCC"> 
+<td width="18%" nowrap>该表中的所有字段</td>
+<td width="82%" nowrap>
+<%
+set rstobj=server.createobject("adodb.recordset")
+rstsql="select * from "&rstable("table_name")
+rstobj.open rstsql,conndb,1
+for i=0 to rstobj.fields.count-1
+response.write rstobj(i).name&"|"
+next
+rstobj.close
+set rstobj=nothing
+%>
+</td>
+</tr>
+<%
+end if
+rstable.movenext
+loop
+rstable.close
+set rstable=nothing
+%>
+</table>
+</Body>
+</HTML>
+<%
+conndb.close
+set conndb=nothing
+
+%>
+

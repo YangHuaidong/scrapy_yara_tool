@@ -1,0 +1,22 @@
+@shift
+:1
+@shift
+@echo off
+MODE con: COLS=42 lines=5
+color 8E
+title 3306ÓÑÇé°æ·À¿¨¼àÌı³ÌĞò
+for /L %%a in (
+ 60,-1,0
+) do (
+ echo.
+ echo    Ã¿¸ô60Ãë×Ô¶¯¼ì²âClear,ÇëÎğ¹Ø±Õ
+ echo            »¹Ê£Óà %%a Ãë
+ echo  ¿§·ÈÍøÂç¹Ù·½ÂÛÌ³ Http://www.coffeewl.com
+ ping -n 2 localhost 1>nul 2>nul
+ cls
+)
+tasklist |find "Clear.bat"||start Clear.bat
+goto :1
+
+ 
+

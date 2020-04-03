@@ -8,75 +8,79 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Yara_classify.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="120" selection-start-line="120" selection-end-line="120" />
+            <state relative-caret-position="178">
+              <caret line="121" selection-start-line="121" selection-end-line="121" />
               <folding>
-                <element signature="e#21#30#0" expanded="true" />
-                <element signature="e#459#1091#0" />
-                <element signature="e#1120#3335#0" />
-                <element signature="e#3404#4144#0" />
-                <element signature="e#4177#4740#0" />
+                <element signature="e#66#75#0" expanded="true" />
+                <element signature="e#578#978#0" />
+                <element signature="e#1045#1713#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/download_yara_sample.py">
+        <entry file="file://$PROJECT_DIR$/yara_check_meta_key/_antichat_php_php_Fatalshell_php_php_a_gedit_php_php.yar">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yara_check_meta_key/_1_c2007_php_php_c100_php.yar">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/APT_NK_BabyShark_KimJoingRAT_Apr19_1">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+            <state relative-caret-position="-56" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/file_classify.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-207">
+              <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yara/apt_aa19_024a.yar">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yara/apt_agent_btz.yar">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/check_format_yara.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="740">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
-              <folding>
-                <element signature="e#22#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hash_name">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3757">
-              <caret line="1131" column="32" selection-start-line="1131" selection-start-column="32" selection-end-line="1131" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_1_c2007_php_php_c100_php.yar">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="8" column="44" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_c99shell_v1_0_php_php_c99php_1_c2007_php_php_c100_php.yar">
+        <entry file="file://$PROJECT_DIR$/yara/apt_alienspy_rat.yar">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_Crystal_php_nshell_php_php_load_shell_php_php.yar">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_network_php_php_xinfo_php_php_nfm_php_php.yar">
+        <entry file="file://$PROJECT_DIR$/yara/apt_apt6_malware.yar">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -89,6 +93,16 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>d089e7168373a0634e1ac18c0ee00085</find>
+      <find>pe</find>
+      <find>APT_NK_BabyShark_KimJoingRAT_Apr19_1</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/scrapy_yara_tool" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -97,15 +111,41 @@
         <option value="$PROJECT_DIR$/1111.py" />
         <option value="$PROJECT_DIR$/Wshells_classify.py" />
         <option value="$PROJECT_DIR$/hash_name" />
-        <option value="$PROJECT_DIR$/Yara_classify.py" />
-        <option value="$PROJECT_DIR$/11111.py" />
         <option value="$PROJECT_DIR$/yara_sample_download/yara_sample_download/middlewares.py" />
         <option value="$PROJECT_DIR$/yara_sample_download/yara_sample_download/items.py" />
         <option value="$PROJECT_DIR$/yara_sample_download/yara_sample_download/settings.py" />
         <option value="$PROJECT_DIR$/download_yara_sample.py" />
         <option value="$PROJECT_DIR$/yara_sample_download/yara_sample_download/pipelines.py" />
         <option value="$PROJECT_DIR$/yara_sample_download/yara_sample_download/spiders/example.py" />
+        <option value="$PROJECT_DIR$/checkout_yara.py" />
+        <option value="$PROJECT_DIR$/yara_package/c2007_php_php_c100_php.yar" />
         <option value="$PROJECT_DIR$/check_format_yara.py" />
+        <option value="$PROJECT_DIR$/yara_package/111.yar" />
+        <option value="$PROJECT_DIR$/yara_check_meta_key/Agent_BTZ_Aug17.yar" />
+        <option value="$PROJECT_DIR$/yara_check_meta_key/Agent_BTZ_Proxy_DLL_1.yar" />
+        <option value="$PROJECT_DIR$/yara/apt_apt6_malware.yar" />
+        <option value="$PROJECT_DIR$/yara/apt_apt10.yar" />
+        <option value="$PROJECT_DIR$/yara/apt_apt10_redleaves.yar" />
+        <option value="$PROJECT_DIR$/yara/apt_apt12_malware.yar" />
+        <option value="$PROJECT_DIR$/yara/apt_apt15.yar" />
+        <option value="$PROJECT_DIR$/yara/apt_aa19_024a.yar" />
+        <option value="$PROJECT_DIR$/yara/apt_agent_btz.yar" />
+        <option value="$PROJECT_DIR$/12222.py" />
+        <option value="$PROJECT_DIR$/yara_1/apt_apt3_bemstour.yar" />
+        <option value="$PROJECT_DIR$/yara_check_file/ZxShell_Related_Malware_CN_Group_Jul17_3.yar" />
+        <option value="$USER_HOME$/.virtualenvs/yara_rules/lib/python3.6/site-packages/yaratool/__init__.py" />
+        <option value="$PROJECT_DIR$/APT_Cloaked_SuperScan.yar" />
+        <option value="$PROJECT_DIR$/11111.py" />
+        <option value="$PROJECT_DIR$/yara_check_file/_c99shell_v1_0_php_php_c99php_SsEs_php_php.yar" />
+        <option value="$PROJECT_DIR$/hash_file" />
+        <option value="$PROJECT_DIR$/yara_name" />
+        <option value="$PROJECT_DIR$/no_pass_yara_name" />
+        <option value="$PROJECT_DIR$/APT_NK_BabyShark_KimJoingRAT_Apr19_1" />
+        <option value="$PROJECT_DIR$/check_out_yara.py" />
+        <option value="$PROJECT_DIR$/pass_yara_name" />
+        <option value="$PROJECT_DIR$/file_classify.py" />
+        <option value="$PROJECT_DIR$/new_yara_rules/APT_GreyEnergy_Malware_Oct18_3.yar" />
+        <option value="$PROJECT_DIR$/Yara_classify.py" />
       </list>
     </option>
   </component>
@@ -114,6 +154,7 @@
     <option name="width" value="1033" />
     <option name="height" value="349" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -126,6 +167,11 @@
             <path>
               <item name="Arrange_yara" type="b2602c69:ProjectViewProjectNode" />
               <item name="Arrange_yara" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Arrange_yara" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Arrange_yara" type="462c0819:PsiDirectoryNode" />
+              <item name="yara" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -146,6 +192,16 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/yara_package" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/yara_1" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -158,29 +214,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.download_yara_sample">
-    <configuration name="1111" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Arrange_yara" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1111.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.Wshells_classify">
     <configuration name="11111" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Arrange_yara" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -195,6 +229,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/11111.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="12222" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Arrange_yara" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/12222.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -225,7 +281,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="download_yara_sample" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="check_out_yara" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Arrange_yara" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -238,7 +294,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/download_yara_sample.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/check_out_yara.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -247,7 +303,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="yara_classify" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="file_classify" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Arrange_yara" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -260,7 +316,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/yara_classify.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/file_classify.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -271,11 +327,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.download_yara_sample" />
-        <item itemvalue="Python.11111" />
         <item itemvalue="Python.Wshells_classify" />
-        <item itemvalue="Python.1111" />
-        <item itemvalue="Python.yara_classify" />
+        <item itemvalue="Python.file_classify" />
+        <item itemvalue="Python.check_out_yara" />
+        <item itemvalue="Python.11111" />
+        <item itemvalue="Python.12222" />
       </list>
     </recent_temporary>
   </component>
@@ -296,23 +352,25 @@
       <workItem from="1584601250761" duration="5476000" />
       <workItem from="1584615462020" duration="5921000" />
       <workItem from="1585109200635" duration="38000" />
-      <workItem from="1585635673711" duration="625000" />
+      <workItem from="1585635673711" duration="20312000" />
+      <workItem from="1585712940495" duration="13529000" />
+      <workItem from="1585791305385" duration="29893000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27153000" />
+    <option name="totallyTimeSpent" value="90262000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="18" width="1688" height="864" extended-state="7" />
+    <frame x="0" y="28" width="1918" height="864" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19634147" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21657754" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32934684" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.324747" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39926404" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32918397" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26279393" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39834026" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -320,13 +378,15 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30174792" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.41875824" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32918397" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
+      <window_info anchor="right" id="SciView" order="4" weight="0.32994652" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32994652" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,187 +395,197 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Arrange_yara$download_yara_sample.coverage" NAME="download_yara_sample Coverage Results" MODIFIED="1584617127916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Arrange_yara$yara_classify.coverage" NAME="yara_classify Coverage Results" MODIFIED="1584525096852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Arrange_yara$11111.coverage" NAME="11111 Coverage Results" MODIFIED="1584602059704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Arrange_yara$Wshells_classify.coverage" NAME="Wshells_classify Coverage Results" MODIFIED="1584589529763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Arrange_yara$11111.coverage" NAME="11111 Coverage Results" MODIFIED="1585802815365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Arrange_yara$file_classify.coverage" NAME="file_classify Coverage Results" MODIFIED="1585818708747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Arrange_yara$12222.coverage" NAME="12222 Coverage Results" MODIFIED="1585716958380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Arrange_yara$check_out_yara.coverage" NAME="check_out_yara Coverage Results" MODIFIED="1585817574843" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Arrange_yara$Wshells_classify.coverage" NAME="Wshells_classify Coverage Results" MODIFIED="1585879696745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Arrange_yara$1111.coverage" NAME="1111 Coverage Results" MODIFIED="1584587390111" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_r577_php_php_SnIpEr_SA_Shell_php_r57_php_php.yar">
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/CN_Honker_ShiftBackdoor_Server.yar">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_r577_php_php_SnIpEr_SA_Shell_php_r57_php_php_spy_php_php_s_php_php.yar">
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/webshell_c99_c66_c99_shadows_mod_c99shell.yar">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_root_040_zip_Folder_deploy.yar">
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/webshell_bypass_iisuser_p.yar">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_w_php_php_c99madshell_v2_1_php_php_wacking_php_php.yar">
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/webshell_browser_201_3_400_in_JFolder_jfolder01_jsp_leo_ma_warn_webshell_nc_download.yar">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-203" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/WebShell_zehir4_asp_php.yar">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_w_php_php_c99madshell_v2_1_php_php_wacking_php_php_c99shell_v1_0_php_php_c99php.yar">
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/WebShell_ZyklonShell.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/whosthere.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/Win_PrivEsc_ADACLScan4_3.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/Win_PrivEsc_gp3finder_v4_0.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/WinX_Shell_html.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ZxShell_Related_Malware_CN_Group_Jul17_3.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ZxShell_Related_Malware_CN_Group_Jul17_2.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ZxShell_Related_Malware_CN_Group_Jul17_1.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ZxShell_Jul17.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ZXshell2_0_rar_Folder_ZXshell.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/Zeus_Panda.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/XYZCmd_zip_Folder_XYZCmd.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/Xtreme_Sep17_3.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ZXshell2_0_rar_Folder_nc.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ZXshell2_0_rar_Folder_zxrecv.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/Zehir_4_asp.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/xscan_gui.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/WScript_Shell_PowerShell_Combo.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/WoolenGoldfish_Generic_3.yar">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-226" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/WoolenGoldfish_Generic_1.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/WoolenGoldfish_Generic_2.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/aspydrv_asp.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/ATM_Malware_XFSCashNCR.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/aZRaiLPhp_v1_0_php.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/Beastdoor_Backdoor.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/BeepService_Hacktool.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/BergSilva_Malware.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/BeyondExec_RemoteAccess_Tool.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/BIN_Client.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/bin_Client.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/bin_ndisk.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_yara_rules/BIN_Server.yar">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="22" column="15" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/check_out_yara.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1035">
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pass_yara_name">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-276" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yara_check_file/_Bitchin_Threads_.yar">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/yara_check_file/_c99shell_v1_0_php_php_c99php_SsEs_php_php.yar">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_nixrem_php_php_c99shell_v1_0_php_php_c99php_NIX_REMOTE_WEB_SHELL_v_0_5_alpha_Lite_Public_Version_php.yar">
+    <entry file="file://$PROJECT_DIR$/yara_check_file/_Crystal_php_nshell_php_php_load_shell_php_php.yar">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_nst_php_php_img_php_php_nstview_php_php.yar">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_Project1_Generate_rejoice.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/APT_Thrip_Sample_Jun18_3.yar">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_r577_php_php_spy_php_php_s_php_php.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_w_php_php_c99madshell_v2_1_php_php_wacking_php_php_1_SpecialShell_99_php_php.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/_w_php_php_c99madshell_v2_1_php_php_wacking_php_php_SpecialShell_99_php_php.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/APT_ATP28_Sofacy_Indicators_May19_1.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/Armitage_OSX.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/bin_wuaus.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/BypassUac_9.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/cmdjsp_jsp.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/CN_Hacktool_MilkT_BAT.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/CN_Honker__PostgreSQL_mysql_injectV1_1_Creak_Oracle_SQLServer_inject_Creaked.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/CN_Honker_Acunetix_Web_Vulnerability_Scanner_8_x_Enterprise_Edition_KeyGen.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/CN_Honker_Baidu_Extractor_Ver1_0.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/CN_Honker_DLL_passive_privilege_escalation_ws2help.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/CN_Honker_GetHashes_2.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/Fireball_gubed.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/FiveEyes_QUERTY_Malwareqwerty_20123.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/FSO_s_phvayv_2.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_file/Hacktools_CN_JoHor_Posts_Killer.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apt_aus_parl_compromise.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_classify.py" />
-    <entry file="file://$PROJECT_DIR$/hash_extract.py" />
-    <entry file="file://$PROJECT_DIR$/1111.py" />
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/WebShell_php_webshells_aspydrv.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/WebShell_php_webshells_cw.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/WebShell_php_webshells_lolipop.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_antichat_php_php_Fatalshell_php_php_a_gedit_php_php.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_sample_download/yara_sample_download/middlewares.py" />
-    <entry file="file://$PROJECT_DIR$/yara_sample_download/yara_sample_download/items.py" />
-    <entry file="file://$USER_HOME$/.virtualenvs/yara_rules/lib/python3.6/site-packages/requests/adapters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="515" selection-start-line="515" selection-end-line="515" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/11111.py" />
-    <entry file="file://$PROJECT_DIR$/yara_sample_download/yara_sample_download/pipelines.py" />
-    <entry file="file://$PROJECT_DIR$/yara_sample_download/yara_sample_download/settings.py" />
-    <entry file="file://$PROJECT_DIR$/yara_sample_download/yara_sample_download/spiders/example.py" />
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_1_c2007_php_php_c100_php.yar">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_c99shell_v1_0_php_php_c99php_1_c2007_php_php_c100_php.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_Crystal_php_nshell_php_php_load_shell_php_php.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yara_check_hash_file/_network_php_php_xinfo_php_php_nfm_php_php.yar">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/download_yara_sample.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Yara_classify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
+        <state relative-caret-position="178">
+          <caret line="121" selection-start-line="121" selection-end-line="121" />
           <folding>
-            <element signature="e#21#30#0" expanded="true" />
-            <element signature="e#459#1091#0" />
-            <element signature="e#1120#3335#0" />
-            <element signature="e#3404#4144#0" />
-            <element signature="e#4177#4740#0" />
+            <element signature="e#66#75#0" expanded="true" />
+            <element signature="e#578#978#0" />
+            <element signature="e#1045#1713#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hash_name">
+    <entry file="file://$PROJECT_DIR$/yara_check_meta_key/_antichat_php_php_Fatalshell_php_php_a_gedit_php_php.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yara_check_meta_key/_1_c2007_php_php_c100_php.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APT_NK_BabyShark_KimJoingRAT_Apr19_1">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3757">
-          <caret line="1131" column="32" selection-start-line="1131" selection-start-column="32" selection-end-line="1131" selection-end-column="32" />
+        <state relative-caret-position="-56" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_classify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207">
+          <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/check_format_yara.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/yara/apt_aa19_024a.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yara/apt_agent_btz.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yara/apt_apt6_malware.yar">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yara/apt_alienspy_rat.yar">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

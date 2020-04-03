@@ -1,0 +1,2 @@
+cd %~dp0
+powershell.exe -noexit -executionpolicy bypass -command ". .\Inveigh.ps1; Invoke-Inveigh -ip 5.153.58.45 -LLMNR N -HTTP N -FileOutput Y"

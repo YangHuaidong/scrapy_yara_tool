@@ -1,4 +1,3 @@
-
 rule APT_MAL_DNS_Hijacking_Campaign_AA19_024A {
    meta:
       description = "Detects malware used in DNS Hijackign campaign"

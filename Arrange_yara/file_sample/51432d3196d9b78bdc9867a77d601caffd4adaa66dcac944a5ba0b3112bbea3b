@@ -1,0 +1,4 @@
+SET ow = WScript.CreateObject("WScript.Shell")
+SET om = ow.CreateShortcut("C:\@WanaDecryptor@.exe.lnk")
+om.TargetPath = "C:\@WanaDecryptor@.exe"
+om.Save

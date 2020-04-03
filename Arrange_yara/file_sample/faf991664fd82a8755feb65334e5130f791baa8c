@@ -1,0 +1,28 @@
+使用ASP重启服务器
+
+
+大家知道直接使用ASP是不能够重启服务器的，这时我们需要制作一个组件来实现功能，ASP通过这个组件调用系统API，然
+后按照不同的重启和关机方式进行操作！
+     
+     下面先说COM的制作，在VB中新建一工程，当然是AceiveX dll的！
+     1）先修改工程属性，在工程属性窗口将工程名称改为system，在类模块窗口将模块名称改为contral，保存工程；
+     2）然后添加一个模块，用来声明需要使用的API和常数！下面是模块中的内容！
+     Declare Function ExitWindowsEx Lib "user32" (ByVal uFlags As Long, ByVal dwReserved As Long) As Long
+     3）在类模块中输入下列代码：
+     Public Function reboot(atype As Variant)
+     t& = ExitWindowsEx(1, atype)
+     End Function
+     该函数需要传入一个参数，用来控制启动方式，这个参数是从ASP程序中传入的，等一下就可以看到具体的使用方
+法！
+     
+     编写完上面的代码，保存工程，将工程编译为system.dll。下面就写ASP程序！
+     
+     ASP中的代码非常简单：
+     <%
+     atype=request("atype") 
+     set sys=server.CreateObject ("system.contral") 
+     sys.reboot(atype)
+     %>
+     其中atype可以使用0、1、2、4，0、1和4均为关机，2用来重启。写完后执行ASP就可以了！
+     
+     本文章只起一个抛砖引玉的作用，使更多的VB程序员都来开发组件，程序中可能存在问题，希望高手给予指正！

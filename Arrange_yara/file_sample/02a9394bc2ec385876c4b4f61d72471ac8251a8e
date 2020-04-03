@@ -1,0 +1,143 @@
+;
+;  Few rules for translator:
+;  For beginning of translate - copy english.ini into the yourlanguage.ini
+;  Please, translate text only after simbol '='
+;
+[Translations]
+;
+; * Header labels *
+;
+frmMain.LabelVersion.Caption   		= 正式版 
+frmMain.LabelTitle.Caption		= Win32 EXE, DLL 压缩程序
+frmMain.LabelShareware.Caption		= 注册给:
+;
+; * File Open tab *
+;
+frmMain.TabFileOpen.Caption		= 打开文件
+frmMain.OD.Title			= 选择文件 压缩
+frmMain.BtnOpen.Caption			= 打开
+frmMain.BtnOpen.Hint          		= 选择文件来压缩
+frmMain.PanelFileTitle.Caption		= 文件信息
+frmMain.LabelFileName.Caption		= 文件名
+frmMain.LabelFileSizeBefore.Caption	= 文件大小 (压缩前)
+frmMain.LabelFileSizeAfter.Caption	= 文件大小 (压缩后)
+frmMain.LabelHistory.Caption		= 历史
+frmMain.BMPHistory.Hint			= 文件历史
+
+;
+; * Compression Tab *
+;
+frmMain.TabCompress.Caption		= 压缩
+frmMain.LabelProgress.Caption		= 压缩进度
+frmMain.LabelCompressFileSize.Caption	= 压缩文件的大小
+frmMain.BtnGo.Caption			= 压缩!
+frmMain.BtnGo.Hint			= Let's go!
+frmMain.BtnCancel.Caption		= 取消
+frmMain.BtnCancel.Hint			= 取消压缩
+frmMain.BtnRestore.Caption		= 还原
+frmMain.BtnRestore.Hint			= 从备份文件还原
+frmMain.BtnTest.Caption			= 检测!
+frmMain.BtnTest.Hint			= 检测压缩文件
+frmMain.BtnErase.Caption		= 去掉 .bak
+frmMain.BtnErase.Hint			= 去掉 .bak
+;
+; * Options Tab *
+;
+frmMain.TabOptions.Caption		= 选项
+frmMain.CBResource.Caption		= 压缩还原
+frmMain.CBResource.Hint			= 压缩还原
+frmMain.CBBackup.Caption		= 建立备份文件(.bak-file)
+frmMain.CBBackup.Hint			= 建立备份文件 (.bak-file)
+frmMain.CBAutoOpen.Caption		= 自动打开文件会话
+frmMain.CBAutoOpen.Hint			= 在ASPack启动时快速打开文件会话 
+frmMain.CBAutoRun.Caption		= 装载后自动运行
+frmMain.CBAutoRun.Hint			= 装载后自动运行
+frmMain.CBExit.Caption			= 运行后退出
+frmMain.CBExit.Hint			= 运行后退出
+frmMain.CBMaxCompression.Caption	= 最大程度压缩
+frmMain.CBMaxCompression.Hint		= 最大化压缩,|但速度慢
+frmMain.CBImportLoader.Caption		= 使用Windows DLL loader
+frmMain.CBImportLoader.Hint		= 使用 Windows DLL loader
+frmMain.CBExtraData.Caption		= 保护特别的数据
+frmMain.CBExtraData.Hint		= 保护特别的数据
+frmMain.CBContextMenu.Caption		= 添加到context菜单
+frmMain.CBContextMenu.Hint		= 为ASPack添加一个目录到context菜单
+frmMain.LabelSectionName.Caption	= 选择的名字
+frmMain.EditSection.Hint		= Decompressor section's name
+frmMain.LabelLang.Caption		= 语言
+frmMain.ComboLang.Hint			= section's name
+frmMain.LabelUnregistered.Caption	= 未注册的版本. 选项不能存档.  
+;
+; * About Tab *
+;
+frmMain.TabAbout.Caption		= 关于
+frmMain.LabelEMail.Caption		= 典典的E-Mail:                      shinlan@km169.net
+frmMain.URLLabelMail.Hint		= Click here if you want to send a mail to the author
+frmMain.LabelWWW.Caption		= WWW:
+frmMain.URLLabelWWW.Hint		= Click here if you want to download the latest version of ASPack
+frmMain.UrlLabelRegistration.Caption	= Click here to register ASPack on-line
+frmMain.UrlLabelRegistration.Hint	= Click here if you want to get your registered copy of ASPack
+;
+; * Help Tab *
+;
+frmMain.TabHelp.Caption         	= 帮助
+frmMain.btnHelpContrents.Caption	= 帮助内容
+frmMain.btnFAQ.Caption			= FAQ
+frmMain.btnStartUpdate.Caption		= 检查新的版本
+frmMain.btnCancelUpdate.Caption		= 取消更新
+;
+; * Exit Tab *
+;
+frmMain.TabExit.Caption         	= 退出
+;
+; * Context menu form
+;
+frmContext.Caption			= Context menu Options
+frmContext.CBEXE.Caption 		= use for EXE- files
+frmContext.CBDLL.Caption 		= use for DLL- files
+frmContext.CBOCX.Caption 		= use for OCX- files
+frmContext.LabelText.Caption 		= Text
+frmContext.LabelCompressText.Text 	= Compress with ASPack
+;
+; * Messages translation *
+;
+[Messages]
+; 
+H01	= Usage  : ASPack filename [Options] ||
+H02	= Options: || 
+H03	= /h	 this help	|
+H04	= /oFILE 	 write output to FILE	|
+H05	= /q	 be quiet	|
+H06	= /r+	 compress resources	|
+H07	= /r-	 don't compress resources	|
+H08	= /b+	 make .bak copy	|
+H09	= /b-	 don't make .bak copy	|
+H10	= /d+	 use Windows DLL loader	|
+H11	= /d-	 don't use Windows DLL loader	|
+H12	= /e+	 preserve extra data|
+H13	= /e-	 don't preserve extra data|
+H14	= /m	 max.compression|
+H15	= /x	 export table compression|||
+;
+01	= 文件已经被压缩了!|还要继续吗?	
+02 	= Image Base of application differs from default value (400000h)!|请使用默认设置.
+03  	= 这个文件已经被压缩了!   
+04	= 还原进度出错!
+05	= 被你取消了!
+06	= 输入出错!
+07	= 字节
+08      = 不能运行这个文件!
+10	= 找不到备份文件! 请检查你的选项.
+11	= 不能打开文件!
+12	= 内存溢出!
+13 	= 读取文件出错!
+14	= 未被承认的文件格式 
+15	= 不是标准的Win32程序!
+16 	= 对不起,ASPack的试用期已满! 
+U1	= 正在检查更新...
+U2	= 正在下载更新...
+U3	= 没有更新文件. 现在的已是最新的了.
+U4	= 当前的版本是%s.|版本 %s 是 可用的.|下在更新吗 ?
+U5	= 可用的更新
+U6	= 安装更新文件
+U7	= 现在你想安装更新文件吗?|这将会关闭ASPack.

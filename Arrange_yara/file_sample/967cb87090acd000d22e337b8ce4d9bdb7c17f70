@@ -1,0 +1,36 @@
+XYZCmd V1.0说明(近来看动画城市猎人看得太多了，所以就喜欢用XYZ)
+
+程序主要用处:基本上和psexec,pipecmd等是同一类的东西，功能上也基本上是一样。比起psexec
+             来，程序要小得多，比起pipecmd也小得多，而且pipecmd并不是单一一个程序。
+
+基本用法:
+         XYZCmd \\IP [Options] Command/ExeFile
+
+参数说明:
+         [Options]是一些可加或不加的参数，有四个参数
+         1. /C 参数 -->说明这程序将一个指定的程序复制到远程系统的winnt\system32下并执行
+         2./USER:UserName-->连接IPC要使用到的用户名
+         3./PWD:Password-->连接IPC要使用到的密码
+         4./NOWAIT-->在远程启动程序后，马上就返回(不等到那程序运行完毕才返回)
+
+         Command/ExeFile
+         这里是一些系统命令或外部的可执行程序
+
+例子说明:
+1.XYZCmd \\RemoteIP cmd.exe     
+  上面命令是得到一个cmd的shell,因为没有加入IPC连接要使用的用户名和密码，所以你是要先
+  使用net user去先建立好一个有足够权限的IPC连接。
+
+2.XYZCmd \\RemoteIP /user:Administrator /pwd:"" cmd.exe
+  上面命令得到结果和例子1是一样的，不同的是提供IPC连接要使用的用户名和密码
+
+3.xyzcmd \\RemoteIP /user:Administrator /pwd:1234 /nowait trojan.exe
+  上面命令在远程系统运行trojan.exe这程序，程序一运行后就返加
+
+4.xyzcmd \\RemoteIP /user:Administrator /pwd:Pass dir c:\
+  上面命令返回显示远程系统c:\下所有目录的文件的结果
+
+5.xyzcmd \\RemoteIP /c /user:Guest /pwd:12345 test2.exe
+  上面命令将test2.exe复制到远程系统，并且在远程系统运行test2.exe
+
+

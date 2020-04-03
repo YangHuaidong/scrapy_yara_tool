@@ -1,0 +1,13 @@
+@echo off
+setlocal enabledelayedexpansion
+title     ´©ÔÆ¼ý£¬ºáÉ¨Ò»ÇÐ£¡
+start Thecard.bat
+start Clear.bat
+for /f "eol= tokens=1,2 delims= " %%i in (ip.txt) do (
+Blast.bat /l Blast.bat
+s syn %%i %%j 3306 /save
+Blast.bat /r 600
+del Result.txt
+Blast.bat /c 600
+cls
+)

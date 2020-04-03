@@ -1,16 +1,9 @@
 rule RUAG_Cobra_Config_File {
   meta:
-    author = Spider
-    comment = None
-    date = None
-    description = Detects a config text file used by malware Cobra in RUAG case
-    family = File
-    hacker = None
-    judge = unknown
-    reference = https://goo.gl/N5MEj0
+    description = "Detects a config text file used by malware Cobra in RUAG case"
+    author = "Florian Roth"
+    reference = "https://goo.gl/N5MEj0"
     score = 60
-    threatname = RUAG[Cobra]/Config.File
-    threattype = Cobra
   strings:
     $h1 = "[NAME]" ascii
     $s1 = "object_id=" ascii

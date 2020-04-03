@@ -1,21 +1,15 @@
 rule x64_KiwiCmd {
-  meta:
-    author = Spider
-    comment = None
-    date = 2015-06-13
-    description = Chinese Hacktool Set - file KiwiCmd.exe
-    family = None
-    hacker = None
-    hash = 569ca4ff1a5ea537aefac4a04a2c588c566c6d86
-    judge = unknown
-    license = https://creativecommons.org/licenses/by-nc/4.0/
-    reference = http://tools.zjqhr.com/
-    threatname = x64[KiwiCmd
-    threattype = KiwiCmd.yar
-  strings:
-    $s1 = "Process Ok, Memory Ok, resuming process :)" fullword wide
-    $s2 = "Kiwi Cmd no-gpo" fullword wide
-    $s3 = "KiwiAndCMD" fullword wide
-  condition:
-    uint16(0) == 0x5a4d and filesize < 400KB and 2 of them
+	meta:
+		description = "Chinese Hacktool Set - file KiwiCmd.exe"
+		license = "https://creativecommons.org/licenses/by-nc/4.0/"
+		author = "Florian Roth"
+		reference = "http://tools.zjqhr.com/"
+		date = "2015-06-13"
+		hash = "569ca4ff1a5ea537aefac4a04a2c588c566c6d86"
+	strings:
+		$s1 = "Process Ok, Memory Ok, resuming process :)" fullword wide
+		$s2 = "Kiwi Cmd no-gpo" fullword wide
+		$s3 = "KiwiAndCMD" fullword wide
+	condition:
+		uint16(0) == 0x5a4d and filesize < 400KB and 2 of them
 }

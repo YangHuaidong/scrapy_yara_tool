@@ -1,0 +1,196 @@
+@ECHO OFF
+VERIFY ON
+REM Do not run directly.
+IF NOT "%1" == "vanquish" GOTO Stop
+
+IF "%2" == "help" GOTO Help
+IF "%2" == "showlog" GOTO ShowLog
+IF "%2" == "install" GOTO Install
+IF "%2" == "restore" GOTO Restore
+IF "%2" == "reinstall" GOTO ReInstall
+IF "%2" == "remove" GOTO RemoveActive
+IF "%2" == "removeold" GOTO RemoveOld
+
+ECHO Unknow command.
+
+GOTO EndNow
+:ShowLog
+MORE /E /C c:\vanquish.log
+
+GOTO EndNow
+:Help
+MORE /E /C .\ReadMe.txt
+
+GOTO EndNow
+:Install
+ECHO *******************************************************************************
+ECHO *                                                                             *
+ECHO *                               Install Vanquish                              *
+ECHO *                                                                             *
+ECHO *******************************************************************************
+ECHO.
+ECHO Checking for previous version...
+IF EXIST %SystemRoot%\vanquish.exe GOTO AlreadyInstalled
+IF EXIST %SystemRoot%\vanquish.dll GOTO AlreadyInstalled
+ECHO Vanquish not found. Fresh install.
+ECHO Are you sure you want to install? Press CTRL+C now to abort.
+PAUSE>NUL
+
+COPY .\bin\vanquish.exe %SystemRoot%\vanquish.exe
+COPY .\bin\vanquish.dll %SystemRoot%\vanquish.dll
+BIND -u %SystemRoot%\vanquish.exe >NUL 2>NUL
+BIND -u %SystemRoot%\vanquish.dll >NUL 2>NUL
+%SystemRoot%\vanquish.exe -install
+
+ECHO.
+ECHO.
+ECHO Vanquish installed. To complete process you DO NOT NEED TO REBOOT.
+
+GOTO EndNow
+:AlreadyInstalled
+ECHO Vanquish is already installed. Please remove first or use 'ReInstall Vanquish'
+
+GOTO EndNow
+:Restore
+ECHO *******************************************************************************
+ECHO *                                                                             *
+ECHO *                            Restore Old Vanquish                             *
+ECHO *                                                                             *
+ECHO *******************************************************************************
+ECHO.
+ECHO Checking for old version...
+IF NOT EXIST %SystemRoot%\vanquish.exe.old GOTO OldNotInstalled
+IF NOT EXIST %SystemRoot%\vanquish.dll.old GOTO OldNotInstalled
+ECHO Old Vanquish found in %SystemRoot%
+ECHO.
+ECHO Please note that to complete restore process you will need to reboot.
+ECHO Are you sure you want to restore? Press CTRL+C now to abort.
+PAUSE>NUL
+
+%SystemRoot%\vanquish.exe -remove
+REN %SystemRoot%\vanquish.exe vanquish.exe.restore  >NUL 2>NUL
+REN %SystemRoot%\vanquish.dll vanquish.dll.restore  >NUL 2>NUL
+
+REN %SystemRoot%\vanquish.exe.old vanquish.exe
+REN %SystemRoot%\vanquish.dll.old vanquish.dll
+REN %SystemRoot%\vanquish.exe.restore vanquish.exe.old  >NUL 2>NUL
+REN %SystemRoot%\vanquish.dll.restore vanquish.dll.old  >NUL 2>NUL
+BIND -u %SystemRoot%\vanquish.exe >NUL 2>NUL
+BIND -u %SystemRoot%\vanquish.dll >NUL 2>NUL
+%SystemRoot%\vanquish.exe -install
+
+ECHO.
+ECHO.
+ECHO Old Vanquish restored. Please reboot to complete process.
+ECHO If you don't want to keep old version, after reboot run 'Remove Old Vanquish'.
+ECHO If you want to switch back, after rebooting run this again.
+
+GOTO EndNow
+:ReInstall
+ECHO *******************************************************************************
+ECHO *                                                                             *
+ECHO *                             ReInstall Vanquish                              *
+ECHO *                                                                             *
+ECHO *******************************************************************************
+ECHO.
+ECHO Checking for previous version...
+IF NOT EXIST %SystemRoot%\vanquish.exe GOTO ReInstallNotInstalled
+IF NOT EXIST %SystemRoot%\vanquish.dll GOTO ReInstallNotInstalled
+ECHO Vanquish found in %SystemRoot%
+ECHO.
+ECHO Please note that reinstalling is not recommended. Better use Remove/Install.
+ECHO *** If not using same version to reinstall, only newly spawned applications
+ECHO *** will use the installed Vanquish. Rebooting fixes this problem.
+ECHO Are you sure you want to reinstall? Press CTRL+C now to abort.
+PAUSE>NUL
+
+%SystemRoot%\vanquish.exe -remove
+DEL /F /Q %SystemRoot%\vanquish.exe.old >NUL 2>NUL
+DEL /F /Q %SystemRoot%\vanquish.dll.old >NUL 2>NUL
+REN %SystemRoot%\vanquish.exe vanquish.exe.old
+REN %SystemRoot%\vanquish.dll vanquish.dll.old
+
+COPY .\bin\vanquish.exe %SystemRoot%\vanquish.exe
+COPY .\bin\vanquish.dll %SystemRoot%\vanquish.dll
+BIND -u %SystemRoot%\vanquish.exe >NUL 2>NUL
+BIND -u %SystemRoot%\vanquish.dll >NUL 2>NUL
+%SystemRoot%\vanquish.exe -install
+
+ECHO.
+ECHO.
+ECHO Vanquish ReInstalled. Reboot if you want, though it is not required.
+ECHO If you don't want to keep old version, after reboot run 'Remove Old Vanquish'.
+ECHO If you want the old version back, after rebooting run 'Restore Old Vanquish'.
+
+GOTO EndNow
+:ReInstallNotInstalled
+ECHO Vanquish is not installed. Cannot reinstall. Use 'Install Vanquish' instead.
+
+GOTO EndNow
+:RemoveActive
+ECHO *******************************************************************************
+ECHO *                                                                             *
+ECHO *                               Remove Vanquish                               *
+ECHO *                                                                             *
+ECHO *******************************************************************************
+ECHO.
+ECHO Checking for previous version...
+IF NOT EXIST %SystemRoot%\vanquish.exe GOTO NotInstalled
+IF NOT EXIST %SystemRoot%\vanquish.dll GOTO NotInstalled
+ECHO Vanquish found in %SystemRoot%
+ECHO.
+ECHO Please note that to complete removal process you will need to reboot.
+ECHO Are you sure you want to remove? Press CTRL+C now to abort.
+PAUSE>NUL
+
+%SystemRoot%\vanquish.exe -remove
+DEL /F /Q %SystemRoot%\vanquish.exe.old >NUL 2>NUL
+DEL /F /Q %SystemRoot%\vanquish.dll.old >NUL 2>NUL
+REN %SystemRoot%\vanquish.exe vanquish.exe.old
+REN %SystemRoot%\vanquish.dll vanquish.dll.old
+
+ECHO.
+ECHO.
+ECHO Vanquish removed. Please reboot to complete process.
+ECHO If you don't want to keep old version, after reboot run 'Remove Old Vanquish'.
+ECHO If you want the old version back, after rebooting run 'Restore Old Vanquish'.
+
+GOTO EndNow
+:RemoveOld
+ECHO *******************************************************************************
+ECHO *                                                                             *
+ECHO *                             Remove Old Vanquish                             *
+ECHO *                                                                             *
+ECHO *******************************************************************************
+ECHO.
+ECHO Checking for old version...
+IF NOT EXIST %SystemRoot%\vanquish.exe.old GOTO OldNotInstalled
+IF NOT EXIST %SystemRoot%\vanquish.dll.old GOTO OldNotInstalled
+ECHO Old Vanquish found in %SystemRoot%
+ECHO.
+ECHO You do not need to reboot to complete remove process.
+ECHO Are you sure you want to remove? Press CTRL+C now to abort.
+PAUSE>NUL
+
+DEL /F /Q %SystemRoot%\vanquish.exe.old >NUL 2>NUL
+DEL /F /Q %SystemRoot%\vanquish.dll.old >NUL 2>NUL
+
+ECHO.
+ECHO.
+ECHO Old Vanquish removed. No need to reboot.
+
+GOTO EndNow
+:OldNotInstalled
+ECHO Old Vanquish is not present. Nothing to remove.
+GOTO EndNow
+:NotInstalled
+ECHO Vanquish is not installed. Nothing to remove.
+Goto EndNow
+:Stop
+ECHO *** Do not run directly. Use [setup.cmd] instead.
+GOTO EndNow
+:EndNow
+ECHO Press any key to continue.
+PAUSE>NUL
+VERIFY OFF
+ECHO ON

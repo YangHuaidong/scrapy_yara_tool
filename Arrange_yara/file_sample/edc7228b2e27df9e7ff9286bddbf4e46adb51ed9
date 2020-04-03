@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by TEAM (RENEGADE) -->
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\xsd\pluginConfig.xsd" id="20123">
+	<platform type="1">
+		<lpConfig>
+			<configFileName>20123_cmdDef.xml</configFileName>
+			<pluginConfig>
+				<name>20123.sys</name>
+				<codebase>/bin/i686-pc-win32/debug</codebase>
+			</pluginConfig>
+		</lpConfig>
+	</platform>
+</plugin>

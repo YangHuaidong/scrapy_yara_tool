@@ -1,0 +1,21 @@
+rule IMPLANT_6_v1 {
+  meta:
+    author = "Spider"
+    comment = "None"
+    date = "2017-02-10"
+    description = "Sednit / EVILTOSS Implant by APT28"
+    family = "None"
+    hacker = "None"
+    judge = "black"
+    reference = "https://www.us-cert.gov/ncas/current-activity/2017/02/10/Enhanced-Analysis-GRIZZLY-STEPPE"
+    score = 85
+    threatname = "None"
+    threattype = "None"
+  strings:
+    $STR1 = "dll.dll" wide ascii
+    $STR2 = "Init1" wide ascii
+    $STR3 = "netui.dll" wide ascii
+  condition:
+    (uint16(0) == 0x5A4D or uint16(0) == 0xCFD0 or uint16(0) == 0xC3D4 or
+    uint32(0) == 0x46445025 or uint32(1) == 0x6674725C) and all of them
+}

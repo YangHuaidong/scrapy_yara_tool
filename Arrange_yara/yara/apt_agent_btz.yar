@@ -1,13 +1,3 @@
-/*
-   Yara Rule Set
-   Author: Florian Roth
-   Date: 2017-08-07
-   Identifier: Agent BTZ
-   Reference: http://www.intezer.com/new-variants-of-agent-btz-comrat-found/
-*/
-
-/* Rule Set ----------------------------------------------------------------- */
-
 import "pe"
 
 rule Agent_BTZ_Proxy_DLL_1 {

@@ -1,0 +1,52 @@
+Option Explicit 
+
+Dim sourcefile,ipaddress,objargs
+
+const destfile="tempfile"
+Const ForWriting = 2
+
+Dim Text
+Dim fso,objNet,ServiceObj
+Dim txtStream, txtStreamOut 
+
+Set objArgs = WScript.Arguments 
+If objArgs.Count = 2 Then 
+sourcefile=objArgs(0)
+ipaddress=objargs(1)
+Else
+wscript.echo "Parameter Error"+ vbcrlf
+wscript.Echo "USAGE:KillLog.vbs LogFileName YourIP."
+wscript.Quit 1
+End If
+
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+if fso.FileExists (sourcefile) then
+Set objNet = WScript.CreateObject( "WScript.Network" )
+Set ServiceObj = GetObject("WinNT://" & objNet.ComputerName & "/w3svc")
+Set objNet=nothing
+ServiceObj.stop
+wscript.sleep 6000
+Set txtStream = fso.OpenTextFile(sourcefile) 
+Set txtStreamOut = fso.OpenTextFile(destfile, ForWriting, True)
+Do While Not (txtStream.atEndOfStream) 
+Text = txtStream.ReadLine 
+if instr(Text,ipaddress)=0 then
+txtStreamOut.WriteLine Text 
+end if
+Loop
+
+Set txtStream = Nothing 
+Set txtStreamOut = Nothing
+
+WScript.Echo "The log file-- " & sourcefile &" has cleaned your IP!"
+Else
+WScript.Echo "The Log file-- " & sourcefile & " has not found!"
+Wscript.quit
+End If
+fso.Copyfile destfile, sourcefile
+fso.deletefile destfile
+Set fso=Nothing
+ServiceObj.start
+Set ServiceObj = Nothing
+

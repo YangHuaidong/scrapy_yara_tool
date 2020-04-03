@@ -1,12 +1,3 @@
-/*
-   Yara Rule Set
-   Author: Florian Roth
-   Date: 2018-05-01
-   Identifier: APT10 / Hogfish Report
-   Reference: https://www.accenture.com/t20180423T055005Z__w__/se-en/_acnmedia/PDF-76/Accenture-Hogfish-Threat-Analysis.pdf
-*/
-
-/* Rule Set ----------------------------------------------------------------- */
 
 import "pe"
 
